@@ -1,0 +1,31 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "description": "微风轻拂晨曦之纱",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LitileXueZha/blog.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "LitileXueZha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LitileXueZha/blog/issues"
+  },
+  "homepage": "https://www.nintaostudy.cn",
+  "dependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.6.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-server": "^3.1.3"
+  }
+}
