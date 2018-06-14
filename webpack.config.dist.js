@@ -1,8 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const fs = require('fs');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // 路径常量
 const PATH_DIST = path.join(__dirname, 'dist');
@@ -11,21 +10,24 @@ const PATH_DIST = path.join(__dirname, 'dist');
 const rules = require('./webpack/loaders');
 const { entry, plugins } = require('./webpack/pages');
 
+// 抽离css
+const extractLess = new ExtractTextPlugin({ filename: 'css/[name].css' });
+rules.push({
+  test: /\.less$/,
+  use: extractLess.extract({
+    use: [
+      { loader: 'css-loader' },
+      { loader: 'less-loader' },
+    ],
+    fallback: 'style-loader',
+  }),
+});
+
 module.exports = {
   context: __dirname,
-  mode: 'none',
-  stats: {
-    assets: true
-  },
-  devtool: 'source-map',
-  devServer: {
-    stats: 'minimal',
-    contentBase: PATH_DIST,
-    port: 8001,
-    disableHostCheck: true,
-    hot: true,
-    compress: true,
-  },
+  mode: 'production',
+  // stats: 'minimal',
+  devtool: 'eval',
 
   entry,
   output: {
@@ -34,8 +36,7 @@ module.exports = {
   },
   module: { rules },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new webpack.HotModuleReplacementPlugin(),
+    extractLess,
     ...plugins,
   ],
 };
