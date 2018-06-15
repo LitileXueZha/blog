@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const pages = ['index'];
@@ -13,6 +14,9 @@ function generatePlugin(chunkName) {
   return new HtmlWebpackPlugin({
     filename: `${chunkName}.html`,
     template: `./pages/page.${chunkName}/index.pug`,
+    // templateParameters: {
+    //   absolutePath: relativePath => path.join()
+    // },
     chunks: [chunkName],
     minify: {
       collapseWhitespace: true,
