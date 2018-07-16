@@ -55,7 +55,7 @@ if (IS_PROD) {
   };
 } else {
   // 开发环境添加devServer等。
-  config.mode = 'none';
+  config.mode = 'development';
   config.devtool = 'eval-source-map';
   config.devServer = {
     stats: 'minimal',
