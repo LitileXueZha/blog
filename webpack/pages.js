@@ -11,6 +11,7 @@ function generatePlugin(chunkName) {
   return new HtmlWebpackPlugin({
     filename: `${chunkName}.html`,
     template: `./pages/page.${chunkName}/index.pug`,
+    pathname: chunkName,
     chunks: ['common', chunkName],
     minify: {
       collapseWhitespace: true,
