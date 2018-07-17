@@ -1,1 +1,77 @@
 extends ../main.pug
+
+block content
+  main.container
+    .content
+      .to-noobs
+        span.title 给新手的一句话
+        p 千万别当程序员。
+    aside.info-nav
+      .tag-cloud
+        span.title 标签云
+        -
+          const tags = [
+            {
+              value: 'js',
+              text: 'JavaScript',
+              click: 12000,
+            }, {
+              value: 'html',
+              text: 'Html',
+              click: 200,
+            }, {
+              value: 'css',
+              text: 'Css',
+              click: 10,
+            }, {
+              value: 'backend',
+              text: '后端',
+              click: 500,
+            }, {
+              value: 'life',
+              text: '生活',
+              click: 300,
+            }, {
+              value: 'other',
+              text: '其它',
+              click: 0,
+            },
+          ];
+          const realTags = resolveTags(tags).sort(() => Math.random() - 0.5);
+
+          function resolveTags(arr) {
+            // 把tags分成了四个级别；xl、l、m、s。比例分别为：1、10%、40%、50%
+            const l = 0 + Math.round(arr.length * 0.1);
+            const m = l + Math.round(arr.length * 0.4);
+            // 取色地址：http://encycolorpedia.cn/009688
+            const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
+            // 先排序之
+            const sortTags = arr.sort((val1, val2) => val2.click - val1.click);
+
+            sortTags.forEach((val, i) => {
+              const color = colors[Math.round(Math.random() * 7)];
+              let className = '';
+
+              if (i === 0) className = 'xl';
+              else if (i <= l) className = 'l';
+              else if (i <= m) className = 'm';
+
+              sortTags[i] = Object.assign(val, { color, className });
+            });
+            return sortTags;
+          }
+        .tags
+          each tag in realTags
+            a(class= `tag ${tag.className}`, href="/", data-value= tag.value, style= `color: ${tag.color}`)= tag.text
+      figure.topics
+        figcaption Topics
+        - const topics = ['这个特别多', '第二', '多拉风拉的屎访问访问地方打发打发的说法大法打发大水', '什么呢？', 'Hdfa daswf dasf', '啊第三方打发第三方', '多拉风拉的屎访问访问', '什么呢？', 'Hdfa daswf dasf', '啊第三方打发第三方']
+        ul.list
+          each data, i in topics
+            li.list-item
+              if i < 3
+                img.list-style(src= require('../assets/icon_fire.png'), style= `opacity: ${1 - (i / 5)}`, width=20, height=20)
+              else
+                span.list-style= i + 1
+              a(href="/")= data
+

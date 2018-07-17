@@ -1,3 +1,3 @@
 import './index.less';
 
-console.log('index也');
+console.log('index也a');

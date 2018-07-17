@@ -1,22 +1,35 @@
 header
   nav.container
-    form#search(action)
+    form#search(action="/search.html")
       img(src= require('../assets/icon_search.png'), alt="", width=20, height=20)
-      input(type="text", placeholder="搜点什么呢")
+      input(type="text", placeholder="搜点什么呢", name="s", autocomplete="off")
     ul
-      - var path = htmlWebpackPlugin.options.pathname
-      li
-        a(class= (path === 'index' ? 'active' : ''), href="/") 首页
-      li
-        a(href="/") 笔记
-      li
-        a(href="/") 生活
-      li
-        a(href="/") 关于这个
-    - var d = new Date();
-    - var YYYY = d.getFullYear();
-    - var MM = d.getMonth() + 1;
-    - var DD = d.getDate();
-    - if (MM < 10) MM = `0${MM}`
-    - if (DD < 10) DD = `0${DD}`
-    time!= `<span style="font-size: 18px">${YYYY}</span><br>${MM}.${DD}`
+      -
+        const links = {
+          index: {
+            path: '/',
+            text: '首页',
+            className: '',
+          },
+          note: {
+            path: '/note.html',
+            text: '笔记',
+            className: '',
+          },
+          life: {
+            path: '/life.html',
+            text: '生活',
+            className: '',
+          },
+          about: {
+            path: '/about.html',
+            text: '关于这个',
+            className: '',
+          },
+        };
+        links[htmlWebpackPlugin.options.pathname].className = 'active';
+      each link in links
+        li
+          a(class= link.className, href= link.path)= link.text
+    a.msg(href="/", title="留言板")
+      include svg_icon/msg.pug
