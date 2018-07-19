@@ -21,14 +21,14 @@ const config = {
   entry,
   output: {
     path: PATH_DIST,
-    filename: 'js/[name].js',
+    filename: IS_PROD ? 'js/[name]-[hash].js' : 'js/[name].js',
   },
   module: { rules },
   plugins: [
     ...plugins,
     new MiniCssExtractPlugin({
-      filename: IS_PROD ? 'css/[name].[hash].css' : 'css/[name].css',
-      chunkFilename: IS_PROD ? 'css/[id].[hash].css' : 'css/[id].css',
+      filename: IS_PROD ? 'css/[name]-[hash].css' : 'css/[name].css',
+      chunkFilename: IS_PROD ? 'css/[id]-[hash].css' : 'css/[id].css',
     }),
   ],
 };
