@@ -1,8 +1,10 @@
+include icon_svg.pug
+
 header
-  nav.container
+  nav.tc-container
     form#search(action="/search.html")
-      img(src= require('../assets/icon_search.png'), alt="", width=20, height=20)
       input(type="text", placeholder="搜点什么呢", name="s", autocomplete="off")
+      +icon('search', 20, '#fff')
     ul
       -
         const links = {
@@ -32,4 +34,4 @@ header
         li
           a(class= link.className, href= link.path)= link.text
     a.msg(href="/", title="留言板")
-      include svg_icon/msg.pug
+      +icon('msg', 40, '#fff')

@@ -67,9 +67,62 @@ a {
 		color: @activeColor;
 	}
 }
-.container {
+.tc-container {
 	margin: 0 auto;
 	width: @mainWidth;
+}
+.tc-font-title {
+	color: #000;
+	font-size: 17px;
+	font-weight: 500;
+	line-height: @textHeight;
+}
+.tc-divider {
+	display: inline-block;
+	position: relative;
+	top: -1px;
+	margin: 0 10px;
+	width: 1px;
+	height: 12px;
+	border-radius: 1px;
+	background: @borderColor;
+	vertical-align: middle;
+}
+
+@keyframes ripple {
+	from {
+		transform: scale(0);
+		opacity: 0.5;
+	}
+	to {
+		transform: scale(1);
+		opacity: 0;
+	}
+}
+
+.tc-ripple {
+	position: relative;
+	
+	& > .tc-ripple-wraper {
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		border-radius: inherit;
+		overflow: hidden;
+		transition: .3s;
+		cursor: inherit;
+
+		& > .tc-ripple-span {
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			opacity: 0;
+			transform-origin: center;
+			animation: ripple .55s cubic-bezier(0.4, 0, 0.2, 1);
+			pointer-events: none;
+		}
+	}
 }
 // @media screen and (max-width: 1200px) and (min-width: 992px) {
 // 	.container {
@@ -109,17 +162,19 @@ nav > #search {
 	position: relative;
 	margin-right: 40px;
 
-	& > img {
+	& > .icon {
 		position: absolute;
 		top: @mainSpace;
 		left: @mainSpace;
+
+		.color { fill: @activeColor !important }
 	}
 
 	& > input {
 		width: 270px;
 		height: 40px;
 		padding: 0 14px 0 40px;
-		border: none;
+		border: 1px solid @activeColor;
 		border-radius: 2px;
 		color: #fff;
 		background: transparent;
@@ -128,6 +183,8 @@ nav > #search {
 		&:focus {
 			background: @activeColor;
 			transition: .3s;
+
+			& + .icon .color { fill: #fff !important }
 		}
 
 		&::-webkit-input-placeholder {
@@ -170,7 +227,7 @@ nav > ul {
 footer {
 	display: flex;
 	justify-content: space-between;
-	margin-top: (@mainSpace * 4) !important;
+	margin-top: (@mainSpace * 6) !important;
 	padding: (@mainSpace * 2) 0;
 	border-top: 1px solid @borderColor;
 	font-size: 12px;
