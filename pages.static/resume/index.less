@@ -1,0 +1,403 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: 微软雅黑;
+  color: #777;
+}
+
+/* 背景渐变 */
+body {
+  background: linear-gradient(90deg, #c46474, #e2a1bb);
+  padding: 100px 0;
+}
+
+#root {
+  background-color: #fefefe;
+  margin: 0 auto;
+  padding: 100px;
+  border-radius: 1px;
+  box-shadow: -60px 100px 100px #9c4c5a;
+  transition: 1s;
+}
+
+/* 布局容器 */
+.resume-container {
+  display: flex;
+
+  & > .resume-col-left {
+    flex: 1;
+    padding-bottom: 50px;
+  }
+
+  & > .resume-col-right {
+    width: 270px;
+    border-left: 1px solid #e9e9e9;
+    margin-top: -100px;
+    padding-top: 112px;
+    margin-left: 100px;
+    padding-left: 50px;
+  }
+}
+
+/* 头部信息 */
+.resume-header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  & > img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+   
+  & > .resume-header-content {
+    flex: 1;
+
+    & > .title {
+      font-weight: 500;
+      color: #000;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+
+    & > .role {
+      color: #d28093;
+      margin-bottom: 2px;
+    }
+
+    & > .location::before {
+      content: '';
+      background-image: url('http://oyskbfna4.bkt.clouddn.com/icon.png?d=d');
+      background-position-y: -30px;
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      position: relative;
+      left: 2px;
+      top: 1px;
+    }
+  }
+}
+
+/* 主体信息 */
+.resume-body {
+  margin-top: 80px;
+}
+/* 每一个模块 */
+.item {
+  margin-bottom: 80px;
+
+  & > .item-title {
+    font-size: 22px;
+    font-weight: 500;
+    color: #c46474;
+    margin-bottom: 40px;
+  }
+
+  & > .item-content {
+    border-left: 1px solid #e9e9e9;
+    padding-left: 43px;
+  }
+}
+
+/* 每一模块中的条目 */
+.item-exp{
+  margin-bottom: 60px;
+
+  & > .item-exp-name {
+    font-weight: 500;
+    color: #000;
+  }
+
+  & > .item-exp-time {
+    display: block;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    color: #e2a1bb;
+  }
+}
+
+/* 侧边栏条目 */
+.item-right{
+  margin-bottom: 100px;
+
+  & > .item-right-title {
+    display: block;
+    font-size: 22px;
+    font-weight: 500;
+    color: #c46474;
+    margin-bottom: 20px;
+  }
+
+  & > .item-right-p {
+    /*color: #666;*/
+    margin-bottom: 2px;
+  }
+}
+.item-right-p-label{
+  display: none;
+}
+
+/* 进度条 */
+.progress-container{
+  margin-bottom: 20px;
+
+  & > .progress-text {
+    /*color: #666;*/
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  & > .progress-total {
+    height: 2px;
+    background-color: #e9e9e9;
+    position: relative;
+  }
+
+  & > .progress-total > .progress-value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #c46474;
+    transition: 1s;
+  }
+}
+
+/* 脚注信息 */
+.resume-footer{
+  border-top: 1px solid #e9e9e9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -100px;
+  margin-top: 0;
+  height: 100px;
+
+  & > a:first-of-type {
+    text-decoration: none;
+    color: #1989fa;
+    margin-right: 608px;
+    font-size: 12px;
+  }
+
+  & > .mail,
+  & > .github,
+  & > .qq {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    background-image: url('http://oyskbfna4.bkt.clouddn.com/icon.png?d=d');
+  }
+
+  & > .mail {
+    background-position-x: 0;
+  }
+
+  & > .github {
+    background-position-x: -30px;
+  }
+
+  & > .qq {
+    background-position-x: -60px;
+  }
+}
+
+/* 切换中英文按钮 */
+.btn-lang {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  background-color: #d28093;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 30px, rgba(0, 0, 0, 0.23) 0px 6px 10px;
+}
+
+
+
+// <!-- 大屏样式，默认，再渐进增强 -->
+  #root{
+    max-width: 1100px;
+  }
+
+// <!-- 小笔记本样式 -->
+  @media (min-width: 992px) and (max-width: 1366px) {
+    #root, .resume-col-right, .resume-footer, .resume-footer>a:first-of-type, .resume-body, .item, .item-right{
+      transition: .5s;
+    }
+    #root{
+      max-width: 970px;
+      padding: 80px;
+    }
+    .resume-container>.resume-col-right{
+      width: 250px;
+      margin-left: 80px;
+      margin-top: -80px;
+      padding-top: 92px;
+    }
+    .resume-footer{
+      height: 80px;
+      margin: -80px;
+      margin-top: 0;
+    }
+    .resume-footer>a:first-of-type{
+      margin-right: 452px;
+    }
+    .resume-body{
+      margin-top: 60px;
+    }
+    .item{
+      margin-bottom: 60px;
+    }
+    .item-right{
+      margin-bottom: 80px;
+    }
+  }
+
+// <!-- 平板样式 -->
+  @media (min-width: 768px) and (max-width: 992px) {
+    #root, .resume-col-right, .resume-footer, .resume-footer>a:first-of-type, .resume-body, .item, .item-right{
+      transition: .5s;
+    }
+    #root{
+      max-width: 760px;
+      padding: 60px;
+      padding-top: 50px;
+    }
+    .resume-container>.resume-col-right{
+      width: 190px;
+      margin-left: 40px;
+      margin-top: -50px;
+      padding-top: 62px;
+      padding-left: 30px;
+    }
+    .item-right{
+      margin-bottom: 60px;
+    }
+    .resume-footer{
+      height: 60px;
+      margin: -60px;
+      margin-top: 0;
+    }
+    .resume-body{
+      margin-top: 30px;
+    }
+    .item{
+      margin-bottom: 30px;
+    }
+    .item>.item-title{
+      margin-bottom: 15px;
+    }
+    .item>.item-content{
+      padding-left: 27px;
+    }
+    .item-exp{
+      margin-bottom: 30px;
+    }
+    .item>.item-title, .item-right>.item-right-title{
+      font-size: 20px;
+    }
+    .resume-container>.resume-col-left{
+      padding-bottom: 30px;
+    }
+    .resume-footer>a:first-of-type{
+      margin-right: 346px;
+    }
+    .resume-footer>.mail, .resume-footer>.github, .resume-footer>.qq{
+      margin-right: 0;
+      -webkit-transform: scale(0.7);
+      -moz-transform: scale(0.7);
+      -ms-transform: scale(0.7);
+      -o-transform: scale(0.7);
+      transform: scale(0.7);
+    }
+  }
+
+// <!-- 手机样式 -->
+  @media (max-width: 768px) {
+    body{
+      background: none;
+      padding: 0;
+    }
+    #root{
+      padding: 20px;
+    }
+    .resume-footer{
+      display: block;
+      margin: -20px;
+      padding: 12px 20px;
+      height: auto;
+    }
+    .resume-footer>a:first-of-type{
+      margin-right: 0;
+      line-height: 20px;
+    }
+    .resume-footer>a:nth-child(n+2){
+      display: inline-block;
+      float: right;
+      margin-right: 0;
+      -webkit-transform: scale(0.68);
+      -moz-transform: scale(0.68);
+      -ms-transform: scale(0.68);
+      -o-transform: scale(0.68);
+      transform: scale(0.68);
+      position: relative;
+      top: -5px;
+    }
+    .resume-footer>a:nth-child(2){
+      margin-right: -5px;
+    }
+    .btn-lang{
+      top: 45%;
+      right: 10px;
+    }
+    .resume-container{
+      display: block;
+    }
+    .resume-body{
+      margin-top: 40px;
+    }
+    .item, .item-right{
+      margin-bottom: 40px;
+    }
+    .item-right:last-of-type{
+      margin-bottom: 80px;
+    }
+    .item>.item-title, .item-exp{
+      margin-bottom: 20px;
+    }
+    .item>.item-content{
+      border: none;
+      padding-left: 0;
+    }
+    .item-exp>.item-exp-time{
+      margin-top: -2px;
+      margin-bottom: 5px;
+    }
+    .resume-container>.resume-col-left{
+      padding-bottom: 0;
+    }
+    .resume-container>.resume-col-right{
+       width: 100%;
+       border-left: none;
+       margin-top: 0;
+       padding-top: 0;
+       margin-left: 0;
+       padding-left: 0;
+    }
+    .item-right-p-label{
+      display: inline;
+    }
+  }

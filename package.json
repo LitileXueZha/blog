@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
+    "static": "webpack --config pages.static/webpack.config.js --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,12 +36,17 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.2.0",
+    "eslint-plugin-react": "^7.10.0",
     "file-loader": "^1.1.11",
+    "html-webpack-inline-source-plugin": "0.0.10",
     "less": "^3.0.4",
     "optimize-css-assets-webpack-plugin": "^4.0.2",
     "pug": "^2.0.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.12.0",
     "webpack-cli": "^2.0.15",
