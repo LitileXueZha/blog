@@ -14,19 +14,19 @@ export default {
     experience: [
       {
         name: '焦点科技 - 新一站保险代理股份有限公司',
-        time: '2017.07 - 至今',
+        time: '2017.07 - 2018.05',
         content: '独立完成内部系统开发。前端界面使用基于React的Dva搭建，UI框架使用Ant Design；同时在完全不清楚NodeJS的情况下，花了一个月的时间熟悉Dva+NodeJS+MongoDB技术栈，接下来的一个月内完成了该系统开发，并将其部署到公司内部服务器上。独立完成新一站保险故事小程序开发，需要适配手机端不同分辨率，采用渐进增强，优雅降级的方式完成视觉稿方案。',
       },
       {
         name: '上海凸赞科技 - 淮南分公司',
-        time: '2017.02 – 2017.07',
+        time: '2017.03 – 2017.06',
         content: '公司主营小程序，当时负责一个南通小程序，主要是拍照上传，捐衣服，积分兑换功能。在这里学了很多，有来自百度和FreeWheel的顶级后台工程师亲自教导，感觉受益良多，在和他们的交互中开阔眼界，了解到Restful API和Swagger UI等等，为以后学习的道路打下了坚实的基础',
       },
     ],
     education: [
       {
         name: '安徽理工大学 - 数学与大数据学院 - 信息与计算科学',
-        time: '2014.09 – 至今',
+        time: '2014.09 – 2018.06',
         content: ['参与过学院官网导航部分重构，并且需要兼容IE6/7/8浏览器，使用过几种hack方案解决不兼容bug。', '学校知通团队外包项目Web App，采用了Frozen UI框架，根据草稿完成前端界面和逻辑处理开发。'],
       },
     ],
@@ -47,12 +47,12 @@ export default {
     experience: [
       {
         name: 'XinYiZhan Insurance Agency Co., Ltd',
-        time: '2017.07 - Present',
+        time: '2017.07 - 2018.05',
         content: 'Spending one month learning the technology stack, completing internal system all alone in the next month. ',
       },
       {
         name: 'Shang Hai Tu Zan Co., Ltd',
-        time: '2017.02 – 2017.07',
+        time: '2017.03 – 2017.06',
         content: 'I am responsible for a Nan Tong mini program which can upload photos, donate cloths and exchange bounds. ',
       },
       {
@@ -64,7 +64,7 @@ export default {
     education: [
       {
         name: 'Information and Computing Sciences',
-        time: '2014.09 – Present',
+        time: '2014.09 – 2018.06',
         content: ['ANHUI University of Science & Technology'],
       },
     ],
