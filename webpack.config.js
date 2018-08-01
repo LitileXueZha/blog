@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // 路径常量
 const PATH_DIST = path.join(__dirname, 'dist');
@@ -30,6 +31,13 @@ const config = {
       filename: IS_PROD ? 'css/[name]-[hash].css' : 'css/[name].css',
       chunkFilename: IS_PROD ? 'css/[id]-[hash].css' : 'css/[id].css',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: './favicon.ico',
+        to: path.join(PATH_DIST, '[name].[ext]'),
+        // force: true,
+      },
+    ]),
   ],
 };
 

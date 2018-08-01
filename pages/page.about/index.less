@@ -1,0 +1,31 @@
+@import '../common/constants.less';
+
+main {
+  display: flex;
+  margin-top: @mainSpace * 6 !important;
+
+  .blog {
+    flex: 1;
+    margin-right: @mainSpace * 10;
+  }
+
+  .blogger {
+    width: @mostUseLength;
+  }
+
+  .photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.experience,
+.more {
+  margin-top: @mainSpace * 4;
+}
+.blog p,
+.blogger p {
+  margin-top: @mainSpace;
+}

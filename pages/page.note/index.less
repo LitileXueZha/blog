@@ -1,0 +1,52 @@
+@import '../common/constants.less';
+
+.intro {
+  margin-bottom: @mainSpace * 4;
+}
+
+.articles {
+  position: relative;
+  padding: @mainSpace * 2;
+  border: 1px solid @borderColor;
+  border-radius: 2px;
+
+  & > .nav-tags {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: @mainSpace * 2;
+    padding-bottom: 4px;
+    border-bottom: 1px dotted @borderColor;
+  }
+
+  & > .list {
+
+    & > .list-item {
+      padding: @mainSpace * 2 0;
+    }
+  }
+}
+
+.articles > .list article {
+  display: flex;
+  align-items: center;
+
+  & > .content {
+    flex: 1;
+  }
+
+  & > .cover {
+    margin-left: @mainSpace * 4;
+    width: 70px;
+    height: 70px;
+    border-radius: 2px;
+    object-fit: cover;
+  }
+}
+
+#more {
+  position: absolute;
+  left: (@mainWidth - 2px) / 2 - 44px;
+  bottom: -17px;
+  color: @mainColor;
+  background: #fff;
+}

@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const pages = ['index'];
+const pages = ['index', 'note', 'about', 'life'];
 
 /**
  * 生成插件（用来生成.html文件 ）

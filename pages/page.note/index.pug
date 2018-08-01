@@ -1,0 +1,51 @@
+extends ../main.pug
+
+block title
+  title 温故而知新
+
+block content
+  main.tc-container
+    .intro
+      span.tc-font-title.tc-intro 写在前
+      p 子曰：“温故而知新，可以为师矣”。
+      p 记得看到过一句话：“什么是知识？知识是印在你脑海里的，能随时写出来的，那种每次都要翻一遍才知道的不叫知识，那是你不会的。”
+        | 感觉很有道理，玩Linux命令的时候每次都要查一遍，其实根本就不会，可笑的是自己还在简历上写了熟悉Linux之类的。可是呈摩尔定律式
+        | 发展的前端，能完全掌握所有知识的人根本不存在，更何谈了解后台的大前端了。然孔子曰，可以温故之，又知新者，可为师矣。
+        | 记录自己的学习笔记就是第一步
+    .articles
+      nav.nav-tags
+        span 最新笔记
+        .tags
+          a JavaScript
+          i.tc-divider
+          a Html
+          i.tc-divider
+          a Css
+      ul.list
+        each val in new Array(3) 
+          li.list-item
+            article
+              .content.tc-list-item-article
+                h3.title
+                  a.tc-font-title(href="/") XXX
+                .description
+                  time(title="发布时间") 刚刚
+                  i.tc-divider
+                  span(title="分类标签") JavaScript
+                  i.tc-divider
+                  span(title="点击量") 200
+                p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quis expedita iure provident quam assumenda nobis, harum incidunt a blanditiis placeat tempora saepe id hic vitae dignissimos voluptates dolorum temporibus!
+              img.cover(src="http://img2.imgtn.bdimg.com/it/u=1582686728,917882130&fm=27&gp=0.jpg", alt="封面", width=40, height=40)
+        li.list-item
+          article
+            .content
+              h3.title
+                a.tc-font-title(href="/") XXX
+              .description
+                time(title="发布时间") 刚刚
+                i.tc-divider
+                span(title="分类标签") JavaScript
+                i.tc-divider
+                span(title="点击量") 200
+              p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis quis expedita iure provident quam assumenda nobis, harum incidunt a blanditiis placeat tempora saepe id hic vitae dignissimos voluptates dolorum temporibus!
+      button#more.tc-button.tc-ripple 加载更多

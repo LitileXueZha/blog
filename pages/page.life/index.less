@@ -1,0 +1,75 @@
+@import '../common/constants.less';
+
+main {
+  display: flex;
+  padding-top: @mainSpace * 4;
+
+  .time-quantum {
+    width: @mostUseLength - 1px;
+  }
+
+  .articles {
+    flex: 1;
+    padding-left: 70px;
+    min-height: 370px;
+    border-left: 1px solid @borderColor;
+
+    li {
+      padding: @mainSpace * 2 0;
+    }
+    li:first-of-type {
+      padding-top: 0;
+    }
+  }
+}
+
+.time-quantum {
+  height: 100%;
+
+  li > a {
+    display: block;
+    line-height: 40px;
+    color: @textColor;
+    transition: .3s;
+
+    &:hover {
+      background: rgba(0,0,0,0.08);
+    }
+  }
+  li.active {
+    position: relative;
+    font-weight: bold;
+    color: #000;
+
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      right: -2px;
+      width: 3px;
+      height: 100%;
+      border-radius: 3px;
+      background: @mainColor;
+      z-index: 2;
+    }
+
+    .color {
+      fill: #000;
+    }
+  }
+  .icon {
+    margin: 0 10px;
+    vertical-align: middle;
+
+    .color {
+      fill: @textColor;
+    }
+  }
+}
+
+#more {
+  position: relative;
+  left: -16px;
+  margin-top: @mainSpace * 2 - 8px;
+  color: @linkColor;
+}

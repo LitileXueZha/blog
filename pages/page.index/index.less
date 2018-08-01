@@ -84,32 +84,14 @@ main {
   position: relative;
   margin-top: @mainSpace * 4;
   min-height: @mostUseLength * 2;
-  padding: 40px 40px (40px + @textHeight) 40px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.09);
+  padding: 40px 40px (40px + @textHeight) 0;
+  // box-shadow: 0 2px 8px rgba(0,0,0,.09);
 
   .list-item {
     padding: 30px 0;
     border-bottom: 1px dotted @borderColor;
 
     &:first-of-type { padding-top: 0 }
-    // &:last-of-type { border: none }
-
-    & > .title {
-      margin-bottom: 10px;
-    }
-
-    & > .description {
-      color: #ccc;
-      line-height: @textHeight;
-      font-size: 12px;
-    }
-    
-    & > p {
-      max-height: @textHeight * 3;
-      line-height: @textHeight;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 
   .actions {
@@ -121,21 +103,13 @@ main {
     bottom: 40px;
     width: 100%;
     height: @textHeight;
-    padding: 0 40px;
+    padding-right: 40px;
     line-height: @textHeight;
 
     & > #more {
       position: relative;
       left: -16px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 3px;
       color: @mainColor;
-      background: none;
-      outline: none;
-      cursor: pointer;
     }
-
-    & > #more:hover { background-color: rgba(0,0,0,0.08) }
   }
 }

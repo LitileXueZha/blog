@@ -56,27 +56,65 @@ body {
 	font-size: @textSize;
 	color: @textColor;
 	font-family: @textFont;
+	line-height: @textHeight;
 	// background-color: #f5f5f5;
 }
+
+// 相关文本属性
 abbr { text-decoration: none; }
 a {
 	color: @linkColor;
 	text-decoration: none;
-
+	
 	&:hover {
 		color: @activeColor;
 	}
 }
-.tc-container {
-	margin: 0 auto;
-	width: @mainWidth;
-}
+
+// 字体-标头
 .tc-font-title {
 	color: #000;
 	font-size: 17px;
 	font-weight: 500;
 	line-height: @textHeight;
 }
+// 导航栏下的介绍文本
+.tc-intro {
+	display: block;
+	margin: @mainSpace * 2 0;
+	height: 30px;
+	padding-bottom: @mainSpace;
+	border-bottom: 1px solid @borderColor;
+}
+// 列表项文章样式
+.tc-list-item-article {
+	& > h3.title {
+		margin-bottom: 10px;
+
+		& > a { .tc-font-title }
+	}
+
+	& > .description {
+		color: #ccc;
+		line-height: @textHeight;
+		font-size: 12px;
+	}
+	
+	& > p {
+		max-height: @textHeight * 3;
+		line-height: @textHeight;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+// 主容器
+.tc-container {
+	margin: 0 auto;
+	width: @mainWidth;
+}
+
+// 分割线，用于间隔链接
 .tc-divider {
 	display: inline-block;
 	position: relative;
@@ -89,6 +127,7 @@ a {
 	vertical-align: middle;
 }
 
+// 水波纹相关，还需要在js里启动
 @keyframes ripple {
 	from {
 		transform: scale(0);
@@ -99,7 +138,6 @@ a {
 		opacity: 0;
 	}
 }
-
 .tc-ripple {
 	position: relative;
 	
@@ -124,6 +162,23 @@ a {
 		}
 	}
 }
+
+// 按钮样式统一
+.tc-button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 3px;
+	font-size: @textSize;
+	line-height: @textHeight;
+	color: @textColor;
+	background: transparent;
+	outline: none;
+	cursor: pointer;
+	transition: .3s;
+
+	&:hover { background: #eee !important; }
+}
+
 // @media screen and (max-width: 1200px) and (min-width: 992px) {
 // 	.container {
 // 		max-width: 970px;
@@ -147,7 +202,7 @@ header {
 	height: 60px;
 	background-color: @mainColor;
 
-	& > nav {
+	& > .nav-header {
 		display: flex;
 		position: relative;
 		padding: @mainSpace 0;
@@ -158,7 +213,7 @@ header {
 		}
 	}
 }
-nav > #search {
+.nav-header > #search {
 	position: relative;
 	margin-right: 40px;
 
@@ -192,7 +247,7 @@ nav > #search {
 		}
 	}
 }
-nav > .logo {
+.nav-header > .logo {
 	display: block;
 
 	& > img {
@@ -200,7 +255,7 @@ nav > .logo {
 		top: 5px;
 	}
 }
-nav > ul {
+.nav-header > ul {
 	& > li {
 		display: inline-block;
 		height: 40px;
@@ -212,14 +267,14 @@ nav > ul {
 		padding: 0 @mainSpace;
 		color: rgba(255,255,255,0.5);
 		text-decoration: none;
+		transition: .3s;
 
-		.active {
+		&.active {
 			color: #fff;
 			transform: scale(1.2);
-			transition: .3s;
 		}
 
-		&.active, &:hover { .active }
+		&:hover { color: #fff }
 	}
 }
 

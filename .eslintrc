@@ -6,5 +6,9 @@
         "FileReader": true,
         "navigator": true
     },
-    "plugins": ["react"]
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    }
 }

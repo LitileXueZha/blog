@@ -39,16 +39,16 @@ block content
             ];
           
           each article in articles
-            li.list-item
+            li.list-item.tc-list-item-article
               h3.title
                 a.tc-font-title(href="/")= article.title
               .description
-                label= article.time
+                label(title="发布时间")= article.time
                 i.tc-divider
-                label= article.tag
+                label(title="分类标签")= article.tag
               p= article.content
         .actions
-          button#more.tc-ripple 加载更多
+          button#more.tc-button.tc-ripple 加载更多
           a 查看所有
 
     aside.info-nav
