@@ -1,0 +1,140 @@
+@import '../common/constants.less';
+
+body {
+  background: #f5f5f5;
+  
+  main {
+    margin-top: @mainSpace * 2 !important;
+    min-height: 500px;
+    background: #fff;
+  }
+}
+
+.list-tool {
+  border-bottom: 1px solid @borderColor;
+
+  & > li {
+    display: inline-block;
+    margin-right: 32px;
+    height: 48px;
+    padding: 14px 24px;
+    line-height: @textHeight;
+
+    &.active {
+      border-bottom: 2px solid @mainColor;
+
+      & > a {
+        font-weight: 500;
+        color: @mainColor;
+      }
+    }
+
+    & > a {
+      color: @textColor;
+    }
+    & > a:hover {
+      color: @mainColor;
+    }
+  }
+}
+
+.container-tool {
+  padding: 24px;
+}
+
+.text-to-b64,
+.b64-to-text,
+.text-to-img,
+.img-to-text {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+
+  textarea,
+  .upload,
+  .transformed {
+    flex: 1;
+    height: @textHeight * 6 + 16px;
+    padding: 8px 12px;
+    border: 1px solid @borderColor;
+    border-radius: 3px;
+    font-family: @textFont;
+    line-height: @textHeight;
+    word-break: break-all;
+  }
+
+  .transformed {
+    border-style: dashed;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+
+    & > img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  & > .icon-arrow-right {
+    margin: 0 60px;
+
+    .color { fill: @borderColor }
+  }
+
+  // 复制图标、下载链接
+  & > .icon-copy,
+  .download {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+
+    .color { fill: @borderColor }
+  }
+  .download .color { fill: @linkColor }
+}
+
+.upload {
+  position: relative;
+
+  input {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .info {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+
+    .icon-plus { width: 100% }
+    .icon-plus .color { fill: @borderColor }
+    p { color: @borderColor }
+  }
+
+  .preview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 8px 12px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    & > img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .hidden { display: none }
+}

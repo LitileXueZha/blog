@@ -29,7 +29,7 @@ header
             className: '',
           },
         };
-        links[pathname].className = 'active';
+        if (links[pathname]) links[pathname].className = 'active';
       each link in links
         li
           a(class= link.className, href= link.path)= link.text

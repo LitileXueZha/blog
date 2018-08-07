@@ -134,5 +134,41 @@ export const Affix = {
       node.style.position = 'fixed';
       obj.fixed = true;
     }
-  }
+  },
+};
+
+/**
+ * 漂浮组件，点击浮出一段文字
+ * 使用：给标签加上.tc-float-text和data-text，js中FloatText.init()；直接调用action触发也行
+ * @return {Object} FloatText，一个普通对象
+ */
+export const FloatText = {
+  map: new Map(),
+  init() {
+    Array.prototype.slice
+      .call(document.querySelectorAll('.tc-float-text'))
+      .forEach((val) => {
+        val.addEventListener('click', () => this.action(val.dataset.text, val));
+      });
+  },
+  action(text, dom) {
+    // 当前dom已有漂浮文本
+    if (this.map.has(dom)) return;
+
+    const { left, top, width, height } = dom.getBoundingClientRect();
+    const span = document.createElement('span');
+
+    span.className = 'tc-float-text span';
+    span.style.left = `${left + window.scrollX + (width / 2)}px`;
+    span.style.top = `${top + window.scrollY + (height / 2)}px`;
+    span.innerHTML = text;
+    document.body.appendChild(span);
+    span.classList.add('floating');
+    this.map.set(dom, true);
+
+    setTimeout(() => {
+      document.body.removeChild(span);
+      this.map.delete(dom);
+    }, 400);
+  },
 };

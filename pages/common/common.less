@@ -180,6 +180,29 @@ a {
 	&:hover { background: #eee !important; }
 }
 
+// 浮动文本
+@keyframes floatText {
+	from {}
+	to {
+		opacity: 0.7;
+		transform: translate(-50%, -200%) scale(1);
+	}
+}
+.tc-float-text.span {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	line-height: @textHeight;
+	color: @textColor;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0);
+	transform-origin: center;
+
+	&.floating {
+		animation: floatText .4s;
+	}
+}
+
 // @media screen and (max-width: 1200px) and (min-width: 992px) {
 // 	.container {
 // 		max-width: 970px;
@@ -287,4 +310,6 @@ footer {
 	padding: (@mainSpace * 2) 0;
 	border-top: 1px solid @borderColor;
 	font-size: 12px;
+
+	& > .links a:not(:last-of-type) { margin-right: @mainSpace * 1.5 }
 }

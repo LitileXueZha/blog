@@ -1,0 +1,45 @@
+extends ../main.pug
+include ../components/icon_svg.pug
+
+block title
+  title 实用小工具_滔's 博客
+
+block content
+  main.tc-container
+    ul.list-tool
+      li.active
+        a(href="#base64") Base64转码
+      li
+        a(href="#") 待做
+      li
+        a(href="#") 待做
+    .container-tool
+      .base64
+        p Base64是常见的编码方式，好处良多。这里提供文字、图片的互相转换
+        .text-to-b64
+          textarea.input(data-pattern="text" placeholder="输入文字..." autocomplete="off" spellcheck="false")
+          +icon('arrow-right')
+          textarea.transformed(spellcheck="false")
+          +icon('copy')
+        .b64-to-text
+          textarea.input(data-pattern="b64" placeholder="输入Base64..." autocomplete="off" spellcheck="false")
+          +icon('arrow-right')
+          textarea.transformed(spellcheck="false")
+          +icon('copy')
+        .img-to-text
+          .upload
+            .info
+              +icon('plus')
+              p 点击、拖拽到此
+            .preview.hidden
+              img
+            input#img(type="file" accept="image/*")
+          +icon('arrow-right')
+          textarea.transformed(spellcheck="false")
+          +icon('copy')
+        .text-to-img
+          textarea.input(placeholder="输入Base64，转为图片" autocomplete="off" spellcheck="false")
+          +icon('arrow-right')
+          .transformed(style="text-align: center")
+          a.download
+            +icon('download')
