@@ -1,0 +1,101 @@
+@import '../common/constants.less';
+
+main {
+  padding-top: 20px;
+}
+
+#form-msg {
+  padding: 20px 40px;
+  border: 1px solid @borderColor;
+  border-bottom-width: 0;
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    line-height: @textHeight;
+    outline: none;
+  }
+
+  & > input:focus + .divider {
+    width: 14px * 4;
+  }
+
+  & > .divider {
+    margin: @mainSpace 0;
+    width: 14px * 2;
+    height: 1px;
+    border: none;
+    border-bottom: 1px solid @borderColor;
+    transition: .3s;
+  }
+  
+  & > textarea {
+    margin-top: 10px;
+    font-family: @textFont;
+    color: @textColor;
+    resize: none;
+
+    &::-webkit-input-placeholder { font-family: @textFont }
+  }
+
+  & > .btns-action {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -8px;
+
+    & > button {
+      position: relative;
+    }
+    & > button:first-of-type {
+      left: -16px;
+      color: @mainColor;
+    }
+    & > button:last-of-type {
+      right: -16px;
+      color: @dangerousColor;
+    }
+    & > button:last-of-type:hover {
+      background: @dangerousColor !important;
+      color: #fff;
+    }
+  }
+}
+
+.list-msg {
+  padding: 20px 40px;
+  border: 1px solid @borderColor;
+
+  & > li {
+    display: flex;
+    padding: @mainSpace * 2 0;
+
+    & > .cover {
+      position: relative;
+      top: -2px;
+      margin-right: @mainSpace * 2;
+      width: 50px;
+      height: 50px;
+      border-radius: 3px;
+      font-size: 25px;
+      font-family: 幼圆;
+      text-align: center;
+      line-height: 50px;
+      background: #eee;
+    }
+
+    h3 > time {
+      float: right;
+      font-size: 12px;
+      color: #ccc;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+
+  & > p { margin-top: @mainSpace }
+}

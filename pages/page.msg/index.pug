@@ -1,0 +1,59 @@
+extends ../main.pug
+
+block title
+  title 留言板
+
+block content
+  main.tc-container
+    form#form-msg
+      input.tc-font-title(type="text", name="name", placeholder="你的名字", autocomplete="off")
+      hr.divider
+      textarea(name="content", rows="5", placeholder="说点什么呢？畅所欲言时可别无视法律法规...", spellcheck="false")
+      .btns-action
+        button.tc-button.tc-ripple(type="submit") 到此一游
+        button.tc-button(type="reset") 清空
+    ul.list-msg
+      -
+        const data = [
+          {
+            id: 'daf',
+            name: '微风轻拂晨曦之纱',
+            content: '我希望有一个如你一般的人，如山间清爽的风，如古城温暖的光，只要最后是你就好',
+            avatar: 'http://oyskbfna4.bkt.clouddn.com/photo.jpg',
+            time: '刚刚',
+          }, {
+            id: 'rqrew',
+            name: '叶子',
+            content: '这个好一般啊...',
+            avatar: null,
+            time: '30分钟',
+          }, {
+            id: 'jkft',
+            name: '滔',
+            content: '我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。我对你的敬仰犹如滔滔之水，源源不绝。',
+            avatar: null,
+            time: '5天',
+          }, {
+            id: 'vcxz',
+            name: '田伯光',
+            content: '当你老了，头发白了，还会想起我吗？',
+            avatar: null,
+            time: '2017-03-07',
+          }
+        ];
+        const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
+        
+        data.forEach(val => {
+          if (!val.avatar) val.color = colors[Math.round(Math.random() * 6)];
+        })
+      each msg in data
+        li
+          if msg.avatar
+            img.cover(src= msg.avatar, alt="头像", width=50, height=50)
+          else
+            .cover(title="头像", style=`color: ${msg.color}`)= msg.name[0]
+          .content
+            h3.tc-font-title= msg.name
+              time= msg.time
+            p= msg.content
+    
