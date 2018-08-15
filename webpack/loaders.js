@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer')({ browsers: ['last 15 versions'] });
 
-// const IS_PROD = process.env.NODE_ENV === 'production';
+const IS_PROD = process.env.NODE_ENV === 'production';
 
 module.exports = [
   {
@@ -19,7 +19,7 @@ module.exports = [
   }, {
     test: /\.(le|c)ss$/,
     use: [
-      MiniCssExtractPlugin.loader,
+      IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
       {
         loader: 'css-loader',
         options: { importLoaders: 1 },

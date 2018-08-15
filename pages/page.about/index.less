@@ -2,7 +2,7 @@
 
 main {
   display: flex;
-  margin-top: @mainSpace * 6 !important;
+  padding-top: @mainSpace * 5;
 
   .blog {
     flex: 1;
@@ -11,21 +11,30 @@ main {
 
   .blogger {
     width: @mostUseLength;
-  }
 
-  .photo {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    object-fit: cover;
+    #showPhoto {
+      display: block;
+      margin-top: @textSize * 1.5;
+      cursor: pointer;
+    }
+  
+    .photo {
+      margin-top: @textSize * 1.5;
+      width: @mostUseLength;
+      height: @mostUseLength;
+      object-fit: cover;
+      cursor: zoom-out;
+    }
+
+    .hidden { display: none !important }
   }
 }
 
 .experience,
 .more {
-  margin-top: @mainSpace * 4;
+  margin-top: @mainSpace * 3;
 }
 .blog p,
 .blogger p {
-  margin-top: @mainSpace;
+  margin-top: @textSize * 1.5;
 }
