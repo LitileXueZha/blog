@@ -5,15 +5,41 @@ block title
   title 搜索_滔's 博客
 
 block content
+  .suggest
+    p.tc-container 搜了这么多次都没有，试试去筛选
+      a(href="/articles.html") 所有文章
+      button#close
+        +icon('close', 10)
   main.tc-container
-    .for-developer.tc-text-center.hidden
-      p 开发者，你好
-      code ?q=xxx
-    .loading.hidden
-      img(src="/favicon.ico", alt="", width=30, height=30)
-      span Loading
-    .no-result.no-input.tc-text-center.hidden
-      +icon('no-result', 60)
-      p.tc-text-center
-        span 无输入，
-        | 无结果
+    .info
+      .for-developer.tc-text-center
+        p 开发者，你好
+        code ?q=xxx
+      .loading
+        img(src="/favicon.ico", alt="", width=30, height=30)
+        span Loading
+      .no-result.no-input.tc-text-center
+        +icon('no-result', 60)
+        p.tc-text-center
+          span 无输入，
+          | 无结果
+    .result.hidden
+      -
+        const result = [
+          {
+            title: '测试测试',
+            link: '#',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur magnam rerum <mark>corrupti</mark> corporis repellat excepturi vero nisi iste consectetur fugiat, obcaecati unde id repudiandae eos sapiente voluptas quo ad?',
+          }, {
+            title: '实用小工具',
+            link: '/tools.html',
+            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur magnam rerum explicabo  corporis repellat excepturi vero nisi iste consectetur fugiat, obcaecati unde id repudiandae eos sapiente voluptas quo ad?',
+          }
+        ];
+      span.num 找到的结果数量约为 #{result.length}
+      ul.list
+        each data in result
+          li
+            h2
+              a.tc-font-title(href= data.link)!= data.title
+            p!= data.content

@@ -1,9 +1,9 @@
 import './index.less';
 
 window.addEventListener('load', () => {
-  const $developer = document.querySelector('.for-developer');
-  const $loading = document.querySelector('.loading');
-  const $noResult = document.querySelector('.no-result');
+  const $suggest = document.querySelector('.suggest');
+  const $info = document.querySelector('.info');
+  const $result = document.querySelector('.result');
   const $form = document.querySelector('#search');
   let searchText = '';
 
@@ -13,34 +13,36 @@ window.addEventListener('load', () => {
    * 2. 开发者篡改query
    * 3. 加载中
    * 4. 无结果
+   * 5. 搜索结果
    */
   const PageShow = {
     noInput() {
-      $developer.classList.add('hidden');
-      $loading.classList.add('hidden');
-      $noResult.classList.add('no-input');
-      $noResult.classList.remove('hidden');
+      $result.classList.add('hidden');
+      $info.className = 'info no-input';
     },
     developer() {
-      $loading.classList.add('hidden');
-      $noResult.classList.add('hidden');
-      $developer.classList.remove('hidden');
+      $result.classList.add('hidden');
+      $info.className = 'info for-developer';
     },
     loading() {
-      $developer.classList.add('hidden');
-      $noResult.classList.add('hidden');
-      $loading.classList.remove('hidden');
+      $result.classList.add('hidden');
+      $info.className = 'info loading';
     },
     noResult() {
-      $developer.classList.add('hidden');
-      $loading.classList.add('hidden');
-      $noResult.classList.remove('no-input');
-      $noResult.classList.remove('hidden');
+      $result.classList.add('hidden');
+      $info.className = 'info no-result';
+    },
+    result() {
+      $info.className = 'info';
+      $result.classList.remove('hidden');
     },
   };
 
   // 初始化title与输入框
   init();
+
+  // 隐藏建议按钮
+  $suggest.querySelector('#close').addEventListener('click', () => $suggest.classList.remove('active'));
 
   /**
    * 当搜索表单提交时
@@ -121,7 +123,7 @@ window.addEventListener('load', () => {
       // Step2: 用户未输入
       PageShow.noInput();
       return;
-    };
+    }
 
     // Step3
     document.title = `${searchText}_搜索_滔's 博客`;
@@ -131,10 +133,39 @@ window.addEventListener('load', () => {
 
   function ajax() {
     // TODO: 请求数据
-    console.info(`开始搜索${searchText}，预计耗时1000ms`)
+    console.info(`开始搜索${searchText}，预计耗时1000ms`);
     PageShow.loading();
     setTimeout(() => {
-      PageShow.noResult();
+      if (Math.random() > 0.7) {
+        setTimes(true);
+        PageShow.result();
+      } else {
+        setTimes();
+        PageShow.noResult();
+      }
     }, 1000);
+  }
+
+  /**
+   * 设置搜索无结果次数，超过三次提示。
+   * @param {boolean} 指明需要重置，搜索成功时
+   */
+  function setTimes(reset) {
+    let num = parseInt(window.sessionStorage.getItem('search_times') || 0, 10);
+
+    if (reset || num >= 3) {
+      window.sessionStorage.setItem('search_times', '0');
+
+      if (!reset) {
+        // 显示建议
+        $suggest.classList.add('active');
+      } else {
+        $suggest.classList.remove('active');
+      }
+      return;
+    }
+
+    num += 1;
+    window.sessionStorage.setItem('search_times', `${num}`);
   }
 });
