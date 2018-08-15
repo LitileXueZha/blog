@@ -1,0 +1,46 @@
+@import '../common/constants.less';
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  .hidden {
+    display: none;
+  }
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @keyframes zoom {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+  }
+
+  img {
+    margin-bottom: 4px;
+    animation: zoom .7s infinite alternate;
+  }
+
+  &.hidden {
+    display: none;
+
+    img { animation: none }
+  }
+}
+
+.no-result {
+  .color { fill: @textColor }
+  span { display: none }
+  &.no-input span { display: inline; }
+}

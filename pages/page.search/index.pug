@@ -1,0 +1,19 @@
+extends ../layout.pug
+include ../components/icon_svg.pug
+
+block title
+  title 搜索_滔's 博客
+
+block content
+  main.tc-container
+    .for-developer.tc-text-center.hidden
+      p 开发者，你好
+      code ?q=xxx
+    .loading.hidden
+      img(src="/favicon.ico", alt="", width=30, height=30)
+      span Loading
+    .no-result.no-input.tc-text-center.hidden
+      +icon('no-result', 60)
+      p.tc-text-center
+        span 无输入，
+        | 无结果

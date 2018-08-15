@@ -3,8 +3,16 @@ include icon_svg.pug
 header
   nav.tc-container.nav-header
     form#search(action="/search.html")
-      input(type="text", placeholder="搜点什么呢", name="s", autocomplete="off")
-      +icon('search', 20, '#fff')
+      input(
+        type="text",
+        placeholder="搜点什么呢",
+        name="q",
+        autocomplete="off",
+        autofocus= pathname === 'search',
+        maxlength=50,
+      )
+      button.icon(type="submit")
+        +icon('search', 20, '#fff')
     ul
       -
         const links = {
