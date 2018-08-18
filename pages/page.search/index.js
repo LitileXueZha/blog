@@ -127,6 +127,7 @@ window.addEventListener('load', () => {
 
     // Step3
     document.title = `${searchText}_搜索_滔's 博客`;
+    window.history.replaceState({ q: searchText }, document.title, window.location.search);
     $form.q.value = searchText;
     ajax();
   }
