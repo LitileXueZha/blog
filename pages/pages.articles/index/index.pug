@@ -1,8 +1,51 @@
 extends ../../layout.pug
+include ../../components/icon_svg.pug
 
 block title
   title 所有文章
 
 block content
   main.tc-container
-    p aaa
+    .filters
+      ul.type
+        li
+          h3 分类
+            +icon('arrow-right', 14)
+        li
+          input#note(type="radio", name="type", value="note")
+          label.item(for="note") 笔记
+            +icon('close', 10)
+        li
+          input#life(type="radio", name="type", value="life")
+          label.item(for="life") 生活
+            +icon('close', 10)
+      ul.tag
+        li
+          h3 标签
+            +icon('arrow-right', 14)
+        li
+          input#JavaScript(type="radio", name="tag", value="JavaScript")
+          label.item(for="JavaScript") JavaScript
+            +icon('close', 10)
+        li
+          input#Css(type="radio", name="tag", value="Css")
+          label.item(for="Css") Css
+            +icon('close', 10)
+    .results
+      p.info
+        a.active(href="#") 最新
+        a(href="#hot") 最多点击
+        span 共100篇
+      ul.list
+        each val, index in new Array(5)
+          li.tc-list-item-article
+            h2.title
+              a.tc-font-title(href="/articles/detail.html?id=#{index}") 多拉风老大
+            .description
+              time(title="发布时间") 刚刚
+              i.tc-divider
+              span(title="标签") Css
+              i.tc-divider
+              span(title="点击量") 100
+            p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis atque perferendis impedit blanditiis maxime totam eum, corporis, molestias deserunt nemo rerum quia fugiat debitis, iure dicta excepturi temporibus exercitationem voluptate!
+    button#more.tc-button.tc-ripple 加载更多

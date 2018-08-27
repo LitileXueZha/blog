@@ -72,7 +72,7 @@ a {
 	}
 }
 code, pre {
-	font-family: Conloas;
+	font-family: Consolas;
 	background: #f5f5f5;
 }
 
@@ -151,6 +151,7 @@ code, pre {
 }
 .tc-ripple {
 	position: relative;
+	-webkit-tap-highlight-color: transparent;
 	
 	& > .tc-ripple-wraper {
 		display: block;
@@ -286,14 +287,6 @@ header {
 		}
 	}
 }
-.nav-header > .logo {
-	display: block;
-
-	& > img {
-		position: relative;
-		top: 5px;
-	}
-}
 .nav-header > ul {
 	& > li {
 		display: inline-block;
@@ -318,8 +311,11 @@ header {
 }
 
 .nav-header > .msg {
-	.color { fill: rgba(255,255,255,0.5) }
-
+	.color {
+		fill: rgba(255,255,255,0.5);
+		transition: .3s;
+	}
+	&:hover .color { fill: #fff }
 	&.active .color { fill: #fff }
 }
 

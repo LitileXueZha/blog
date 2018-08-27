@@ -1,8 +1,28 @@
 extends ../../layout.pug
+include ../../components/icon_svg.pug
 
 block title
-  title 加载文章详情中...
+  title 文章详情
 
 block content
   main.tc-container
-    p bbb
+    .loading.active
+      img(src="/favicon.ico", alt="", width=30, height=30)
+      p Loading
+    article.container-article.has-cover
+      img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+      .markdowned
+        h1.title Linux - 服务器操作系统
+        p.info
+          +icon('time', 14)
+          time.time 刚刚
+          br
+          +icon('tag', 14)
+          span.tag JavaScript
+        .body
+      .tc-affix(data-top=10)
+        aside.catalog
+          img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+          .content
+            h1 目录
+

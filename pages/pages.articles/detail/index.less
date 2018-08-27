@@ -1,0 +1,274 @@
+@import '../../common/constants.less';
+
+main {
+  min-height: 400px;
+}
+
+.loading {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+
+  @keyframes zoom {
+    from {
+      transform: scale(1);
+      opacity: 1;
+    }
+    to {
+      transform: scale(0.8);
+      opacity: 0.8;
+    }
+  }
+
+  img {
+    margin-bottom: 4px;
+    width: 30px;
+    height: 30px;
+    animation: zoom .7s infinite alternate;
+  }
+}
+.loading.active { display: flex }
+
+.container-article {
+  position: relative;
+  display: none;
+  flex-wrap: wrap;
+
+  &.has-cover { padding-top: 200px }
+  
+  &.active {
+    display: -webkit-box;
+  }
+
+  & > .cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .markdowned,
+  & > .tc-affix {
+    margin-top: 40px;
+  }
+
+  .markdowned {
+    flex: 1;
+  }
+
+  & > .tc-affix {
+    margin-left: 40px;
+    width: @mostUseLength - 40px;
+  }
+}
+
+.markdowned > .title,
+.catalog h1 {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.markdowned > .info {
+  margin: 15px 0;
+  color: #ccc;
+  font-size: 12px;
+  line-height: 14px;
+
+  .icon {
+    position: relative;
+    top: -2px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .color { fill: #ccc }
+}
+
+// markdown样式
+.markdowned > .body {
+  overflow: hidden;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 32px 0;
+    font-weight: 500;
+    color: #000;
+  }
+  h1 {
+    font-size: 30px;
+    line-height: 30px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 12px;
+  }
+  ol, ul {
+    padding-left: 1.5em;
+    list-style: circle;
+  }
+  ol { list-style: decimal }
+  ol ol { list-style: lower-roman }
+
+  p, pre, img, table {
+    margin: 16px 0;
+  }
+
+  code {
+    padding: 0 4px;
+  }
+  pre > code {
+    padding: 16px;
+    border-radius: 3px;
+  }
+
+  em {
+    font-style: italic;
+  }
+  b, strong {
+    font-weight: bold;
+  }
+
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+
+  sub {
+    vertical-align: sub;
+    font-size: smaller;
+  }
+  sup {
+    vertical-align: super;
+    font-size: smaller;
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+  p > img, td > img {
+    margin: 0;
+  }
+
+  table th {
+    color: #000;
+    font-weight: 600;
+  }
+  table th, table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  
+  .mermaid {
+    text-align: center;
+  }
+}
+
+.catalog {
+  .cover {
+    display: none;
+    min-width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: @mostUseLength;
+    object-fit: cover;
+  }
+
+  h1 {
+    margin-bottom: @mainSpace;
+    padding-bottom: 4px;
+    border-bottom: 1px solid @borderColor;
+  }
+
+  &.affixing .cover { display: unset }
+  &.affixing .cover + .content > h1 { display: none }
+
+}
+.catalog ol.nav {
+  padding-left: 23px;
+  line-height: 23px;
+  list-style: cjk-ideographic;
+
+  & > li > a {
+    display: block;
+    margin-left: -23px;
+    padding-left: 23px;
+    color: inherit;
+    font-weight: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  & > li:hover {
+    color: @activeColor;
+  }
+
+  & > li.active {
+    color: @mainColor;
+    font-weight: 700;
+  }
+}
+
+// 二级目录
+.catalog ul.nav {
+  display: none;
+  margin-bottom: @mainSpace;
+  line-height: 18px;
+
+  & > li {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: none;
+      position: absolute;
+      top: 4px;
+      left: -10px;
+      border: 5px solid transparent;
+      border-left-color: @mainColor;
+    }
+
+    &.active::before { display: block }
+  }
+
+  & > li > a {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    color: @textColor;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover { color: @activeColor }
+  }
+
+  & > li.active > a {
+    color: @mainColor;
+  }
+}
+
+.catalog li.active > ul.nav {
+  display: block;
+}

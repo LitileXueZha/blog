@@ -13,9 +13,9 @@
 1. 原生`.html`构建，没法儿刷新
 2. 文章id包含在路径中，如`xxxid.html`，这需要nginx转发做处理。webpack构建的dev-server显然没必要
 
-> 第一个问题的折中解决：html-webpack-plugin提供模板生产，会用到loader加载，这样一来修改之后就能刷新了。也可以不用模板，直接html-loader能够返回字符串生成`.html`
+第一个问题的折中解决：html-webpack-plugin提供模板生产，会用到loader加载，这样一来修改之后就能刷新了。也可以不用模板，直接html-loader能够返回字符串生成`.html`
 
-> 由于不是生成单个.html文件，故不考虑这样（不太合语义）。设为`articles/detail?id=xxx`形式，使用query而不是用hash，因为hash会被认为同一个地址，不同文章应该有各自的地址，虽然返回同一个文件且由js加载文章数据。SEO的事之后再考虑
+由于不是生成单个.html文件，故不考虑这样（不太合语义）。设为`articles/detail?id=xxx`形式，使用query而不是用hash，因为hash会被认为同一个地址，不同文章应该有各自的地址，虽然返回同一个文件且由js加载文章数据。SEO的事之后再考虑
 
 ## 目录结构
 
@@ -47,3 +47,5 @@
 ├── README.md             此说明文件
 └── webpack.config.js     打包总配置
 ```
+
+> 静态资源文件生成后还在源文件目录里，需手动copy，静态文件很少改变，没必要每次都重新覆盖之，打包了哪个直接用哪个就行了。并且静态文件的样式与js为内联方式，直接嵌入到了.html文件里

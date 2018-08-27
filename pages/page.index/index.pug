@@ -21,16 +21,19 @@ block content
           -
             const articles = [
               {
+                id: 'abc',
                 title: '闭包',
                 time: '刚刚',
                 tag: 'JavaScript',
                 content: '闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。因此，通常你使用只有一个方法的对象的地方，都可以使用闭包。在 Web 中，你想要这样做的情况特别常见。大部分我们所写的 JavaScript 代码都是基于...',
               }, {
+                id: 'dfa',
                 title: '关于打酱油',
                 time: '12小时',
                 tag: '生活',
                 content: '闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。',
               }, {
+                id: 'gfa',
                 title: '很久很久以前',
                 time: '2017.03.07',
                 tag: '其它',
@@ -41,7 +44,7 @@ block content
           each article in articles
             li.list-item.tc-list-item-article
               h3.title
-                a.tc-font-title(href="/")= article.title
+                a.tc-font-title(href= `/articles/detail.html?id=${article.id}`)= article.title
               .description
                 label(title="发布时间")= article.time
                 i.tc-divider
@@ -49,7 +52,7 @@ block content
               p= article.content
         .actions
           button#more.tc-button.tc-ripple 加载更多
-          a 查看所有
+          a(href="/articles") 查看所有
 
     aside.info-nav
       .tag-cloud

@@ -99,7 +99,7 @@ export const Affix = {
   },
   add(node) {
     const fixTop = parseInt(node.dataset.top, 10) || 0;
-    const { width, height, top } = node.getBoundingClientRect();
+    const { width, height, top, left } = node.getBoundingClientRect();
     const fixed = top < 0;
     const offsetTop = top + window.scrollY;
 
@@ -109,6 +109,8 @@ export const Affix = {
 
     // 初始化node的状态
     node.firstElementChild.style.top = `${fixTop}px`;
+    node.firstElementChild.style.left = `${left}px`;
+    node.firstElementChild.style.width = `${width}px`;
     if (fixed) {
       node.firstElementChild.style.position = 'fixed';
     }
@@ -125,6 +127,7 @@ export const Affix = {
     if (fixed && window.scrollY <= offsetTop - fixTop) {
       // 回到原来的位置上
       node.style.position = 'static';
+      node.classList.remove('affixing');
       obj.fixed = false;
       return;
     }
@@ -132,6 +135,7 @@ export const Affix = {
     if (!fixed && window.scrollY > offsetTop - fixTop) {
       // 滚动超出，需要fix
       node.style.position = 'fixed';
+      node.classList.add('affixing')
       obj.fixed = true;
     }
   },
