@@ -20,7 +20,7 @@ import php from 'highlight.js/lib/languages/php';
 import sql from 'highlight.js/lib/languages/sql';
 
 import './index.less';
-import { Affix } from '../../common/plugins';
+import { Affix, Scrollspy, Ripple } from '../../common/plugins';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);
@@ -45,35 +45,34 @@ renderer.code = (code, lang) => {
 };
 
 window.addEventListener('load', () => {
+  Ripple.init();
 
 
-  const $mdBody = document.querySelector('.markdowned > .body');
+  const $mdContainer = document.querySelector('.markdowned');
+  const $mdBody = $mdContainer.querySelector('.body');
   const $catalog = document.querySelector('.catalog > .content');
   const $loading = document.querySelector('.loading');
   const $article = document.querySelector('.container-article');
+  const $more = document.querySelector('.container-more');
 
-
-  fetch('https://note.youdao.com/yws/api/personal/sync?method=download&keyfrom=web&cstk=z5yuS0Cj', {
-    method: 'POST',
-    credentials: 'include',
-    body: 'fileId=WEBd467fa3b5a26c28e1988d7f15bce160e&version=-1&read=true&cstk=z5yuS0Cj',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
-  }).then(data => data.text()).then((text) => {
+  // 简单地拿文件名
+  const filename = decodeURIComponent(location.search).replace(/^\?id=(.+)$/, '$1');
+  fetch(`/Markdown/${filename}`).then(data => data.text()).then((text) => {
     // console.log(text);
-    renderMD(text);
+    setTimeout(() => renderMD(text), 1000);
   });
 
   function renderMD(data) {
     // 显示article
     $loading.classList.remove('active');
     $article.classList.add('active');
+    $more.classList.add('active');
 
     // 覆盖md转html的h1-h2标签
-    let heading = '<ol class="nav">';
+    let heading = '<ol class="nav tc-scrollspy">';
     let second = false;
     let headingCount = 0;
+    const prefix = 'heading';
 
     renderer.heading = (text, level) => {
       if (level === 1) {
@@ -83,16 +82,16 @@ window.addEventListener('load', () => {
         headingCount = Math.floor(headingCount) + 1;
         second = false;
         // 拼接
-        heading += `${first ? '' : ext}<li class="${first ? 'active' : ''}"><a href="#heading-${headingCount}">${text}</a>`;
+        heading += `${first ? '' : ext}<li class="${first ? 'active' : ''}"><a href="#${prefix}-${headingCount}">${text}</a>`;
       } else if (level === 2) {
         headingCount += 0.1;
         headingCount = parseFloat(headingCount.toFixed(1));
         if (second) {
           // 有h2，表示这是第二个h2
-          heading += `<li><a href="#heading-${headingCount}">${text}</a></li>`;
+          heading += `<li><a href="#${prefix}-${headingCount}">${text}</a></li>`;
         } else {
           second = true;
-          heading += `<ul class="nav"><li class="${headingCount === 1.1 ? 'active' : ''}"><a href="#heading-${headingCount}">${text}</a></li>`;
+          heading += `<ul class="nav"><li class="${headingCount === 1.1 ? 'active' : ''}"><a href="#${prefix}-${headingCount}">${text}</a></li>`;
         }
       }
 
@@ -100,21 +99,23 @@ window.addEventListener('load', () => {
         // 默认的渲染
         return `<h${level}>${text}</h${level}>`;
       }
-      return `<h${level + 1} id="heading-${headingCount}">${text}</h${level + 1}>`;
+      return `<h${level + 1} id="${prefix}-${headingCount}">${text}</h${level + 1}>`;
     };
     $mdBody.innerHTML = marked(data, { renderer });
     $catalog.innerHTML = `<h1>目录</h1>${heading}</ol>`;
 
     Affix.init();
+    Scrollspy.init();
     hljs.initHighlighting();
     initMermaid();
+    initMathJax();
   }
 
   function initMermaid() {
     // 动态加载mermaid.js流程图
     const $mermaids = document.querySelectorAll('.mermaid');
 
-    if (!$mermaids) return;
+    if (!$mermaids.length) return;
 
     const $script = document.createElement('script');
 
@@ -123,4 +124,35 @@ window.addEventListener('load', () => {
     $script.addEventListener('load', () => mermaid.init(undefined, $mermaids));
     document.body.appendChild($script);
   }
+
+  function initMathJax() {
+    // 动态加载数学公式MathJax支持
+    if (/(\$\$|\\\().+(\$\$|\\\))/m.test(document.body.innerHTML)) {
+      const $script = document.createElement('script');
+
+      $script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      $script.addEventListener('load', () => MathJax.Hub.Configured());
+      document.body.appendChild($script);
+    }
+  }
+
+  // 监听全屏F11，keyCode = 122
+  window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 122) {
+      e.preventDefault();
+      fullscreen($mdContainer);
+    }
+  });
 });
+
+function fullscreen(dom) {
+  if (dom.requestFullscreen) {
+    dom.requestFullscreen();
+  } else if (dom.webkitRequestFullscreen) {
+    dom.webkitRequestFullscreen();
+  } else if (dom.mozRequestFullscreen) {
+    dom.mozRequestFullscreen();
+  } else if (dom.msRequestFullscreen) {
+    dom.msRequestFullscreen();
+  }
+}

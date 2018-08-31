@@ -72,6 +72,10 @@ if (IS_PROD) {
     disableHostCheck: true,
     hot: true,
     compress: true,
+    // 代理到本地的md文件
+    proxy: {
+      '/Markdown': 'http://localhost',
+    },
   };
   config.plugins = [
     ...config.plugins,

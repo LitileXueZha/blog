@@ -10,7 +10,6 @@ block content
       img(src="/favicon.ico", alt="", width=30, height=30)
       p Loading
     article.container-article.has-cover
-      img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
       .markdowned
         h1.title Linux - 服务器操作系统
         p.info
@@ -25,4 +24,26 @@ block content
           img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
           .content
             h1 目录
+      img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+    .container-more
+      .actions
+        button.tc-ripple(title="喜欢")
+          +icon('heart', 20)
+        button.tc-ripple(title="踩一下")
+          +icon('foot', 20)
+      p.previous 上一篇：
+        a(href="#") 钢铁是怎样炼成的
+      p.next 下一篇：
+        a(href="#") 打酱油
+      .comment
+        form#form-comment
+          textarea(cols="30", rows="10", maxlength=200, placeholder="说说你的看法")
+          .tip
+            button.tc-ripple 评论
+            |  Ctrl + Enter
+        ul.list
+          each i in new Array(5)
+            li
+              time 2017-12-12
+              p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor assumenda nobis repellat saepe consectetur ullam enim officiis? Laborum sapiente officia, ipsum illum eum inventore at totam ex ipsam voluptatem reiciendis!
 

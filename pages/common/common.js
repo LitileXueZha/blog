@@ -13,3 +13,6 @@ window.TC = {
     };
   },
 };
+
+// 常用变量定义
+window.REG_QUERY = /^\?(\w+)$/;
