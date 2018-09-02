@@ -56,7 +56,8 @@ window.addEventListener('load', () => {
   const $more = document.querySelector('.container-more');
 
   // 简单地拿文件名
-  const filename = decodeURIComponent(location.search).replace(/^\?id=(.+)$/, '$1');
+  // const filename = decodeURIComponent(location.search).replace(/^\?id=(.+)$/, '$1');
+  const filename = 'Done/Markdown - 语法.md';
   fetch(`/Markdown/${filename}`).then(data => data.text()).then((text) => {
     // console.log(text);
     setTimeout(() => renderMD(text), 1000);

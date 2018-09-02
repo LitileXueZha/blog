@@ -40,7 +40,7 @@ block content
         each val, index in new Array(5)
           li.tc-list-item-article
             h2.title
-              a.tc-font-title(href="/articles/detail.html?id=#{index}") 多拉风老大
+              a.tc-font-title(href="/articles/detail.html?id=" +index) 多拉风老大
             .description
               time(title="发布时间") 刚刚
               i.tc-divider
