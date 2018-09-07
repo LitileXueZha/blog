@@ -224,7 +224,7 @@ export const Scrollspy = {
     // init
     this.change(links, spy, lastTop, dom);
     $spy.addEventListener('scroll', () => {
-      const top = isBody ? (window.scrollTop || document.documentElement.scrollTop) : spy.scrollTop;
+      const top = isBody ? (window.scrollY || document.documentElement.scrollTop) : spy.scrollTop;
       if (i < this.lineHeight) {
         i += 1;
 

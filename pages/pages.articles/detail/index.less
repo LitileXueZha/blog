@@ -202,6 +202,9 @@ main {
     vertical-align: super;
     font-size: smaller;
   }
+  small {
+    font-size: smaller;
+  }
 
   img {
     max-width: 100%;
@@ -218,14 +221,14 @@ main {
   table th, table td {
     padding: 6px 13px;
     border: 1px solid #dfe2e5;
-    text-align: left;
+    // text-align: left;
     vertical-align: middle;
   }
   table tr:nth-child(2n) {
     background-color: #f6f8fa;
   }
   table span {
-    width: unset;
+    width: auto;
   }
   
   .mermaid {
@@ -254,12 +257,11 @@ main {
 
 }
 .catalog ol.nav {
-  padding-left: 23px;
+  padding-left: 15px;
   line-height: 23px;
-  list-style: cjk-ideographic;
+  list-style: decimal;
 
   & > li > a {
-    display: block;
     margin-left: -23px;
     padding-left: 23px;
     color: inherit;
@@ -293,7 +295,7 @@ main {
       display: none;
       position: absolute;
       top: 4px;
-      left: -10px;
+      left: -11px;
       border: 5px solid transparent;
       border-left-color: @mainColor;
     }

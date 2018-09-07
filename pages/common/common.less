@@ -59,6 +59,8 @@ body {
 	line-height: @textHeight;
 	// background-color: #f5f5f5;
 }
+// HACK: IE11里main需要定义为块级元素
+main { display: block; }
 
 // 相关文本属性
 abbr { text-decoration: none; }

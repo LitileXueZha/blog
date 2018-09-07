@@ -49,6 +49,7 @@ window.addEventListener('load', () => {
 
 
   const $mdContainer = document.querySelector('.markdowned');
+  const $mdTitle = $mdContainer.querySelector('.title');
   const $mdBody = $mdContainer.querySelector('.body');
   const $catalog = document.querySelector('.catalog > .content');
   const $loading = document.querySelector('.loading');
@@ -58,12 +59,27 @@ window.addEventListener('load', () => {
   // 简单地拿文件名
   // const filename = decodeURIComponent(location.search).replace(/^\?id=(.+)$/, '$1');
   const filename = 'Done/Markdown - 语法.md';
-  fetch(`/Markdown/${filename}`).then(data => data.text()).then((text) => {
-    // console.log(text);
-    setTimeout(() => renderMD(text), 1000);
-  });
+
+  if (window.fetch) {
+    fetch(`/Markdown/${filename}`).then(data => data.text()).then((text) => {
+      setTimeout(() => renderMD(text), 1000);
+    });
+  } else {
+    const xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        setTimeout(() => renderMD(xhr.responseText), 1000);
+      }
+    };
+    xhr.open('GET', `/Markdown/${filename}`);
+    xhr.send();
+  }
 
   function renderMD(data) {
+    // 定义title
+    document.title = 'Markdown - 语法_滔\'s 博客';
+    $mdTitle.innerHTML = 'Markdown - 语法';
     // 显示article
     $loading.classList.remove('active');
     $article.classList.add('active');
@@ -151,8 +167,8 @@ function fullscreen(dom) {
     dom.requestFullscreen();
   } else if (dom.webkitRequestFullscreen) {
     dom.webkitRequestFullscreen();
-  } else if (dom.mozRequestFullscreen) {
-    dom.mozRequestFullscreen();
+  } else if (dom.mozRequestFullScreen) {
+    dom.mozRequestFullScreen();
   } else if (dom.msRequestFullscreen) {
     dom.msRequestFullscreen();
   }

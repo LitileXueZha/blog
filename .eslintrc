@@ -4,7 +4,9 @@
         "window": true,
         "document": true,
         "FileReader": true,
-        "navigator": true
+        "navigator": true,
+        "XMLHttpRequest": true,
+        "history": true
     },
     "parserOptions": {
         "ecmaFeatures": {
