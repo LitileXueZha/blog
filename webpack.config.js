@@ -35,7 +35,9 @@ const config = {
       {
         from: './favicon.ico',
         to: path.join(PATH_DIST, '[name].[ext]'),
-        // force: true,
+      }, {
+        from: './pages.static/*.html',
+        to: path.join(PATH_DIST, '[name].html'),
       },
     ]),
   ],
