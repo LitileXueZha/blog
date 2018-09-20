@@ -136,7 +136,7 @@ window.addEventListener('load', () => {
 
     const $script = document.createElement('script');
 
-    $script.src = 'https://unpkg.com/mermaid@7.1.0/dist/mermaid.js';
+    $script.src = 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js';
     // eslint-disable-next-line
     $script.addEventListener('load', () => mermaid.init(undefined, $mermaids));
     document.body.appendChild($script);
@@ -147,7 +147,7 @@ window.addEventListener('load', () => {
     if (/(\$\$|\\\().+(\$\$|\\\))/m.test(document.body.innerHTML)) {
       const $script = document.createElement('script');
 
-      $script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      $script.src = 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML';
       $script.addEventListener('load', () => MathJax.Hub.Configured());
       document.body.appendChild($script);
     }

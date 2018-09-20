@@ -32,10 +32,10 @@
 │   ├── pages.xxx         二级目录，生成一个xxx目录
 │   │   └── xxx           与上面page.xxx类似
 │   └── layout.pug        博客总布局
-├── pages.static          静态页面，可单独放到任一位置
+├── pages.static          静态页面，内联css与js
 │   ├── xxx               生成xxx.html静态页面
 │   │   ├── index.js
-│   │   └── index.html
+│   │   └── index.pug
 │   └── webpack.config.js 静态页专门的配置
 ├── webpack               细分配置文件
 │   ├── loaders.js        一系列loader

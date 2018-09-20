@@ -1,0 +1,109 @@
+@color: #009688;
+
+.icon {
+  vertical-align: middle;
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  font-family: PingFang SC, Microsoft YaHei;
+  transform: translate3d(-50%, -50%, 0);
+  box-sizing: border-box;
+  padding-right: 240px;
+
+  & > .planet {
+    position: absolute;
+    top: -25px;
+    right: 0;
+    margin-left: 54px;
+  }
+
+  & > .title,
+  & > .info {
+    margin: 0;
+    width: 290px;
+    color: @color;
+    overflow: hidden;
+  }
+
+  & > .title {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  & > .info {
+    margin: 10px 0 30px 0;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+
+  .btn {
+    display: inline-block;
+    margin: 0 10px 0 1px;
+    width: 100px;
+    padding: 5px 0;
+    border: 2px solid @color;
+    color: @color;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+
+    .icon-back {
+      margin-right: 5px;
+
+      .color {
+        fill: #fff;
+      }
+    }
+
+    .icon-home-f {
+      transform: scale(1.3);
+
+      .color {
+        fill: @color;
+      }
+    }
+
+    .icon {
+      position: relative;
+      top: -2px;
+    }
+  }
+  .btn.primary {
+    color: #fff;
+    background: @color;
+  }
+}
+
+.code {
+  display: none;
+  color: @color;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    padding-right: 0;
+
+    & > .planet {
+      position: static;
+      margin-left: 0;
+    }
+
+    .title,
+    .info,
+    .btn {
+      display: none;
+    }
+  }
+
+  .code {
+    display: block;
+  }
+}

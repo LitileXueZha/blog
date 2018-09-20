@@ -345,7 +345,6 @@ body {
       line-height: 20px;
     }
     .resume-footer>a:nth-child(n+2){
-      display: inline-block;
       float: right;
       margin-right: 0;
       -webkit-transform: scale(0.68);
@@ -401,3 +400,36 @@ body {
       display: inline;
     }
   }
+
+// 打印样式
+@media print {
+  #root {
+    box-shadow: none;
+  }
+
+  .btn-lang {
+    display: none;
+  }
+
+  .resume-container {
+    display: flex;
+
+    & > .resume-col-left {
+      flex: 1;
+      padding-bottom: 50px;
+    }
+  
+    & > .resume-col-right {
+      width: 200px;
+      border-left: 1px solid #e9e9e9;
+      margin-top: -100px;
+      padding-top: 112px;
+      margin-left: 40px;
+      padding-left: 40px;
+    }  
+  }
+
+  .resume-footer {
+    margin-top: 0;
+  }
+}
