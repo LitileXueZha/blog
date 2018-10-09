@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 
   // 简单地拿文件名
   // const filename = decodeURIComponent(location.search).replace(/^\?id=(.+)$/, '$1');
-  const filename = 'Done/Markdown - 语法.md';
+  const filename = '破万重浪未往矣/Markdown - 语法.md';
 
   if (window.fetch) {
     fetch(`/Markdown/${filename}`).then(data => data.text()).then((text) => {
@@ -136,7 +136,7 @@ window.addEventListener('load', () => {
 
     const $script = document.createElement('script');
 
-    $script.src = 'https://cdn.bootcss.com/mermaid/8.0.0-rc.8/mermaid.min.js';
+    $script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js';
     // eslint-disable-next-line
     $script.addEventListener('load', () => mermaid.init(undefined, $mermaids));
     document.body.appendChild($script);
@@ -147,7 +147,7 @@ window.addEventListener('load', () => {
     if (/(\$\$|\\\().+(\$\$|\\\))/m.test(document.body.innerHTML)) {
       const $script = document.createElement('script');
 
-      $script.src = 'https://cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML';
+      $script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
       $script.addEventListener('load', () => MathJax.Hub.Configured());
       document.body.appendChild($script);
     }

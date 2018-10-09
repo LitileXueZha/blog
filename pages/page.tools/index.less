@@ -5,7 +5,7 @@ body {
   
   main {
     margin-top: @mainSpace * 2 !important;
-    min-height: 500px;
+    min-height: 400px;
     background: #fff;
   }
 }
@@ -41,6 +41,15 @@ body {
 
 .container-tool {
   padding: 24px;
+
+  .base64,
+  .character {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 }
 
 .text-to-b64,
@@ -84,8 +93,7 @@ body {
   }
 
   // 复制图标、下载链接
-  & > .icon-copy,
-  .download {
+  & > .icon-copy {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -93,7 +101,6 @@ body {
 
     .color { fill: @borderColor }
   }
-  .download .color { fill: @linkColor }
 }
 
 .upload {
@@ -138,4 +145,14 @@ body {
   }
 
   .hidden { display: none }
+}
+
+// 字符样式
+.character > span {
+  display: inline-block;
+  margin: @mainSpace @mainSpace 0 0;
+  width: 40px;
+  font-size: 40px;
+  line-height: 40px;
+  text-align: center;
 }

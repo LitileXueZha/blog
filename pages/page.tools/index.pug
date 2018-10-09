@@ -7,14 +7,14 @@ block title
 block content
   main.tc-container
     ul.list-tool
-      li.active
+      li.base64.active
         a(href="#base64") Base64转码
-      li
-        a(href="#") 待做
-      li
-        a(href="#") 待做
+      li.character
+        a(href="#character") 字符
+      //- li
+      //-   a(href="#") 待做
     .container-tool
-      .base64
+      .base64.active
         p Base64是常见的编码方式，好处良多。这里提供文字、图片的互相转换
         .text-to-b64
           textarea.input(data-pattern="text" placeholder="输入文字..." autocomplete="off" spellcheck="false")
@@ -41,5 +41,11 @@ block content
           textarea.input(placeholder="输入Base64，转为图片" autocomplete="off" spellcheck="false")
           +icon('arrow-right')
           .transformed(style="text-align: center")
-          a.download
-            +icon('download')
+      
+      //- 一些字符，或许能当图标使用
+      .character
+        p 下面是收集的一些有趣的字符，或许能当图标用。
+          strong 但要注意兼容性！
+        - const str = ['✓', '✗']
+        each val in str
+          span= val
