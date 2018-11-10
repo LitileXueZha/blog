@@ -1,12 +1,11 @@
 {
     "extends": "airbnb-base",
-    "globals": {
-        "window": true,
-        "document": true,
-        "FileReader": true,
-        "navigator": true,
-        "XMLHttpRequest": true,
-        "history": true
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
     },
     "parserOptions": {
         "ecmaFeatures": {

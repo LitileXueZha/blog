@@ -38,6 +38,7 @@
 │   │   └── index.pug
 │   └── webpack.config.js 静态页专门的配置
 ├── webpack               细分配置文件
+│   ├── index.js          基本
 │   ├── loaders.js        一系列loader
 │   └── pages.js          一系列entry以及插件（生成html文件）
 ├── .eslintrc             eslint配置
@@ -45,5 +46,6 @@
 ├── favicon.ico           网站图标
 ├── package.json          模块配置
 ├── README.md             此说明文件
-└── webpack.config.js     打包总配置
+├── webpack.config.dev.js 开发配置
+└── webpack.config.js     生产环境配置
 ```
