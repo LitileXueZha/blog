@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // 路径常量
 const PATH_DIST = path.join(__dirname, '../dist');
@@ -37,5 +38,9 @@ module.exports = {
         to: path.join(PATH_DIST, '[name].html'),
       },
     ]),
+    new BundleAnalyzerPlugin({
+      analyzerMode: IS_PROD ? 'static' : 'disabled',
+      reportFilename: '../zzz-analyzer.html',
+    }),
   ],
 };
