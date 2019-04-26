@@ -4,6 +4,7 @@ const config = require('./webpack');
 
 module.exports = {
   ...config,
+  mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
     stats: 'minimal',
