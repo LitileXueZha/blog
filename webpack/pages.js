@@ -23,8 +23,8 @@ for (let i = 0; i < pages.length; i++) {
     filename: `${page}.html`,
     template: `./pages/page${hasChild ? 's' : ''}.${page}/index.pug`,
     templateParameters: { pathname: page },
-    // NOTE: 必须要手动加上 runtime、vendor
-    chunks: ['runtime', 'common', `vendors~${page}`, page],
+    // NOTE: 必须要手动加上 vendor
+    chunks: ['common', `vendors~${page}`, page],
   });
 
   entry[page] = `./pages/page${hasChild ? 's' : ''}.${page}/index.js`;

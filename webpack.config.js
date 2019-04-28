@@ -33,9 +33,19 @@ module.exports = {
       new TerserWebpackPlugin({}),
       new OptimizeCssPlugin({}),
     ],
-    runtimeChunk: 'single',
+    // 整合 runtime 到公共模块，可以不用单独打个 runtime.js 增加请求
+    runtimeChunk: { name: 'common' },
     splitChunks: {
-      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          chunks: 'all',
+          // 只提 js 模块到 vendor，样式可以打包到一起
+          test(module) {
+            return module.type === 'javascript/auto' && /[\\/]node_modules[\\/]/.test(module.resource);
+          },
+          priority: -10,
+        },
+      },
     },
   },
 };
