@@ -44,7 +44,7 @@ block content
           each article in articles
             li.list-item.tc-list-item-article
               h3.title
-                a.tc-font-title(href= `/articles/detail.html?id=${article.id}`)= article.title
+                a.tc-font-title(href= `/articles/detail?id=${article.id}`)= article.title
               .description
                 label(title="发布时间")= article.time
                 i.tc-divider

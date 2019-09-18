@@ -2,7 +2,7 @@ include icon_svg.pug
 
 header#top
   nav.tc-container.nav-header
-    form#search(action="/search.html")
+    form#search(action="/search")
       input(
         type="search",
         placeholder="搜点什么呢",
@@ -22,17 +22,17 @@ header#top
             className: '',
           },
           note: {
-            path: '/note.html',
+            path: '/note',
             text: '笔记',
             className: '',
           },
           life: {
-            path: '/life.html',
+            path: '/life',
             text: '生活',
             className: '',
           },
           about: {
-            path: '/about.html',
+            path: '/about',
             text: '关于这个',
             className: '',
           },
@@ -42,5 +42,5 @@ header#top
         li
           a(class= link.className, href= link.path)= link.text
     - const msgClass = `msg ${pathname === 'msg' ? 'active' : ''} `
-    a(class= msgClass href="/msg.html", title="留言板")
+    a(class= msgClass href="/msg", title="留言板")
       +icon('msg', 40)
