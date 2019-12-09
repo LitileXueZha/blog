@@ -12,7 +12,7 @@ const pages = [
   'articles/index', // 文章列表页
   'articles/detail', // 文章详情页
 ];
-const entry = { common: './pages/common/common.js' };
+const entry = { common: './src/common/common.js' };
 const plugins = [];
 
 for (let i = 0; i < pages.length; i++) {
@@ -21,13 +21,13 @@ for (let i = 0; i < pages.length; i++) {
   const hasChild = page.indexOf('/') > 0;
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
-    template: `./pages/page${hasChild ? 's' : ''}.${page}/index.pug`,
+    template: `./src/page${hasChild ? 's' : ''}.${page}/index.pug`,
     templateParameters: { pathname: page },
     // NOTE: 必须要手动加上 vendor
     chunks: ['common', `vendors~${page}`, page],
   });
 
-  entry[page] = `./pages/page${hasChild ? 's' : ''}.${page}/index.js`;
+  entry[page] = `./src/page${hasChild ? 's' : ''}.${page}/index.js`;
   plugins.push(plugin);
 }
 
