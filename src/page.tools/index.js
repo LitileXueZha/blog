@@ -1,7 +1,7 @@
 import { Base64 } from 'js-base64';
 
 import './index.less';
-import { Ripple, FloatText } from '../common/plugins';
+import { Ripple, FloatText } from '../common';
 
 const { debounce } = window.TC;
 

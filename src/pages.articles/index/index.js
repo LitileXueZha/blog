@@ -1,5 +1,5 @@
 import './index.less';
-import { Ripple } from '../../common/plugins';
+import { Ripple } from '../../common';
 
 window.addEventListener('load', () => {
   Ripple.init();

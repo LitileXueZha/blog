@@ -44,6 +44,13 @@ module.exports = {
             return module.type === 'javascript/auto' && /[\\/]node_modules[\\/]/.test(module.resource);
           },
           priority: -10,
+          enforce: true,
+          reuseExistingChunk: true,
+        },
+        common: {
+          name: 'common',
+          chunks: 'initial',
+          minChunks: 2,
         },
       },
     },

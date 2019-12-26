@@ -20,7 +20,7 @@ import php from 'highlight.js/lib/languages/php';
 import sql from 'highlight.js/lib/languages/sql';
 
 import './index.less';
-import { Affix, Scrollspy, Ripple } from '../../common/plugins';
+import { Affix, Scrollspy, Ripple } from '../../common';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);

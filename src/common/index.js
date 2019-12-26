@@ -1,4 +1,5 @@
-import './common.less';
+export * from './plugins';
+import './index.less';
 
 // 通用库的封装
 window.TC = {

@@ -12,7 +12,7 @@ const pages = [
   'articles/index', // 文章列表页
   'articles/detail', // 文章详情页
 ];
-const entry = { common: './src/common/common.js' };
+const entry = { common: './src/common/index.js' };
 const plugins = [];
 
 for (let i = 0; i < pages.length; i++) {
