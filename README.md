@@ -1,6 +1,6 @@
-# blog
+# Blog
 
-博客页面
+博客站点源码
 
 ## 开始对于构建工具的思考
 
@@ -19,9 +19,11 @@
 
 ## 目录结构
 
+<details>
+
 ```bash
 ├── node_modules          模块目录
-├── pages                 博客总目录
+├── src                   博客总目录
 │   ├── assets            图片、视频等资源文件
 │   ├── common            公共样式、js以及一些插件
 │   ├── components        通用组件，诸如header等；icon_svg则是图标
@@ -49,3 +51,5 @@
 ├── webpack.config.dev.js 开发配置
 └── webpack.config.js     生产环境配置
 ```
+
+</details>

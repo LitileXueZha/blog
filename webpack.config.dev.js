@@ -13,6 +13,14 @@ module.exports = {
     disableHostCheck: true,
     hot: true,
     compress: true,
+    historyApiFallback: {
+      rewrites: [{
+        from: /.*/,
+        to(ctx) {
+          return `${ctx.parsedUrl.pathname}.html`;
+        },
+      }],
+    },
     // 代理到本地的md文件
     proxy: {
       '/Markdown': 'http://localhost',
