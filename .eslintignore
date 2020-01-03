@@ -1,12 +1,12 @@
 .scannerwork/
-.vscode/
 dist/
 node_modules/
 pages.static/.trash/
 pages.static/*.html
-_cache.dist.json
 
 package-lock.json
 
 # webpack-bundle-analyzer
 zzz-analyzer.html
+
+seo.js

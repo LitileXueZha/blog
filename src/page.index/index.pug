@@ -18,30 +18,7 @@ block content
           | 5. 回家卖烧饼月入一两万了解一下······
       section.articles
         ul.list
-          -
-            const articles = [
-              {
-                id: 'abc',
-                title: '闭包',
-                time: '刚刚',
-                tag: 'JavaScript',
-                content: '闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。因此，通常你使用只有一个方法的对象的地方，都可以使用闭包。在 Web 中，你想要这样做的情况特别常见。大部分我们所写的 JavaScript 代码都是基于...',
-              }, {
-                id: 'dfa',
-                title: '关于打酱油',
-                time: '12小时',
-                tag: '生活',
-                content: '闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。',
-              }, {
-                id: 'gfa',
-                title: '很久很久以前',
-                time: '2017.03.07',
-                tag: '其它',
-                content: '闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面',
-              },
-            ];
-          
-          each article in articles
+          each article in _cache.index.articles
             li.list-item.tc-list-item-article
               h3.title
                 a.tc-font-title(href= `/articles/detail?id=${article.id}`)= article.title
@@ -58,87 +35,15 @@ block content
       .tag-cloud
         span.title.tc-font-title 标签云
         -
-          const tags = [
-            {
-              value: 'js',
-              text: 'JavaScript',
-              click: 12000,
-            }, {
-              value: 'html',
-              text: 'Html',
-              click: 200,
-            }, {
-              value: 'css',
-              text: 'Css',
-              click: 10,
-            }, {
-              value: 'backend',
-              text: '后端',
-              click: 500,
-            }, {
-              value: 'life',
-              text: '生活',
-              click: 300,
-            }, {
-              value: 'other',
-              text: '其它',
-              click: 0,
-            },
-            {
-              value: 'js',
-              text: 'JavaScript',
-              click: 12000,
-            }, {
-              value: 'html',
-              text: 'Html',
-              click: 200,
-            }, {
-              value: 'css',
-              text: 'Css',
-              click: 10,
-            }, {
-              value: 'backend',
-              text: '后端',
-              click: 500,
-            }, {
-              value: 'life',
-              text: '生活',
-              click: 300,
-            }, {
-              value: 'other',
-              text: '其它',
-              click: 0,
-            },
-          ];
-          const realTags = resolveTags(tags).sort(() => Math.random() - 0.5);
-
-          function resolveTags(arr) {
-            // 把tags分成了四个级别；xl、l、m、s。比例分别为：1、10%、40%、50%
-            const l = 0 + Math.round(arr.length * 0.1);
-            const m = l + Math.round(arr.length * 0.4);
-            // 取色地址：http://encycolorpedia.cn/009688
-            const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
-            // 先排序之
-            const sortTags = arr.sort((val1, val2) => val2.click - val1.click);
-
-            sortTags.forEach((val, i) => {
-              const color = colors[Math.round(Math.random() * 7)];
-              let className = '';
-
-              if (i === 0) className = 'xl';
-              else if (i <= l) className = 'l';
-              else if (i <= m) className = 'm';
-
-              sortTags[i] = Object.assign(val, { color, className });
-            });
-            return sortTags;
-          }
+          const { resolveTags }  = require('./index.pug.js');
+          const { tags } = _cache.index;
+          const realTags = resolveTags(tags);
         .tags
           each tag in realTags
-            a(class= `tag ${tag.className}`, href="/", data-value= tag.value, style= `color: ${tag.color}`)= tag.text
+            a(class= `tag ${tag.className}`, href= `/articles#${tag.value}`, style= `color: ${tag.color}`)= tag.text
       figure.topics
         figcaption.tc-font-title Topics
-        - const topics = ['这个特别多', '第二', 'lorem is a good snippet', '什么呢？', 'Hdfa daswf dasf', '三方打发第三方', 'hello world', '什么呢？', 'Hdfa daswf dasf', '啊第三方打发第三方']
+        - const { topics } = _cache.index;
         ul.list
           each data, i in topics
             li.list-item

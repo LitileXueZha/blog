@@ -1,5 +1,15 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const IS_PROD = process.env.NODE_ENV === 'production';
+let _cache;
+
+// SEO 数据
+if (IS_PROD) {
+  _cache = require('../_cache.dist.json');
+} else {
+  _cache = require('../_cache.dev.json');
+}
+
 // 需要打包的页面
 const pages = [
   'index', // 首页
@@ -22,7 +32,7 @@ for (let i = 0; i < pages.length; i++) {
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
     template: `./src/page${hasChild ? 's' : ''}.${page}/index.pug`,
-    templateParameters: { pathname: page },
+    templateParameters: { pathname: page, _cache },
     // NOTE: 必须要手动加上 vendor
     chunks: ['common', `vendors~${page}`, page],
   });

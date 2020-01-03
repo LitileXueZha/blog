@@ -26,6 +26,7 @@
     "highlight.js": "^9.17.1",
     "js-base64": "^2.5.1",
     "marked": "^0.7.0",
+    "request": "^2.88.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
