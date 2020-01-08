@@ -18,15 +18,16 @@ block content
           | 5. 回家卖烧饼月入一两万了解一下······
       section.articles
         ul.list
+          - const { humanDate } = require('../common/index.pug.js');
           each article in _cache.index.articles
             li.list-item.tc-list-item-article
               h3.title
                 a.tc-font-title(href= `/articles/detail?id=${article.id}`)= article.title
               .description
-                label(title="发布时间")= article.time
+                label(title="发布时间")= humanDate(article.create_at)
                 i.tc-divider
-                label(title="分类标签")= article.tag
-              p= article.content
+                label(title="分类标签")= article.tag_name
+              p= article.summary
         .actions
           button#more.tc-button.tc-ripple 加载更多
           a(href="/articles") 查看所有
@@ -40,17 +41,17 @@ block content
           const realTags = resolveTags(tags);
         .tags
           each tag in realTags
-            a(class= `tag ${tag.className}`, href= `/articles#${tag.value}`, style= `color: ${tag.color}`)= tag.text
+            a(class= `tag ${tag.className}`, href= `/articles#${tag.id}`, style= `color: ${tag.color}`)= tag.name
       figure.topics
         figcaption.tc-font-title Topics
         - const { topics } = _cache.index;
         ul.list
-          each data, i in topics
+          each topic, i in topics
             li.list-item
               if i < 3
                 +icon('fire', 20, '#ff6977', 'list-style', `opacity: ${1 - (i / 5)}`)
                 //- img.list-style(src= require('../assets/icon_fire.png'), style= `opacity: ${1 - (i / 5)}`, width=20, height=20)
               else
                 span.list-style= i + 1
-              a(href="/")= data
+              a(href= `/articles/detail?id=${topic.id}`)= topic.title
 
