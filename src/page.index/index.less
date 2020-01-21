@@ -1,4 +1,4 @@
-@import '../common/constants.less';
+@import '../common/variables.less';
 
 @navWidth: 270px;
 
@@ -81,9 +81,9 @@ main.container {
 }
 
 .articles {
-  position: relative;
+  // position: relative;
   margin-top: @mainSpace * 4;
-  min-height: @mostUseLength * 2;
+  // min-height: @mostUseLength * 2;
   padding: 40px 40px (40px + @textHeight) 0;
   // box-shadow: 0 2px 8px rgba(0,0,0,.09);
 
@@ -98,12 +98,13 @@ main.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: absolute;
-    left: 0;
-    bottom: 40px;
+    // position: absolute;
+    // left: 0;
+    // bottom: 40px;
+    margin-top: @mainSpace;
     width: 100%;
     height: @textHeight;
-    padding-right: 40px;
+    // padding-right: 40px;
     line-height: @textHeight;
 
     & > #more {

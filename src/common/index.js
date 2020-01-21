@@ -2,6 +2,8 @@ import './index.less';
 // 便于打包优化，别直接 `import` 对应的文件
 export * from './plugins';
 export * from './index.pug';
+export * from './constants';
+export { default as fetch } from './request';
 
 // 通用库的封装
 window.TC = {
