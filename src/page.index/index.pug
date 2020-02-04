@@ -17,7 +17,17 @@ block content
           br
           | 5. 回家卖烧饼月入一两万了解一下······
       section.articles
-        ul.list
+        ul.list.skeleton
+          //- 骨架屏
+          each tmp in Array(3)
+            li.list-item.skeleton-article
+              .title
+              .description
+                span
+                span
+              .p
+              .p
+              .p
           - const { humanDate } = require('../common/index.pug.js');
           each article in _cache.index.articles
             li.list-item.tc-list-item-article
@@ -39,13 +49,19 @@ block content
           const { resolveTags }  = require('./index.pug.js');
           const { tags } = _cache.index;
           const realTags = resolveTags(tags);
-        .tags
+        .tags.skeleton
+          //- 骨架屏
+          each tmp in Array(9)
+            span.skeleton-tag
           each tag in realTags
             a(class= `tag ${tag.className}`, href= `/articles#${tag.id}`, style= `color: ${tag.color}`)= tag.name
       figure.topics
         figcaption.tc-font-title Topics
         - const { topics } = _cache.index;
-        ul.list
+        ul.list.skeleton
+          //- 骨架屏
+          each tmp in Array(5)
+            li.list-item.skeleton-topic
           each topic, i in topics
             li.list-item
               if i < 3

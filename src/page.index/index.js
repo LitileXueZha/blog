@@ -62,6 +62,7 @@ function renderTagCloud(tags) {
   `);
 
   $tags.innerHTML = fragments.join('');
+  $tags.classList.remove('skeleton');
 }
 
 /**
@@ -99,6 +100,7 @@ function renderAricleList(articles, isLoadMore) {
 
   $newArticles.appendChild($frag);
   $articles.parentNode.replaceChild($newArticles, $articles);
+  $newArticles.classList.remove('skeleton');
 }
 
 /**
@@ -126,6 +128,7 @@ function renderTopicList(topics) {
   });
 
   $topics.innerHTML = fragments.join('');
+  $topics.classList.remove('skeleton');
 }
 
 function topicIconSvg(index) {

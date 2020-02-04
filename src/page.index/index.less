@@ -60,7 +60,7 @@ main.container {
     align-items: center;
     line-height: @textHeight;
 
-    &:not(:last-of-type) { padding-bottom: @mainSpace; }
+    &:not(:last-of-type) { margin-bottom: @mainSpace; }
 
     & > .list-style {
       display: inline-block;
@@ -111,6 +111,87 @@ main.container {
       position: relative;
       left: -16px;
       color: @mainColor;
+    }
+  }
+}
+
+// 骨架屏
+@skeletonColor: #f5f5f5;
+
+.articles .skeleton {
+  .tc-list-item-article {
+    position: absolute;
+    left: -100%;
+    width: 820px;
+  }
+
+  .skeleton-article {
+    .title {
+      margin-bottom: 8px;
+      height: 28px;
+      width: @mostUseLength;
+      background-color: @skeletonColor;
+    }
+    .description {
+      line-height: 0;
+
+      & span {
+        display: inline-block;
+        margin-right: 4px;
+        height: 12px;
+        width: 48px;
+        background-color: @skeletonColor;
+      }
+    }
+    .p {
+      margin-top: 4px;
+      height: 18px;
+      background-color: @skeletonColor;
+    }
+  }
+}
+
+.topics .list.skeleton {
+  left: 0;
+  overflow: hidden;
+
+  .list-item:not(.skeleton-topic) {
+    position: absolute;
+    right: -100%;
+  }
+
+  .skeleton-topic {
+    height: 20px;
+    background-color: @skeletonColor;
+  }
+}
+
+.tags.skeleton {
+  position: relative;
+  overflow: hidden;
+  margin-right: -4px;
+
+  .tag {
+    position: absolute;
+    right: -100%;
+  }
+
+  @width: (@mostUseLength - 4px * 3) / 4;
+  .skeleton-tag {
+    display: inline-block;
+    margin-right: 4px;
+    width: @width;
+    height: 20px;
+    background-color: @skeletonColor;
+
+    &:nth-of-type(1) {
+      width: 90px;
+    }
+    &:nth-of-type(3) {
+      width: @mostUseLength - 90px - 4px * 2 - @width;
+    }
+    &:nth-last-of-type(2) {
+      width: @width * 2;
     }
   }
 }
