@@ -16,7 +16,7 @@ block content
           | 还申请幕布备案了个域名。这即是萌芽之初
         p 到了2017年3月，帮学校的导航样式重写了下，兼容IE6/7/8的难受地香菇。一直都在看别人的博客，就想要有个自己的博客，想有作为，
           | 博客就是证明。花了一个礼拜的时间，写了一些静态页面，可以说的上是
-          a(href="/v1.0/index.html") 1.0版本
+          a(href="/v1.0/index.html", target="_blank") v1.0版本
           | 了，hah。但毕竟只是静态的，都没法儿写文章、发布之类的，顶多就一个留言功能，还没防SQL注入，被别人鄙视的不行。再看过诸如
           | WordPress这样的系统后，有了一个新的想法
         p 在2018年3月的时候，就决定花时间来重写自己的博客，并给自己定了四项任务：博客、管理后台、博客API、手机App管理。然而下班了一直
@@ -40,4 +40,4 @@ block content
       p 男，90后江西吉安人。从事IT行业，前端开发工程师。性格开朗乐观、很怀旧，有的时候能说一大堆子的话，有的时候一声不吭。
         | 平时除了敲代码外，也会看看视频、打打游戏，当然需要运动起来，嗯，这个在计划之中
       a#showPhoto(role="button") 查看照片
-      img.hidden.photo(src="https://download.ningtaostudy.cn/photo.jpg", alt="头像", width=270, height=270)
+      img.hidden.photo(src= require('../assets/photo.jpg'), alt="头像", width=270, height=270)

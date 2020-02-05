@@ -18,6 +18,18 @@ main { display: block; }
 input[type=search] {
 	-webkit-appearance: textfield;
 }
+// 覆盖默认占位符
+input,
+textarea {
+	&::-webkit-input-placeholder,
+	&::placeholder {
+		color: #ccc;
+	}
+	&:-ms-input-placeholder,
+	&::-moz-placeholder {
+		color: #ccc;
+	}
+}
 
 // 相关文本属性
 abbr { text-decoration: none; }
@@ -241,7 +253,12 @@ header {
 			& + .icon .color { fill: #fff !important }
 		}
 
-		&::-webkit-input-placeholder {
+		&::-webkit-input-placeholder,
+		&::placeholder {
+			color: @activeColor;
+		}
+		&::-moz-placeholder,
+		&:-ms-input-placeholder {
 			color: @activeColor;
 		}
 	}
