@@ -114,6 +114,7 @@ export const Affix = {
     node.firstElementChild.style.width = `${width}px`;
     if (fixed) {
       node.firstElementChild.style.position = 'fixed';
+      node.firstElementChild.classList.add('affixing');
     }
     this.nodes.push({
       node: node.firstElementChild,

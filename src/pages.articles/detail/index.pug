@@ -6,10 +6,23 @@ block title
 
 block content
   main.tc-container
-    .loading.active
-      img(src="/favicon.ico", alt="", width=30, height=30)
-      p Loading
-    article.container-article.has-cover
+    article.container-article.skeleton
+      //- 骨架屏：文章
+      .skeleton-article
+        .title
+        .info-label
+        .info-label
+        .body
+          .summary
+            .p
+            .p
+          each tmp in Array(3)
+            .section
+              .section-title
+              .p
+              .p
+              .p
+      //- ====================================
       .markdowned
         h1.title Markdown - 语法
         p.info
@@ -19,12 +32,16 @@ block content
           +icon('tag', 14)
           span.tag JavaScript
         .body
+      //- 骨架屏：目录
+      .skeleton-catalog
+        .title
+        each tmp in Array(5)
+          .p
+      //- ====================================
       .tc-affix(data-top=10)
         aside.catalog
-          img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
-          .content
-            h1 目录
-      img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+          //- img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+          .content 无目录
     .container-more
       .actions
         button.tc-ripple(title="喜欢")
@@ -42,7 +59,7 @@ block content
             button.tc-ripple 评论
             |  Ctrl + Enter
         ul.list
-          each i in new Array(5)
+          each i in new Array(3)
             li
               time 2017-12-12
               p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor assumenda nobis repellat saepe consectetur ullam enim officiis? Laborum sapiente officia, ipsum illum eum inventore at totam ex ipsam voluptatem reiciendis!

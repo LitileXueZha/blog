@@ -1,46 +1,23 @@
 @import '../../common/variables.less';
+@import './md.less';
 
 main {
   min-height: 400px;
 }
 
-.loading {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-
-  @keyframes zoom {
-    from {
-      transform: scale(1);
-      opacity: 1;
-    }
-    to {
-      transform: scale(0.8);
-      opacity: 0.8;
-    }
-  }
-
-  img {
-    margin-bottom: 4px;
-    width: 30px;
-    height: 30px;
-    animation: zoom .7s infinite alternate;
-  }
+.mixin-layoutArticle() {
+  flex: 1;
+  margin-top: 40px;
 }
-.loading.active { display: flex }
+.mixin-layoutCatalog() {
+  margin: 40px 0 0 80px;
+  width: 230px;
+}
 
 .container-article {
   position: relative;
-  display: none;
+  display: flex;
   flex-wrap: wrap;
-
-  &.has-cover { padding-top: 200px }
-  
-  &.active {
-    display: flex;
-  }
 
   & > .cover {
     position: absolute;
@@ -51,31 +28,27 @@ main {
     object-fit: cover;
   }
 
-  .markdowned,
-  & > .tc-affix {
-    margin-top: 40px;
-  }
-
   .markdowned {
-    flex: 1;
+    .mixin-layoutArticle();
     overflow: auto;
   }
 
   & > .tc-affix {
-    margin-left: 40px;
-    width: @mostUseLength - 40px;
+    .mixin-layoutCatalog();
   }
 }
 
 .markdowned > .title,
-.catalog h1 {
+.catalog .catalog-title {
+  padding-bottom: @mainSpace;
+  color: #000;
   font-size: 30px;
   font-weight: 500;
   line-height: 30px;
 }
 
 .markdowned > .info {
-  margin: 15px 0;
+  margin-top: 15px;
   color: #ccc;
   font-size: 12px;
   line-height: 14px;
@@ -90,170 +63,27 @@ main {
   .color { fill: #ccc }
 }
 
-// 全屏模式
-.markdowned:fullscreen {
-  position: relative;
-  margin-top: 0;
-  width: 100%;
-  background: #f8f8f8;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 4px;
-    background: transparent;
-    cursor: pointer;
-  }
-  &::-webkit-scrollbar-thumb {
-    border-radius: 3px;
-    background: @mainColor;
-
-    &:hover { background: #000 }
-  }
-
-  & > .title {
-    position: absolute;
-    left: 50%;
-    top: 70px;
-    margin-left: -310px;
-    width: 620px;
-  }
-
-  & > .info { display: none }
-
-  & > .body {
-    width: 800px;
-    margin: 20px auto;
-    padding: 100px 90px 70px 90px;
-    background-color: #fff;
-    box-shadow: 0 1px 10px 2px rgba(0,0,0,.06);
-    border: 1px solid #e5e5e5;
-  }
-}
-
-// markdown样式
-.markdowned > .body {
-  overflow: hidden;
-
-  h1, h2, h3, h4, h5, h6 {
-    margin: 32px 0;
-    font-weight: 500;
-    color: #000;
-  }
-  h1 {
-    font-size: 30px;
-    line-height: 30px;
-  }
-  h2 {
-    font-size: 24px;
-    line-height: 24px;
-  }
-  h3 {
-    font-size: 20px;
-  }
-  h4 {
-    font-size: 16px;
-  }
-  h5 {
-    font-size: 14px;
-  }
-  h6 {
-    font-size: 12px;
-  }
-  ol, ul {
-    padding-left: 1.5em;
-    list-style: circle;
-  }
-  ol { list-style: decimal }
-  ol ol { list-style: lower-roman }
-  ul + ul, ul + ol, ol + ol, ol + ul {
-    margin-top: 16px;
-  }
-
-  p, pre, img, table {
-    margin: 16px 0;
-  }
-
-  code {
-    padding: 0 4px;
-  }
-  pre > code {
-    padding: 16px;
-    border-radius: 3px;
-  }
-
-  em {
-    font-style: italic;
-  }
-  b, strong {
-    font-weight: bold;
-  }
-
-  blockquote {
-    padding: 0 1em;
-    color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
-  }
-
-  sub {
-    vertical-align: sub;
-    font-size: smaller;
-  }
-  sup {
-    vertical-align: super;
-    font-size: smaller;
-  }
-  small {
-    font-size: smaller;
-  }
-
-  img {
-    max-width: 100%;
-    vertical-align: middle;
-  }
-  td > img {
-    margin: 0;
-  }
-
-  table th {
-    color: #000;
-    font-weight: 600;
-  }
-  table th, table td {
-    padding: 6px 13px;
-    border: 1px solid #dfe2e5;
-    // text-align: left;
-    vertical-align: middle;
-  }
-  table tr:nth-child(2n) {
-    background-color: #f6f8fa;
-  }
-  table span {
-    width: auto;
-  }
-  
-  .mermaid {
-    text-align: center;
-  }
-}
-
 .catalog {
   .cover {
     display: none;
     min-width: 100%;
     max-width: 100%;
     height: auto;
-    max-height: @mostUseLength;
+    max-height: 130px;
+    background-color: #f5f5f5;
     object-fit: cover;
   }
 
-  h1 {
+  .catalog-title {
     position: relative;
     left: -3px;
     margin-bottom: @mainSpace;
+    border-bottom: 1px solid @borderColor;
+    color: @textColor;
   }
 
-  &.affixing .cover { display: unset }
-  &.affixing .cover + .content > h1 { display: none }
+  &.affixing .cover { display: inline-block }
+  &.affixing .cover + .content > .catalog-title { display: none }
 
 }
 .catalog ol.nav {
@@ -326,10 +156,8 @@ main {
 
 // 底部的按钮、评论
 .container-more {
-  display: none;
-  padding-right: 270px;
-
-  &.active { display: block }
+  margin: 60px 310px 0 0;
+  border-top: 1px solid @borderColor;
 }
 
 .container-more > .actions {
@@ -409,4 +237,74 @@ main {
       color: #ccc;
     }
   }
+}
+
+// 骨架屏
+.skeleton {
+  & + .container-more,
+  & .markdowned,
+  & .tc-affix {
+    display: none;
+  }
+
+  .skeleton-article {
+    .mixin-layoutArticle();
+  }
+
+  .skeleton-catalog {
+    .mixin-layoutCatalog();
+  }
+  
+  .p {
+    margin-top: 4px;
+    height: 18px;
+    background-color: @skeletonColor;
+  }
+}
+
+.skeleton .skeleton-article {
+  .title {
+    width: @mostUseLength * 2;
+    height: 40px;
+    margin-bottom: 24px;
+    background-color: @skeletonColor;
+  }
+
+  .info-label {
+    margin-top: 4px;
+    width: 40px;
+    height: 12px;
+    background-color: @skeletonColor;
+  }
+
+  .summary {
+    margin-top: 32px;
+
+    & .p:last-of-type {
+      width: 90%;
+    }
+  }
+
+  .section-title {
+    width: @mostUseLength;
+    height: 32px;
+    margin-top: 32px;
+    background-color: @skeletonColor;
+  }
+}
+
+.skeleton .skeleton-catalog {
+  .title {
+    width: 120px;
+    height: 40px;
+    margin-bottom: 24px;
+    background-color: @skeletonColor;
+  }
+}
+
+// 错误信息
+.error-content {
+  padding: 10px 0;
+  color: @dangerousColor;
+  background-color: #f5f5f5;
 }
