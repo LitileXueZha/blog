@@ -52,15 +52,14 @@ block content
         a(href="#") 钢铁是怎样炼成的
       p.next 下一篇：
         a(href="#") 打酱油
-      .comment
+      .comments
         form#form-comment
-          textarea(cols="30", rows="10", maxlength=200, placeholder="说说你的看法")
+          textarea.input-comment(name="content", cols="30", rows="10", maxlength=200, placeholder="说说你的看法~")
           .tip
             button.tc-ripple 评论
             |  Ctrl + Enter
-        ul.list
+        ul.list-comment
           each i in new Array(3)
-            li
-              time 2017-12-12
-              p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor assumenda nobis repellat saepe consectetur ullam enim officiis? Laborum sapiente officia, ipsum illum eum inventore at totam ex ipsam voluptatem reiciendis!
-
+            li.comment
+              time.comment-at 2017-12-12
+              p.comment-content Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor assumenda nobis repellat saepe consectetur ullam enim officiis? Laborum sapiente officia, ipsum illum eum inventore at totam ex ipsam voluptatem reiciendis!

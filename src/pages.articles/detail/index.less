@@ -1,10 +1,6 @@
 @import '../../common/variables.less';
 @import './md.less';
 
-main {
-  min-height: 400px;
-}
-
 .mixin-layoutArticle() {
   flex: 1;
   margin-top: 40px;
@@ -194,12 +190,12 @@ main {
   }
 }
 
-.container-more > .comment {
+.container-more > .comments {
   margin-top: @mainSpace * 6;
   padding: 20px 40px;
   border: 1px solid @borderColor;
 
-  textarea {
+  .input-comment {
     width: 100%;
     height: 80px;
     padding: 0;
@@ -223,16 +219,16 @@ main {
     }
   }
 
-  ul.list {
+  .list-comment {
     margin: 20px -40px 0 -40px;
     padding: 0 40px;
     border-top: 1px solid @borderColor;
 
-    & > li {
-      margin-top: 20px;
+    .comment {
+      margin-top: 15px;
     }
 
-    li > time {
+    .comment-at {
       font-size: 12px;
       color: #ccc;
     }

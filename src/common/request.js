@@ -71,7 +71,11 @@ export default async function request(url, opts = {}) {
 /** 接口鉴权 */
 async function auth() {
   const fetch = await fetchPolyfill();
-  const res = await fetch(`${API}/oauth`);
+  const res = await fetch(`${API}/oauth`, {
+    headers: {
+      Authorization: localStorage.getItem('token'),
+    },
+  });
   const { data } = await res.json();
 
   localStorage.setItem('token', data);

@@ -39,3 +39,5 @@ export function humanDate(dateStr) {
 
   return '刚刚';
 }
+
+export const tmp = null;
