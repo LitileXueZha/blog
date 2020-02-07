@@ -62,6 +62,7 @@ export default async function request(url, opts = {}) {
 
   if (code !== 1) {
     // 暂只抛出一个错误
+    // throw String(`RequestError: ${error}`);
     throw new Error(error);
   }
 
@@ -76,10 +77,17 @@ async function auth() {
       Authorization: localStorage.getItem('token'),
     },
   });
-  const { data } = await res.json();
+  const { data, code, error } = await res.json();
 
-  localStorage.setItem('token', data);
-  return data;
+  // 只在认证成功后，返回 token
+  if (code === 1) {
+    localStorage.setItem('token', data);
+    return data;
+  }
+
+  // 认证失败。暂时抛出异常
+  // throw String(`AuthError: ${error}`);
+  throw new Error(error);
 }
 
 /**
