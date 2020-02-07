@@ -42,7 +42,7 @@ window.addEventListener('load', async () => {
       const $text = document.createTextNode('暂无更多~');
 
       $span.appendChild($text);
-      $span.style.color = '#999';
+      $span.style.color = '#ccc';
       $btnMore.parentNode.replaceChild($span, $btnMore);
     } else {
       loading = false;

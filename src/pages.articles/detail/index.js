@@ -54,12 +54,8 @@ window.addEventListener('load', async () => {
     }
   });
 
+  initLoadComment(id);
   initFormComment(id);
-  const comments = await fetch('/comments', {
-    params: { parent_id: id },
-  });
-
-  renderComments(comments.items);
 });
 
 /**
@@ -181,7 +177,32 @@ function renderComments(data, isLoadMore = false) {
     </li>
   `);
 
-  $commnetList.innerHTML = comments.join('');
+  $commnetList.innerHTML = comments.join('') || '<p class="empty">暂无评论</p>';
+  $commnetList.classList.remove('skeleton-comment');
+}
+
+function initLoadComment(id) {
+  const { offsetTop } = document.querySelector('.list-comment');
+  const throttleHelper = window.TC.throttle(loadComment);
+  const listener = () => throttleHelper(window.scrollY);
+
+  window.addEventListener('scroll', listener);
+
+  async function loadComment() {
+    // 还未滚动到顶部
+    if (window.scrollY + window.innerHeight < offsetTop) {
+      return;
+    }
+
+    // 避免触发多次
+    window.removeEventListener('scroll', listener);
+
+    const comments = await fetch('/comments', {
+      params: { parent_id: id },
+    });
+
+    renderComments(comments.items);
+  }
 }
 
 function fullscreen(dom) {

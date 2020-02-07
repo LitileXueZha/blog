@@ -58,8 +58,10 @@ block content
           .tip
             button.tc-ripple 评论
             |  Ctrl + Enter
-        ul.list-comment
-          each i in new Array(3)
-            li.comment
-              time.comment-at 2017-12-12
-              p.comment-content Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor assumenda nobis repellat saepe consectetur ullam enim officiis? Laborum sapiente officia, ipsum illum eum inventore at totam ex ipsam voluptatem reiciendis!
+        ul.list-comment.skeleton-comment
+          //- 骨架屏
+          li.comment
+            .comment-at
+            .comment-content
+              .p
+              .p

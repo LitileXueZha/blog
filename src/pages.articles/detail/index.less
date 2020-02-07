@@ -192,7 +192,7 @@
 
 .container-more > .comments {
   margin-top: @mainSpace * 6;
-  padding: 20px 40px;
+  padding: 20px 30px;
   border: 1px solid @borderColor;
 
   .input-comment {
@@ -220,18 +220,26 @@
   }
 
   .list-comment {
-    margin: 20px -40px 0 -40px;
-    padding: 0 40px;
+    margin: 20px -30px 0 -30px;
+    padding: 0 30px;
     border-top: 1px solid @borderColor;
 
     .comment {
       margin-top: 15px;
     }
 
-    .comment-at {
+    .comment-at,
+    .empty {
       font-size: 12px;
       color: #ccc;
     }
+
+    .empty {
+      margin-top: 20px;
+      height: 51px;
+    }
+    // 第一个评论完后隐藏空提示
+    .comment + .empty { display: none; }
   }
 }
 
@@ -295,6 +303,22 @@
     height: 40px;
     margin-bottom: 24px;
     background-color: @skeletonColor;
+  }
+}
+
+.skeleton-comment {
+  .comment-at {
+    width: 40px;
+    height: 12px;
+    background-color: @skeletonColor;
+  }
+
+  .comment-content {
+    .p {
+      margin-top: 4px;
+      height: 18px;
+      background-color: @skeletonColor;
+    }  
   }
 }
 

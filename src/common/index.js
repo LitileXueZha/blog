@@ -25,6 +25,26 @@ window.TC = {
   },
 
   /**
+   * 节流
+   * 
+   * @param {function} fn 执行函数
+   * @param {number} minUnit 默认间隔为 `10`
+   * @return {function} 参数为节流单位。可以是像素、时间等
+   */
+  throttle(fn, minUnit = 10) {
+    let lastUnit = 0;
+
+    return (unit) => {
+      if (Math.abs(lastUnit - unit) < minUnit) {
+        return;
+      }
+
+      lastUnit = unit;
+      fn();
+    };
+  },
+
+  /**
    * 转义 html 标签
    *
    * @param {String} str html 字符串
