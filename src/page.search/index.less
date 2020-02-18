@@ -5,11 +5,13 @@
   height: 0;
   padding: 0;
   overflow: hidden;
+  visibility: hidden;
+  transition: .3s;
   
   &.active {
     height: 40px;
     padding: 10px 0;
-    transition: .3s;
+    visibility: visible;
   }
 
   #close {
@@ -19,7 +21,6 @@
     padding: 15px;
     border: none;
     background: transparent;
-    outline: none;
     cursor: pointer;
 
     .color { fill: @textColor }
@@ -98,13 +99,20 @@ main {
   }
 }
 
-.result > .list li {
+.result > .list .result-item {
   margin-top: 30px;
+
+  .result-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 // 颜色标注搜索字段
 .result mark {
-  background: yellow;
+  background: rgba(#ffbf00, .4);
 }
 
 .result > .list .content {

@@ -24,22 +24,5 @@ block content
           span 无输入，
           | 无结果
     .result.hidden
-      -
-        const result = [
-          {
-            title: '测试测试',
-            link: '/articles/detail?from=search',
-            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur magnam rerum <mark>corrupti</mark> corporis repellat excepturi vero nisi iste consectetur fugiat, obcaecati unde id repudiandae eos sapiente voluptas quo ad?',
-          }, {
-            title: '实用小工具',
-            link: '/tools',
-            content: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur magnam rerum explicabo  corporis repellat excepturi vero nisi iste consectetur fugiat, obcaecati unde id repudiandae eos sapiente voluptas quo ad?',
-          }
-        ];
-      span.num 找到的结果数量约为 #{result.length}
+      span.num 找到的结果数量
       ul.list
-        each data in result
-          li
-            h2
-              a.tc-font-title(href= data.link)!= data.title
-            p!= data.content

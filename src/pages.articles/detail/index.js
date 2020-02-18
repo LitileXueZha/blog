@@ -91,9 +91,9 @@ function renderArticle(data) {
   $tag.innerText = tagName;
 
   // 生成 markdown html
-  const [mdHtml, catalog] = marked(content);
+  const [mdHtml, catalog] = marked(content || '');
 
-  $mdBody.innerHTML = mdHtml;
+  $mdBody.innerHTML = mdHtml || '<p>无内容</p>';
   // 有目录时渲染
   $catalog.innerHTML = catalog ? `<h2 class="catalog-title">目录</h2>${catalog}` : '无目录';
   // 有封面时插入图片到目录
