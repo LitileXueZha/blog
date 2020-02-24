@@ -40,4 +40,17 @@ export function humanDate(dateStr) {
   return '刚刚';
 }
 
-export const tmp = null;
+/**
+ * 随机色
+ * 
+ * 取色地址：http://encycolorpedia.cn/009688
+ * 
+ * @return {string} 随机色值，例如 `#ff6977`
+ */
+export function randomColor() {
+  const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
+  const max = 7; // colors.length - 1
+  const index = Math.round(Math.random() * max);
+
+  return colors[index];
+}

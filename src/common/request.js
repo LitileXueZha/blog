@@ -100,7 +100,7 @@ async function fetchPolyfill() {
     return window.fetch;
   }
 
-  const res = await import('whatwg-fetch');
+  const res = await import(/* webpackChunkName: "whatwg-fetch" */ 'whatwg-fetch');
 
   window.fetch = res.fetch;
   return window.fetch;

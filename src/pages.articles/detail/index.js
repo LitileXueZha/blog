@@ -150,7 +150,6 @@ function initFormComment(articleId) {
     `;
 
     $commnetList.insertBefore($comment, $commnetList.firstElementChild);
-    console.log(res);
     // 提交完后清空
     $content.value = '';
     submitting = false;

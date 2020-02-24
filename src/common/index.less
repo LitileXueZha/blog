@@ -157,11 +157,12 @@ code, pre {
 	line-height: @textHeight;
 	color: @textColor;
 	background: transparent;
-	// outline: none;
+	outline: none;
 	cursor: pointer;
 	transition: .3s;
 
-	&:hover { background: #eee !important; }
+	&:hover,
+	&:focus { background: rgba(@mainColor, .1) !important; }
 }
 
 // 浮动文本
