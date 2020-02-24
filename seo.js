@@ -34,6 +34,7 @@ function get(url) {
         request.get(API.prefix + url, {
             headers: {
                 Authorization: API.getToken(),
+                'User-Agent': 'Robot by seo.js',
             },
             strictSSL: false,
         }, (err, resp, body) => {
