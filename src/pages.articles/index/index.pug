@@ -8,29 +8,31 @@ block content
   main.tc-container
     .filters
       ul.type
-        li
+        li.type-item
           h3 分类
             +icon('arrow-right', 14)
-        li
+        li.type-item
+          input#all(type="radio", name="type", value="", checked)
+          label.item(for="all") 全部
+        li.type-item
           input#note(type="radio", name="type", value="note")
           label.item(for="note") 笔记
-            +icon('close', 10)
-        li
+        li.type-item
           input#life(type="radio", name="type", value="life")
           label.item(for="life") 生活
-            +icon('close', 10)
       ul.tag
-        li
+        li.tag-item
           h3 标签
             +icon('arrow-right', 14)
-        li
+        li.tag-item
+          input#all1(type="radio", name="tag", value="", checked)
+          label.item(for="all1") 全部
+        li.tag-item
           input#JavaScript(type="radio", name="tag", value="JavaScript")
           label.item(for="JavaScript") JavaScript
-            +icon('close', 10)
-        li
+        li.tag-item
           input#Css(type="radio", name="tag", value="Css")
           label.item(for="Css") Css
-            +icon('close', 10)
     .results
       p.info
         a.active(href="#") 最新
