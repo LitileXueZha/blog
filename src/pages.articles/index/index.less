@@ -4,13 +4,21 @@ main {
   padding-top: @mainSpace * 2;
 }
 
-.filters > .type > li,
-.filters > .tag > li,
-.filters > .sort > li,
-.filters > .setting > li {
-  display: inline-block;
+.filter-type,
+.filter-tag {
+  margin-bottom: @mainSpace;
+  margin-left: -@mainSpace;
 
-  &:first-of-type {
+  & .list {
+    display: inline-block;
+  }
+}
+
+.filter-item {
+  display: inline-block;
+  margin-left: @mainSpace;
+
+  &.title {
     color: #999;
 
     .icon {
@@ -20,40 +28,25 @@ main {
     .color { fill: #999 }
   }
 
-  & > input {
-    display: none;
-  }
+  input { display: none; }
 
-  & > .item {
+  .item {
     border-radius: 3px;
     transition: .3s;
     cursor: pointer;
 
     &:hover { color: @activeColor }
 
-    .icon-close {
-      display: none;
-      margin-left: 5px;
-    }
-
     .color { fill: @textColor }
   }
-  &:not(:first-of-type) > .item {
-    margin-left: @mainSpace * 1.5;
-  }
-  & > input:checked + .item {
+  // 选中状态
+  input:checked + .item {
     padding: 4px 10px;
     color: #fff;
     background: @mainColor;
 
-    .icon-close { display: unset }
-
     .color { fill: #fff }
   }
-}
-
-.filters > ul:not(:first-of-type) {
-  margin-top: @mainSpace;
 }
 
 .results {

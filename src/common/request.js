@@ -1,13 +1,6 @@
 import QueryString from 'query-string';
 
-import { API, API_OMIT_AUTH } from './constants';
-
-const defaultOpts = {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
+import { API, FETCH_DEFAULT_OPTS, TOKEN_NAME } from './constants';
 
 /**
  * 通用请求函数封装
@@ -16,48 +9,139 @@ const defaultOpts = {
  * @param {Object} opts 同原生 `fetch` 配置对象
  */
 export default async function request(url, opts = {}) {
-  const fetch = await fetchPolyfill();
-  let apiUrl = API + url;
-  let token = localStorage.getItem('token');
+  const RequestInstance = new Request(url, opts);
+  const result = await RequestInstance.fetchStart();
 
-  if (!token) {
-    // 不存在 token，未认证
-    token = await auth();
+  if (result) {
+    return result.data;
   }
+
+  return undefined;
+}
+
+/**
+ * 请求构造函数
+ * 
+ * @param {string} url 接口地址
+ * @param {object} opts 同原生 `fetch` 配置对象
+ */
+function Request(url, opts = {}) {
+  /** 原请求配置 */
+  this.request = { url, opts };
+  /** 返回处理器 */
+  this.handler = responseHandler;
+
+  this.token = localStorage.getItem(TOKEN_NAME);
+  this.fetch = window.fetch.bind(window);
+
+  this.url = API + url;
+  // 合并默认配置
+  this.opts = {
+    ...FETCH_DEFAULT_OPTS,
+    ...opts,
+    headers: {
+      ...FETCH_DEFAULT_OPTS.headers,
+      Authorization: this.token,
+      ...opts.headers,
+    },
+  };
 
   if (opts.params) {
     // GET 请求的查询参数，不能放到 body
-    apiUrl += '?';
+    this.url += '?';
     // php 获取 GET 请求的数组形式只支持 `xxx[]=&xxx[]=` 形式
-    apiUrl += QueryString.stringify(opts.params, {
+    this.url += QueryString.stringify(opts.params, {
       arrayFormat: 'bracket',
     });
   }
 
   if (typeof opts.body === 'object') {
     // 发送数据必须手动转成 json 字符串
-    opts.body = JSON.stringify(opts.body);
+    this.opts.body = JSON.stringify(opts.body);
+  }
+}
+
+/** 简易 `window.fetch` 兼容 */
+Request.prototype.fetchPolyfill = async function fetchPolyfill() {
+  if (!this.fetch) {
+    const res = await import(/* webpackChunkName: "whatwg-fetch" */ 'whatwg-fetch');
+
+    window.fetch = res.fetch;
+    this.fetch = window.fetch;
+  }
+};
+
+/** 请求 */
+Request.prototype.fetchStart = async function fetchStart() {
+  await this.fetchPolyfill();
+  await this.auth();
+
+  /** `fetch` 返回对象 */
+  this.response = await this.fetch(this.url, this.opts);
+  /** 请求成功数据 */
+  this.result = await this.handler(this.response);
+
+  return this.result;
+};
+
+/** 鉴权 */
+Request.prototype.auth = async function auth(refresh = false) {
+  // 可以指明需要重新鉴权
+  if (!refresh && this.token) {
+    return;
   }
 
-  const options = {
-    ...defaultOpts,
-    ...opts,
+  const res = await this.fetch(`${API}/oauth`, {
     headers: {
-      ...defaultOpts.headers,
-      Authorization: token,
-      ...opts.headers,
+      Authorization: this.token,
     },
-  };
-  const res = await fetch(apiUrl, options);
-  const response = await res.json();
-  const { code, data, error } = response;
+  });
+  const { data, code, error } = await res.json();
+
+  // 只在认证成功后，设置 token
+  if (code === 1) {
+    localStorage.setItem(TOKEN_NAME, data);
+    this.token = data;
+    this.opts.headers.Authorization = data;
+    return;
+  }
+
+  // 认证失败。暂时抛出异常
+  // throw String(`AuthError: ${error}`);
+  throw new Error(error);
+};
+
+/**
+ * `response` 处理函数
+ * 
+ * 可以直接用 `this` 访问请求实例，
+ * 请求成功时必须返回全部数据
+ * 
+ * @param {Promise} fetchResponse `fetch` 返回对象
+ * @return {object} 请求成功返回数据
+ */
+async function responseHandler(fetchResponse) {
+  const response = await fetchResponse.json().catch((e) => {
+    // JSON 化失败，返回的数据有问题
+    // 如果 HTTP 码不是 204 No Content 的化，抛错
+    if (fetchResponse.status !== 204) {
+      throw e;
+    }
+  });
+
+  // JSON 化失败
+  if (!response) {
+    return undefined;
+  }
+
+  const { code, error } = response;
 
   // token 令牌过期，认证失效
   if (code === 9001) {
     // 更新 localStorage 中的 token
-    await auth();
+    await this.auth(true);
     // 重新发起请求
-    return request(url, opts);
+    return this.fetchStart();
   }
 
   if (code !== 1) {
@@ -66,42 +150,5 @@ export default async function request(url, opts = {}) {
     throw new Error(error);
   }
 
-  return data;
-}
-
-/** 接口鉴权 */
-async function auth() {
-  const fetch = await fetchPolyfill();
-  const res = await fetch(`${API}/oauth`, {
-    headers: {
-      Authorization: localStorage.getItem('token'),
-    },
-  });
-  const { data, code, error } = await res.json();
-
-  // 只在认证成功后，返回 token
-  if (code === 1) {
-    localStorage.setItem('token', data);
-    return data;
-  }
-
-  // 认证失败。暂时抛出异常
-  // throw String(`AuthError: ${error}`);
-  throw new Error(error);
-}
-
-/**
- * 简单的 fetch 兼容
- * 
- * @returns {Promise<fetch>} 可使用的 `fetch` 方法
- */
-async function fetchPolyfill() {
-  if (window.fetch) {
-    return window.fetch;
-  }
-
-  const res = await import(/* webpackChunkName: "whatwg-fetch" */ 'whatwg-fetch');
-
-  window.fetch = res.fetch;
-  return window.fetch;
+  return response;
 }

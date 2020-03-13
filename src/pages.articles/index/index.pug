@@ -6,33 +6,36 @@ block title
 
 block content
   main.tc-container
-    .filters
-      ul.type
-        li.type-item
-          h3 分类
-            +icon('arrow-right', 14)
-        li.type-item
-          input#all(type="radio", name="type", value="", checked)
-          label.item(for="all") 全部
-        li.type-item
-          input#note(type="radio", name="type", value="note")
-          label.item(for="note") 笔记
-        li.type-item
-          input#life(type="radio", name="type", value="life")
-          label.item(for="life") 生活
-      ul.tag
-        li.tag-item
-          h3 标签
-            +icon('arrow-right', 14)
-        li.tag-item
-          input#all1(type="radio", name="tag", value="", checked)
-          label.item(for="all1") 全部
-        li.tag-item
-          input#JavaScript(type="radio", name="tag", value="JavaScript")
-          label.item(for="JavaScript") JavaScript
-        li.tag-item
-          input#Css(type="radio", name="tag", value="Css")
-          label.item(for="Css") Css
+    .filter-type
+      h3.filter-item.title 分类
+        +icon('arrow-right', 14)
+      ul.list
+        -
+          const types = [
+            { label: '全部', value: 'all' },
+            { label: '笔记', value: 'note' },
+            { label: '生活', value: 'life' },
+          ];
+        each item in types
+          li.filter-item.type
+            input(id= item.value, type="radio", name="type", value= item.value, checked= item.value === 'all')
+            label.item(for= item.value)= item.label
+    .filter-tag
+      h3.filter-item.title 标签
+        +icon('arrow-right', 14)
+      .filter-item.tag
+        input#all1(type="radio", name="tag", value="all", checked)
+        label.item(for="all1") 全部
+      ul.list
+        //- -
+        //-   const tags = [
+        //-     { label: 'JavaScript', value: 'js' },
+        //-     { label: 'Css', value: 'css' },
+        //-   ];
+        //- each item in tags
+        //-   li.filter-item.tag
+        //-     input(id= item.value, type="radio", name="tag", value= item.value)
+        //-     label.item(for= item.value)= item.label
     .results
       p.info
         a.active(href="#") 最新
