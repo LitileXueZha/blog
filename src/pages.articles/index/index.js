@@ -1,10 +1,30 @@
 import './index.less';
-import { Ripple, fetch } from '../../common';
+import { Ripple, fetch, humanDate } from '../../common';
+
+const SIZE = 10;
+/** 全局查询文章条件 */
+const query = {
+  page: 1,
+  size: SIZE,
+};
 
 window.addEventListener('load', () => {
   Ripple.init();
 
   initTags();
+  getArticles();
+
+  let loading = false;
+  const $btnMore = document.getElementById('more');
+
+  $btnMore.addEventListener('click', async () => {
+    if (loading) return;
+
+    loading = true;
+    query.page += 1;
+    await getArticles(true);
+    loading = false;
+  });
 });
 
 /** 加载标签列表，绑定筛选 */
@@ -24,16 +44,20 @@ async function initTags() {
 
   // 只有在标签列表渲染完后才能绑
   addFilterListener((values) => {
-    const params = {};
-
     Object.keys(values).forEach((key) => {
-      // 剔除空值与全选
       if (values[key] && values[key] !== 'all') {
-        params[key] = values[key];
+        query[key] = values[key];
+      } else {
+        // 剔除空值与全选
+        delete query[key];
       }
     });
 
-    console.log(params);
+    // 重置分页
+    query.page = 1;
+    query.size = SIZE;
+
+    getArticles();
   });
 
   // 标签点击量统计
@@ -46,6 +70,8 @@ async function initTags() {
       params: { id: tagId },
     });
     document.querySelector(`input#${tagId}`).checked = true;
+    // 设置查询条件
+    query.tag = tagId;
   }
 }
 
@@ -88,4 +114,51 @@ function addFilterListener(listener) {
       listener(params);
     });
   });
+}
+
+async function getArticles(isLoadMore = false) {
+  const data = await fetch('/articles', {
+    params: query,
+  });
+  const $list = document.querySelector('.results .list');
+  const $total = document.querySelector('.results .total');
+  const $frag = document.createDocumentFragment();
+
+  data.items.forEach((item) => {
+    const $li = document.createElement('li');
+
+    $li.className = 'list-item';
+    $li.innerHTML = `
+      <section class="content tc-list-item-article">
+        <h2 class="title">
+          <a class="tc-font-title" href="/articles/detail?id=${item.id}">${item.title}</a>
+        </h2>
+        <div class="description">
+          <time title="发布时间">${humanDate(item.create_at)}</time><i class="tc-divider"></i><span title="标签">${item.tag_name}</span><i class="tc-divider"></i><span title="点击量">000</span>
+        </div>
+        <p>${item.summary || '暂无简介~'}</p>
+      </section>
+      ${item.bg ? `<img src="${item.bg}" class="cover" alt="封面" width="40" height="40" />` : ''}
+    `;
+    $frag.appendChild($li);
+  });
+
+  if (isLoadMore) {
+    $list.appendChild($frag);
+  } else {
+    const $newList = $list.cloneNode();
+
+    $newList.appendChild($frag);
+    $list.parentNode.replaceChild($newList, $list);
+  }
+
+  $total.textContent = `共${data.total}篇`;
+
+  if (data.total <= query.page * query.size) {
+    document.getElementById('more').classList.add('tc-hidden');
+    document.querySelector('.no-more').classList.remove('tc-hidden');
+  } else {
+    document.getElementById('more').classList.remove('tc-hidden');
+    document.querySelector('.no-more').classList.add('tc-hidden');
+  }
 }

@@ -18,7 +18,7 @@ block content
           ];
         each item in types
           li.filter-item.type
-            input(id= item.value, type="radio", name="type", value= item.value, checked= item.value === 'all')
+            input(id= item.value, type="radio", name="category", value= item.value, checked= item.value === 'all')
             label.item(for= item.value)= item.label
     .filter-tag
       h3.filter-item.title 标签
@@ -40,17 +40,18 @@ block content
       p.info
         a.active(href="#") 最新
         a(href="#hot") 最多点击
-        span 共100篇
+        span.total 共-篇
       ul.list
-        each val, index in new Array(5)
-          li.tc-list-item-article
-            h2.title
-              a.tc-font-title(href="/articles/detail?id=" +index) 多拉风老大
-            .description
-              time(title="发布时间") 刚刚
-              i.tc-divider
-              span(title="标签") Css
-              i.tc-divider
-              span(title="点击量") 100
-            p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis atque perferendis impedit blanditiis maxime totam eum, corporis, molestias deserunt nemo rerum quia fugiat debitis, iure dicta excepturi temporibus exercitationem voluptate!
+        //- each val, index in new Array(5)
+        //-   li.tc-list-item-article
+        //-     h2.title
+        //-       a.tc-font-title(href="/articles/detail?id=" +index) 多拉风老大
+        //-     .description
+        //-       time(title="发布时间") 刚刚
+        //-       i.tc-divider
+        //-       span(title="标签") Css
+        //-       i.tc-divider
+        //-       span(title="点击量") 100
+        //-     p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis atque perferendis impedit blanditiis maxime totam eum, corporis, molestias deserunt nemo rerum quia fugiat debitis, iure dicta excepturi temporibus exercitationem voluptate!
     button#more.tc-button.tc-ripple 加载更多
+    span.no-more.tc-hidden(style="color:#ccc") 暂无更多~

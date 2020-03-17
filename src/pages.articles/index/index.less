@@ -2,6 +2,7 @@
 
 main {
   padding-top: @mainSpace * 2;
+  min-height: 400px;
 }
 
 .filter-type,
@@ -52,8 +53,19 @@ main {
 .results {
   margin-top: @mainSpace * 4;
 
-  li {
+  .list-item {
+    display: flex;
+    align-items: center;
     padding: @mainSpace * 2 0;
+
+    .content { flex: 1 }
+    .cover {
+      margin-left: @mainSpace * 4;
+      width: 70px;
+      height: 70px;
+      border-radius: 2px;
+      object-fit: cover;  
+    }
   }
 }
 
@@ -71,7 +83,7 @@ main {
     }
   }
 
-  & > span {
+  .total {
     float: right;
   }
 }
