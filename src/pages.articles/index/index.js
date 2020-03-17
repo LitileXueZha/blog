@@ -8,11 +8,11 @@ const query = {
   size: SIZE,
 };
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   Ripple.init();
 
-  initTags();
-  getArticles();
+  await initTags();
+  await getArticles();
 
   let loading = false;
   const $btnMore = document.getElementById('more');
