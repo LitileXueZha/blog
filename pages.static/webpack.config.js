@@ -3,8 +3,11 @@ const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { pages, output, loaders } = require('./webpack.base');
 
+const PATH_DIST = path.join(__dirname, '../dist');
 const entry = {};
 const plugins = [];
 
@@ -36,6 +39,12 @@ module.exports = {
       filename: '.trash/[name].css',
     }),
     new HtmlWebpackInlineSourcePlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: './pages.static/*.html',
+        to: path.join(PATH_DIST, '[name].html'),
+      },
+    ]),
   ],
   stats: {
     children: false,
