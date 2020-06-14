@@ -1,14 +1,14 @@
 export default {
-  details: ['1996.06.26', '17679069513', '18255447846@163.com'],
+  details: ['1996.06', '17679069513', '18255447846@163.com'],
   expertise: [
-    ['Html', 90], ['Css', 82], ['JavaScript', 92], ['Php', 15], ['Linux', 18], ['NodeJS', 25], ['React Native', 25],
+    ['HTML', 90], ['CSS', 82], ['JavaScript', 92], ['PHP', 15], ['Linux', 18], ['NodeJS', 25], ['React Native', 25],
   ],
   zh: {
     title: ['个人资料', '工作经历', '教育经历、校内实践', '详细信息', '专业技能', '爱好'],
     header: {
       name: '宁涛',
       role: '前端开发工程师',
-      location: '江苏，南京',
+      location: '浙江，杭州',
     },
     profile: '学习前端基础一年，对Html5、CSS3、ES6很熟悉，能够熟练应用JQuery、Bootstrap框架，热衷于开发响应式界面以及兼容式代码，有望前端能一统江湖；喜欢在Linux系统下开发，能够运用PHP、NodeJS，和后台交互无障碍，熟悉Git流团队开发，能够快速上手公司项目，有志在公司发展。',
     experience: [
@@ -41,7 +41,7 @@ export default {
     header: {
       name: 'Tao Ning',
       role: 'Front-end Engineer',
-      location: 'Jiang Su, Nan Jing',
+      location: 'Zhe Jiang, Hang Zhou',
     },
     profile: 'I have learnt the basic of front-end about 1 year and am familiar with Html5, Css3 and ES6. I am skilled in using jQuery and Bootstrap Framework, high on developing responsive interface. It is comfortable for me to develop on Linux system and use Git when working with team.',
     experience: [
