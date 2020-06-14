@@ -41,7 +41,7 @@ module.exports = {
     new HtmlWebpackInlineSourcePlugin(),
     new CopyWebpackPlugin([
       {
-        from: './pages.static/*.html',
+        from: './*.html',
         to: path.join(PATH_DIST, '[name].html'),
       },
     ]),
