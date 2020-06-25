@@ -32,7 +32,7 @@ block content
           each article in _cache.index.articles
             li.list-item.tc-list-item-article
               h3.title
-                a.tc-font-title(href= `/articles/detail?id=${article.id}`)= article.title
+                a.tc-font-title(href= `/articles/${article.id}`)= article.title
               .description
                 label(title="发布时间")= humanDate(article.create_at)
                 i.tc-divider
@@ -69,5 +69,5 @@ block content
                 //- img.list-style(src= require('../assets/icon_fire.png'), style= `opacity: ${1 - (i / 5)}`, width=20, height=20)
               else
                 span.list-style= i + 1
-              a(href= `/articles/detail?id=${topic.id}`)= topic.title
+              a(href= `/articles/${topic.id}`)= topic.title
 

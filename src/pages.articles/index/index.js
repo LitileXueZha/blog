@@ -131,7 +131,7 @@ async function getArticles(isLoadMore = false) {
     $li.innerHTML = `
       <section class="content tc-list-item-article">
         <h2 class="title">
-          <a class="tc-font-title" href="/articles/detail?id=${item.id}">${item.title}</a>
+          <a class="tc-font-title" href="/articles/${item.id}">${item.title}</a>
         </h2>
         <div class="description">
           <time title="发布时间">${humanDate(item.create_at)}</time><i class="tc-divider"></i><span title="标签">${item.tag_name}</span><i class="tc-divider"></i><span title="点击量">000</span>

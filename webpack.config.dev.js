@@ -15,6 +15,9 @@ module.exports = {
     compress: true,
     historyApiFallback: {
       rewrites: [{
+        from: /^\/articles\/\w+/,
+        to: '/articles/detail.html',
+      }, {
         from: /.*/,
         to(ctx) {
           return `${ctx.parsedUrl.pathname}.html`;

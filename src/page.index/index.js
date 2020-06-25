@@ -81,7 +81,7 @@ function renderAricleList(articles, isLoadMore) {
     $li.className = 'list-item tc-list-item-article';
     $li.innerHTML = `
       <h3 class="title">
-        <a class="tc-font-title" href="/articles/detail?id=${article.id}">${article.title}</a>
+        <a class="tc-font-title" href="/articles/${article.id}">${article.title}</a>
       </h3>
       <div class="description">
         <time title="发布时间">${humanDate(article.create_at)}</time><i class="tc-divider"></i><span title="分类标签">${article.tag_name}</span>
@@ -122,7 +122,7 @@ function renderTopicList(topics) {
     return `
       <li class="list-item">
         ${listStyle}
-        <a href="/articles/detail?id=${topic.id}">${topic.title}</a>
+        <a href="/articles/${topic.id}">${topic.title}</a>
       </li>
     `;
   });

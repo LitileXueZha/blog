@@ -23,8 +23,11 @@ function renderErrorContent() {
 }
 
 window.addEventListener('load', async () => {
-  const params = QueryString.parse(window.location.search);
-  const { id } = params;
+  // const params = QueryString.parse(window.location.search);
+  // const { id } = params;
+  // 匹配 `/articles/xxx`
+  const matchResult = window.location.pathname.match(/^\/articles\/(\w+)$/);
+  const id = matchResult ? matchResult[1] : '';
 
   if (!id) {
     // 读取不到文章 id
