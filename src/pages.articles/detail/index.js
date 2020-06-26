@@ -35,7 +35,19 @@ window.addEventListener('load', async () => {
     return;
   }
 
-  const data = await fetch(`/articles/${id}`).catch(renderErrorContent);
+  /**
+   * 本地开发还是发请求，线上通过 PHP 渲染，
+   * 数据读取注入的 `__SSR_DATA__`
+   */
+
+  // const data = await fetch(`/articles/${id}`).catch(renderErrorContent);
+  // eslint-disable-next-line
+  const data = window.__SSR_DATA__;
+
+  if (!data) {
+    renderErrorContent();
+    return;
+  }
 
   renderArticle(data);
 
