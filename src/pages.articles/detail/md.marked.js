@@ -2,6 +2,7 @@ import marked from 'marked';
 
 const regMermaid = /^(graph|sequenceDiagram)/;
 const regMathJax = /(\$|\\\()[\s\S]+?(\$|\\\))/gm;
+const regLink = /^(<a.+?)">/;
 const renderer = new marked.Renderer();
 
 // monkey patch 猴子补丁
@@ -66,7 +67,15 @@ renderer.heading = (text, level, ...args) => {
 
   return defaultHead;
 };
+// SEO: 给链接添加 rel="nofollow"，减小权重流失
+renderer.defaultLink = renderer.link;
+renderer.link = (...args) => {
+  const linkHtml = renderer.defaultLink(...args);
+  // 保留原有功能，正则加上
+  const linkSeo = linkHtml.replace(regLink, '$1" rel="nofollow noopener noreferrer">');
 
+  return linkSeo;
+};
 
 // 设置
 marked.setOptions({ renderer });
