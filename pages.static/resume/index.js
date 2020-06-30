@@ -130,9 +130,9 @@ class FooterComponent extends React.Component {
     return (
       <footer className="resume-footer">
         <a href="#">ningtaostudy.cn/resume</a>
-        <a href="mailto:18255447846@163.com" className="mail" />
-        <a href="https://github.com/LitileXueZha" className="github" target="_blank" />
-        <a href="http://wpa.qq.com/msgrd?v=3&uin=1941639715&site=qq&menu=yes" className="qq" target="_blank" />
+        <a href="mailto:18255447846@163.com" className="mail" rel="nofollow noopener noreferrer" />
+        <a href="https://github.com/LitileXueZha" className="github" target="_blank" rel="nofollow noopener noreferrer" />
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=1941639715&site=qq&menu=yes" className="qq" target="_blank" rel="nofollow noopener noreferrer" />
       </footer>
     );
   }
