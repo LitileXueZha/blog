@@ -17,7 +17,9 @@
  * @returns {String} 可读性字符串
  */
 export function humanDate(dateStr) {
-  const date = new Date(dateStr);
+  // 转化为旧日期格式: 2020/12/1 23:32:12
+  // 兼容 IE、Safari
+  const date = new Date(dateStr.replace('-', '/'));
   const diffTs = Date.now() - date.getTime();
 
   if (diffTs > 365 * 24 * 60 * 60 * 1000) {

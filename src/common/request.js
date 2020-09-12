@@ -32,7 +32,7 @@ function Request(url, opts = {}) {
   this.handler = responseHandler;
 
   this.token = localStorage.getItem(TOKEN_NAME);
-  this.fetch = window.fetch.bind(window);
+  this.fetch = window.fetch && window.fetch.bind(window);
 
   this.url = API + url;
   // 合并默认配置

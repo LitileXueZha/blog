@@ -102,7 +102,7 @@ export const Affix = {
       width, height, top, left,
     } = node.getBoundingClientRect();
     const fixed = top < 0;
-    const offsetTop = top + window.scrollY;
+    const offsetTop = top + window.pageYOffset;
 
     // 保留占位，防止布局错乱
     node.style.width = `${width}px`;
@@ -128,7 +128,7 @@ export const Affix = {
       node, fixed, offsetTop, fixTop,
     } = obj;
 
-    if (fixed && window.scrollY <= offsetTop - fixTop) {
+    if (fixed && window.pageYOffset <= offsetTop - fixTop) {
       // 回到原来的位置上
       node.style.position = 'static';
       node.classList.remove('affixing');
@@ -136,7 +136,7 @@ export const Affix = {
       return;
     }
 
-    if (!fixed && window.scrollY > offsetTop - fixTop) {
+    if (!fixed && window.pageYOffset > offsetTop - fixTop) {
       // 滚动超出，需要fix
       node.style.position = 'fixed';
       node.classList.add('affixing');
@@ -169,8 +169,8 @@ export const FloatText = {
     const span = document.createElement('span');
 
     span.className = 'tc-float-text span';
-    span.style.left = `${left + window.scrollX + (width / 2)}px`;
-    span.style.top = `${top + window.scrollY + (height / 2)}px`;
+    span.style.left = `${left + window.pageXOffset + (width / 2)}px`;
+    span.style.top = `${top + window.pageYOffset + (height / 2)}px`;
     span.innerHTML = text;
     document.body.appendChild(span);
     span.classList.add('floating');

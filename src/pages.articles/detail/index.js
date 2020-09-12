@@ -198,13 +198,13 @@ function renderComments(data, isLoadMore = false) {
 function initLoadComment(id) {
   const { offsetTop } = document.querySelector('.list-comment');
   const throttleHelper = window.TC.throttle(loadComment);
-  const listener = () => throttleHelper(window.scrollY);
+  const listener = () => throttleHelper(window.pageYOffset);
 
   window.addEventListener('scroll', listener);
 
   async function loadComment() {
     // 还未滚动到顶部
-    if (window.scrollY + window.innerHeight < offsetTop) {
+    if (window.pageYOffset + window.innerHeight < offsetTop) {
       return;
     }
 

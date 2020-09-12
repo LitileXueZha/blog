@@ -39,8 +39,12 @@ export function initMathJax() {
     },
   };
   $script.addEventListener('load', () => {
-    // eslint-disable-next-line
-    MathJax.typesetPromise($mathjax).catch(MathJax.typesetClear);
+    // IE 11 上莫名的问题。只能拿到 MathJax 对象上部分属性和方法
+    // 置于 event loop 中貌似执行完成了
+    setTimeout(() => {
+      // eslint-disable-next-line
+      MathJax.typesetPromise($mathjax).catch(MathJax.typesetClear);
+    });
   });
 
   document.body.appendChild($script);

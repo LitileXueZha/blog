@@ -2,6 +2,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer')({ browsers: ['last 15 versions'] });
 
 const IS_PROD = process.env.NODE_ENV === 'production';
+// 需要被 babel 编译的包。这些包只有 es6+ 的代码，而 loader 里又忽略了
+const MODULE_NEED_BABEL = [
+  'query-string',
+  'strict-uri-encode',
+  'split-on-first',
+];
 
 module.exports = [
   {
@@ -9,18 +15,20 @@ module.exports = [
     use: 'pug-loader',
   }, {
     test: /\.js$/,
-    exclude: /node_modules/,
+    // exclude: /node_modules/,
+    exclude: new RegExp(`node_modules(\\\\|\\/)(?!(${MODULE_NEED_BABEL.join('|')}))`),
     use: {
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
+        sourceType: 'unambiguous',
         plugins: [
-          [
-            '@babel/plugin-transform-runtime',
-            {
-              regenerator: true,
-            },
-          ],
+          // [
+          //   '@babel/plugin-transform-runtime',
+          //   {
+          //     regenerator: true,
+          //   },
+          // ],
           '@babel/plugin-syntax-dynamic-import',
         ],
       },

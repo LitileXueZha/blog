@@ -21,11 +21,13 @@ input[type=search] {
 // 覆盖默认占位符
 input,
 textarea {
+	&:-ms-input-placeholder {
+		color: #ccc !important;
+	}
 	&::-webkit-input-placeholder,
 	&::placeholder {
 		color: #ccc;
 	}
-	&:-ms-input-placeholder,
 	&::-moz-placeholder {
 		color: #ccc;
 	}

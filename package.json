@@ -23,10 +23,12 @@
   },
   "homepage": "https://www.ningtaostudy.cn",
   "dependencies": {
+    "core-js": "^3.6.5",
     "highlight.js": "^9.17.1",
     "js-base64": "^2.5.1",
     "marked": "^0.7.0",
     "query-string": "^6.10.1",
+    "regenerator-runtime": "^0.13.7",
     "request": "^2.88.0",
     "whatwg-fetch": "^3.0.0"
   },
