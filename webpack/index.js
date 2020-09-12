@@ -1,13 +1,10 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // loaders与各页面相关配置
 const loaders = require('./loaders');
 const { entry, plugins } = require('./pages');
 
-// 生产环境判断
-const IS_PROD = process.env.NODE_ENV === 'production';
 // 路径常量
 const PATH_DIST = path.join(__dirname, '../dist');
 
@@ -17,17 +14,12 @@ module.exports = {
   entry,
   output: {
     path: PATH_DIST,
-    // conenthash 可在英文最新版看到，移除了 manifest.json
-    filename: IS_PROD ? 'js/[name]-[contenthash].js' : 'js/[name].js',
+    filename: 'js/[name].js',
     publicPath: '/',
   },
   module: { rules: loaders },
   plugins: [
     ...plugins,
-    new MiniCssExtractPlugin({
-      filename: IS_PROD ? 'css/[name]-[contenthash].css' : 'css/[name].css',
-      chunkFilename: IS_PROD ? 'css/[name]-[contenthash].css' : 'css/[name].css',
-    }),
     new CopyWebpackPlugin([
       {
         from: './favicon.ico',

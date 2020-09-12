@@ -2,24 +2,23 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const { HashedModuleIdsPlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const { merge } = require('webpack-merge');
 
 const config = require('./webpack');
+const polyfill = require('./webpack/polyfill');
 
-// 修复 vendor、runtime 打包后 contenthash 变化。
-// 文档：https://webpack.js.org/guides/caching/
-config.plugins.push(new HashedModuleIdsPlugin());
-
-// 打包分析，文件：zzz-analyzer.html
-config.plugins.push(new BundleAnalyzerPlugin({
-  analyzerMode: 'static',
-  reportFilename: '../zzz-analyzer.html',
-  openAnalyzer: false,
-  logLevel: 'error',
-}));
-
-module.exports = {
-  ...config,
+/**
+ * 生产环境增加了 polyfill 打包任务
+ */
+module.exports = [merge(config, {
   mode: 'production',
+  output: {
+    // conenthash 可在英文最新版看到，移除了 manifest.json
+    filename: 'js/[name]-[contenthash].js',
+    hashDigestLength: 16,
+  },
   stats: {
     children: false,
     modules: false,
@@ -28,6 +27,22 @@ module.exports = {
     entrypoints: false,
     chunkOrigins: false,
   },
+  plugins: [
+    // 修复 vendor、runtime 打包后 contenthash 变化。
+    // 文档：https://webpack.js.org/guides/caching/
+    new HashedModuleIdsPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name]-[contenthash].css',
+      chunkFilename: 'css/[name]-[contenthash].css',
+    }),
+    // 打包分析，文件：zzz-analyzer.html
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../zzz-analyzer.html',
+      openAnalyzer: false,
+      logLevel: 'error',
+    }),
+  ],
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({}),
@@ -55,4 +70,4 @@ module.exports = {
       },
     },
   },
-};
+}), polyfill];

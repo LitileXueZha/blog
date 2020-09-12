@@ -8,6 +8,11 @@ const MODULE_NEED_BABEL = [
   'strict-uri-encode',
   'split-on-first',
 ];
+// 生产环境下编译
+// 注意不同系统上的路径分隔符
+const EXCLUDE_BABEL = IS_PROD
+  ? new RegExp(`node_modules[\\\\/](?!(${MODULE_NEED_BABEL.join('|')}))`)
+  : /node_modules/;
 
 module.exports = [
   {
@@ -16,19 +21,14 @@ module.exports = [
   }, {
     test: /\.js$/,
     // exclude: /node_modules/,
-    exclude: new RegExp(`node_modules(\\\\|\\/)(?!(${MODULE_NEED_BABEL.join('|')}))`),
+    exclude: EXCLUDE_BABEL,
     use: {
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
         sourceType: 'unambiguous',
         plugins: [
-          // [
-          //   '@babel/plugin-transform-runtime',
-          //   {
-          //     regenerator: true,
-          //   },
-          // ],
+          '@babel/plugin-transform-runtime',
           '@babel/plugin-syntax-dynamic-import',
         ],
       },

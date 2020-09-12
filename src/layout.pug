@@ -26,4 +26,7 @@ html(lang="zh")
     block content
     block footer
       include components/footer.pug
+    script.
+      // IE11 support
+      window.Promise || document.write('<script src="/js/ie11-polyfill.js"><\/script>')
     block scripts
