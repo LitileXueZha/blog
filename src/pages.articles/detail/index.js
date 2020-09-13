@@ -17,7 +17,7 @@ function renderErrorContent() {
   const $container = document.querySelector('main.tc-container');
   const $error = document.createElement('div');
 
-  $error.className = 'error-content';
+  $error.className = 'tc-error';
   $error.innerHTML = '<p class="tc-container">文章不存在或已下线</p>';
   $container.parentNode.insertBefore($error, $container);
 }
@@ -67,6 +67,9 @@ window.addEventListener('load', async () => {
       e.preventDefault();
       fullscreen($mdContainer);
     }
+  });
+  document.querySelector('#fullscreen').addEventListener('click', () => {
+    fullscreen($mdContainer);
   });
 
   initLoadComment(id);

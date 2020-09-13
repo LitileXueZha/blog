@@ -10,8 +10,8 @@ window.addEventListener('load', async () => {
   const tags = resolveTags(data.tags);
 
   // 渲染数据
-  renderTagCloud(tags);
   renderAricleList(data.articles);
+  renderTagCloud(tags);
   renderTopicList(data.topics);
 
   // 添加加载更多文章事件
@@ -92,7 +92,11 @@ function renderAricleList(articles, isLoadMore) {
   });
 
   if (isLoadMore) {
+    // 修复 chrome 中新特性 overflow-anchor
+    // @link https://stackoverflow.com/a/52787936
+    const scrollY = window.pageYOffset;
     $articles.appendChild($frag);
+    window.scrollTo(window.pageXOffset, scrollY);
     return;
   }
 
