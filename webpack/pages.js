@@ -35,6 +35,7 @@ for (let i = 0; i < pages.length; i++) {
     templateParameters: { pathname: page, _cache },
     // NOTE: 必须要手动加上 vendor
     chunks: ['common', `vendors~${page}`, page],
+    minify: { removeComments: false },
   });
 
   entry[page] = `./src/page${hasChild ? 's' : ''}.${page}/index.js`;
