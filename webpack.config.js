@@ -1,13 +1,19 @@
+const path = require('path');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 const { HashedModuleIdsPlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const { merge } = require('webpack-merge');
 
 const config = require('./webpack');
+const InlineHtmlWebpackPlugin = require('./webpack/InlineHtmlWebpackPlugin.js');
 const polyfill = require('./webpack/polyfill');
+
+// 路径常量
+const PATH_DIST = path.join(__dirname, 'dist');
 
 /**
  * 生产环境增加了 polyfill 打包任务
@@ -17,7 +23,7 @@ module.exports = [merge(config, {
   output: {
     // conenthash 可在英文最新版看到，移除了 manifest.json
     filename: 'js/[name]-[contenthash].js',
-    hashDigestLength: 16,
+    hashDigestLength: 8,
   },
   stats: {
     children: false,
@@ -35,6 +41,18 @@ module.exports = [merge(config, {
       filename: 'css/[name]-[contenthash].css',
       chunkFilename: 'css/[name]-[contenthash].css',
     }),
+    // 把公共样式直接内联进了 html 中
+    new InlineHtmlWebpackPlugin([/common.*\.css/]),
+    // 复制静态页面和 favicon
+    new CopyWebpackPlugin([
+      {
+        from: './favicon.ico',
+        to: path.join(PATH_DIST, '[name].[ext]'),
+      }, {
+        from: './pages.static/*.html',
+        to: path.join(PATH_DIST, '[name].html'),
+      },
+    ]),
     // 打包分析，文件：zzz-analyzer.html
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',

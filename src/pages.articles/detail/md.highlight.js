@@ -22,6 +22,7 @@ import http from 'highlight.js/lib/languages/http';
 import php from 'highlight.js/lib/languages/php';
 import sql from 'highlight.js/lib/languages/sql';
 import json from 'highlight.js/lib/languages/json';
+import diff from 'highlight.js/lib/languages/diff';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);
@@ -34,5 +35,6 @@ hljs.registerLanguage('http', http);
 hljs.registerLanguage('php', php);
 hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('json', json);
+hljs.registerLanguage('diff', diff);
 
 export default () => hljs.initHighlighting();
