@@ -1,5 +1,6 @@
 const autoprefixer = require('autoprefixer')({ browsers: ['last 15 versions'] });
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 // 定义了一些可复用的东西
@@ -9,6 +10,17 @@ const pages = [
   'resume',
   '404',
 ];
+const entry = {};
+const plugins = [];
+
+pages.forEach((val) => {
+  entry[val] = `./${val}/index.js`;
+  plugins.push(new HtmlWebpackPlugin({
+    filename: `${val}.html`,
+    template: `./${val}/index.pug`,
+    chunks: [val],
+  }));
+});
 
 const output = {
   path: __dirname,
@@ -21,6 +33,7 @@ const loaders = firstCssLoader => [
     use: 'pug-loader',
   }, {
     test: /\.js$/,
+    exclude: /node_modules/,
     use: {
       loader: 'babel-loader',
       options: {
@@ -47,7 +60,8 @@ const loaders = firstCssLoader => [
 module.exports = {
   context,
   PATH_DIST,
-  pages,
+  entry,
+  plugins,
   output,
   loaders,
 };

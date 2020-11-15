@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /**
  * 参考：https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/InlineChunkHtmlPlugin.js
  * 
@@ -9,9 +10,22 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const htmlWebpackPlugin = require('html-webpack-plugin');
 
+/**
+ * 第一个入参为正则数组。
+ * 配置对象支持：
+ * ```
+ * {
+ *    all: 内联全部 css/js，忽略正则匹配。默认 false
+ *    cleanup: 清除已内联的 css/js。默认 false
+ * }
+ * ```
+ */
 class InlineHtmlWebpackPlugin {
-  constructor(regexps = []) {
-    this.regexps = regexps;
+  constructor(regexps, opts = {}) {
+    this.regexps = regexps || [];
+    this.all = opts.all;
+    this.cleanup = opts.cleanup;
+    this._safeCleanBucket = new Set();
   }
 
   setInlined(publicPath, assets, tag) {
@@ -24,11 +38,13 @@ class InlineHtmlWebpackPlugin {
         : attributes.href;
       const asset = assets[name];
 
-      if (asset && this.regexps.some(reg => name.match(reg))) {
+      if (asset && (this.all || this.regexps.some(reg => name.match(reg)))) {
+        this._safeCleanBucket.add(name);
         return {
           tagName: 'style',
           innerHTML: asset.source(),
           closeTag: true,
+          // 添加的 type 可能会被 html minify
           attributes: {
             type: 'text/css',
           },
@@ -42,11 +58,13 @@ class InlineHtmlWebpackPlugin {
         : attributes.src;
       const asset = assets[name];
 
-      if (asset && this.regexps.some(reg => name.match(reg))) {
+      if (asset && (this.all || this.regexps.some(reg => name.match(reg)))) {
+        this._safeCleanBucket.add(name);
         return {
           tagName: 'script',
           innerHTML: asset.source(),
           closeTag: true,
+          // 添加的 type 可能会被 html minify
           attributes: {
             type: 'application/javascript',
           },
@@ -74,15 +92,18 @@ class InlineHtmlWebpackPlugin {
         assets.bodyTags = assets.bodyTags.map(inlined);
       });
 
-      // Still emit the runtime chunk for users who do not use our generated
-      // index.html file.
-      // hooks.afterEmit.tap('InlineHtmlWebpackPlugin', () => {
-      //   Object.keys(compilation.assets).forEach(name => {
-      //     if (this.regexps.some(reg => name.match(reg))) {
-      //       delete compilation.assets[name];
-      //     }
-      //   });
-      // });
+      if (this.cleanup) {
+        hooks.afterEmit.tap('InlineHtmlWebpackPlugin', () => {
+          Object.keys(compilation.assets).forEach((name) => {
+            if (
+              (this.all || this.regexps.some(reg => name.match(reg)))
+              && this._safeCleanBucket.has(name)
+            ) {
+              delete compilation.assets[name];
+            }
+          });
+        });
+      }
     });
   }
 }

@@ -1,18 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const { pages, output, loaders } = require('./webpack.base');
-
-const entry = {};
-const plugins = [];
-
-pages.forEach((val) => {
-  entry[val] = `./${val}/index.js`;
-  plugins.push(new HtmlWebpackPlugin({
-    filename: `${val}.html`,
-    template: `./${val}/index.pug`,
-    chunks: [val],
-  }));
-});
+const { entry, output, loaders, plugins } = require('./webpack.base');
 
 module.exports = {
   context: __dirname,
@@ -27,7 +13,7 @@ module.exports = {
   devServer: {
     stats: 'minimal',
     port: 8002,
-    host: '0.0.0.0',
+    // host: '0.0.0.0',
     hot: true,
   },
 };
