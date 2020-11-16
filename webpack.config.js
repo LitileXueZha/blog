@@ -49,17 +49,20 @@ module.exports = [merge(config, {
         from: './favicon.ico',
         to: path.join(PATH_DIST, '[name].[ext]'),
       }, {
+        from: './robots.txt',
+        to: path.join(PATH_DIST, '[name].[ext]'),
+      }, {
         from: './pages.static/*.html',
         to: path.join(PATH_DIST, '[name].html'),
       },
     ]),
     // 打包分析，文件：zzz-analyzer.html
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: '../zzz-analyzer.html',
-      openAnalyzer: false,
-      logLevel: 'error',
-    }),
+    // new BundleAnalyzerPlugin({
+    //   analyzerMode: 'static',
+    //   reportFilename: '../zzz-analyzer.html',
+    //   openAnalyzer: false,
+    //   logLevel: 'error',
+    // }),
   ],
   optimization: {
     minimizer: [

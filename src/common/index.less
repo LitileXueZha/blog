@@ -4,12 +4,12 @@
 
 // 布局规范
 * { box-sizing: border-box; }
-html {
-	// 点击 a 链接及返回时平滑滚动
-	scroll-behavior: smooth;
-	// 字体渲染优化
-	-webkit-font-smoothing: antialiased;
-}
+// html {
+// 	// 点击 a 链接及返回时平滑滚动
+// 	scroll-behavior: smooth;
+// 	// 字体渲染优化
+// 	-webkit-font-smoothing: antialiased;
+// }
 body {
 	min-width: @mainWidth + 40px;
 	font-size: @textSize;
@@ -47,6 +47,7 @@ a {
 	// outline: none;
 	
 	&:not([role="button"]):hover {
+		text-decoration: underline;
 		color: @activeColor;
 	}
 }
