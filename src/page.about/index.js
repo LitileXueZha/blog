@@ -11,6 +11,8 @@ window.addEventListener('load', () => {
     if (showing) return;
 
     showing = true;
+    // 懒加载
+    $photo.src = $photo.dataset.src;
     $showBtn.classList.add('hidden');
     $photo.classList.remove('hidden');
   });
