@@ -10,7 +10,7 @@ import 'highlight.js/styles/atom-one-light.css';
  * 手动引用比默认引用全部更高效：全部加载达到500K，手动只需40K
  */
 
-import hljs from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js/lib/core';
 // 语言列表
 import xml from 'highlight.js/lib/languages/xml';
 import css from 'highlight.js/lib/languages/css';
@@ -23,6 +23,7 @@ import php from 'highlight.js/lib/languages/php';
 import sql from 'highlight.js/lib/languages/sql';
 import json from 'highlight.js/lib/languages/json';
 import diff from 'highlight.js/lib/languages/diff';
+import shell from 'highlight.js/lib/languages/shell';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);
@@ -36,5 +37,6 @@ hljs.registerLanguage('php', php);
 hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('diff', diff);
+hljs.registerLanguage('shell', shell);
 
 export default () => hljs.initHighlighting();

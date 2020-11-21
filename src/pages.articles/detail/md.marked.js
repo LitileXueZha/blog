@@ -34,8 +34,8 @@ const regHead = /id="(\S+?)"/;
 
 renderer.defaultHeading = renderer.heading;
 renderer.heading = (text, level, ...args) => {
-  // 转化一、二级标题为二、三级
-  const realLevel = level < 3 ? level + 1 : level;
+  // 把文章内容中的标题全部降低一级
+  const realLevel = level < 6 ? level + 1 : level;
   const defaultHead = renderer.defaultHeading(text, realLevel, ...args);
   // 转化文章标题为锚链接
   const anchorId = regHead.exec(defaultHead)[1];
