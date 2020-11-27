@@ -13,7 +13,7 @@ module.exports = {
   devServer: {
     stats: 'minimal',
     port: 8002,
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
     hot: true,
   },
 };

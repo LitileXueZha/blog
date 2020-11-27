@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import data from './data.js';
@@ -39,12 +40,19 @@ function Experience(props) {
           <div key={x.name} className="item-exp">
             <strong className="item-exp-name">{x.name}</strong>
             <time className="item-exp-time">{x.time}</time>
-            <p className="item-exp-content">{x.content}</p>
+            <ExpContent content={x.content} />
           </div>
         ))}
       </div>
     </figure>
   );
+}
+
+function ExpContent({ content }) {
+  if (content instanceof Array) {
+    return content.map(y => <p className="item-exp-content" key={y}>{y}</p>);
+  }
+  return <p className="item-exp-content">{content}</p>;
 }
 
 //  教育经历
@@ -57,7 +65,7 @@ function Education(props) {
         <div key={x.name} className="item-exp">
           <strong className="item-exp-name">{x.name}</strong>
           <time className="item-exp-time">{x.time}</time>
-          { x.content.map(y => <p className="item-exp-content" key={y}>{y}</p>) }
+          <ExpContent content={x.content} />
         </div>
       ))}
       </div>
