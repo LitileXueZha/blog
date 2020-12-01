@@ -7,6 +7,8 @@ const MODULE_NEED_BABEL = [
   'query-string',
   'strict-uri-encode',
   'split-on-first',
+  // highlight.js 升级后，发布的包文件面向 es6，不支持 IE11
+  'highlight.js',
 ];
 // 生产环境下编译
 // 注意不同系统上的路径分隔符

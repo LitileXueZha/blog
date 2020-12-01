@@ -300,7 +300,9 @@ export const Scrollspy = {
     let $p = $activeLink.parentNode;
 
     // 如果已是active，return不做操作
-    if (activeNodes.indexOf($p) > -1) return;
+    // if (activeNodes.indexOf($p) > -1) return;
+    // 从二级切换到一级时，activeNodes 包含了一级，这里确保能删除二级 .active
+    if (activeNodes.indexOf($p) === 0) return;
     // 删除上次的active link
     activeNodes.forEach(val => val.classList.remove('active'));
     metaObj.activeNodes = [];
