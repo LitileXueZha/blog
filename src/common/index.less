@@ -131,10 +131,18 @@ code, pre {
 @keyframes ripple {
 	from {
 		transform: scale(0);
-		opacity: 0.5;
+		opacity: 0.1;
 	}
 	to {
 		transform: scale(1);
+		opacity: 0.4;
+	}
+}
+@keyframes ripple-leave {
+	from {
+		opacity: 1;
+	}
+	to {
 		opacity: 0;
 	}
 }
@@ -156,10 +164,18 @@ code, pre {
 			display: block;
 			position: absolute;
 			border-radius: 50%;
-			opacity: 0;
+			opacity: 0.4;
 			transform-origin: center;
 			animation: ripple .55s cubic-bezier(0.4, 0, 0.2, 1);
 			pointer-events: none;
+			overflow: hidden;
+		}
+		.tc-ripple-span_bg {
+			display: block;
+			height: 100%;
+		}
+		.tc-ripple-span.leave .tc-ripple-span_bg {
+			animation: ripple-leave .55s cubic-bezier(0.4, 0, 0.2, 1);
 		}
 	}
 }

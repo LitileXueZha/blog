@@ -36,45 +36,67 @@ export const Ripple = {
     node.appendChild(wraper);
     node.addEventListener(startEventName, this.start, false);
     node.addEventListener(leaveEventName, this.leave, false);
+    if (this.platform === 'pc') {
+      // 修复鼠标拖拽出 dom 区域后 mouseup 未触发，导致 ripple-span 未删除问题
+      node.addEventListener('mouseout', this.leave);
+    }
   },
 
   start(event) {
     // ripple达到数量最大时，不再添加
     if (Ripple.quantity === Ripple.max) return;
 
-    const { offsetX, offsetY } = event;
-    const { width, height } = this.getBoundingClientRect();
+    const { offsetX, offsetY, width, height } = Ripple.enhancedOffset(event, this);
+    // const { width, height } = this.getBoundingClientRect();
     const px = offsetX > width / 2 ? offsetX : width - offsetX;
     const py = offsetY > height / 2 ? offsetY : height - offsetY;
     const length = Math.sqrt((px * px) + (py * py));
     const span = document.createElement('span');
     const wraper = this.querySelector('.tc-ripple-wraper');
+    const spanBg = document.createElement('span');
 
     span.className = 'tc-ripple-span';
     span.style.left = `${offsetX - length}px`;
     span.style.top = `${offsetY - length}px`;
-    span.style.backgroundColor = Ripple.color;
     span.style.width = `${length * 2}px`;
     span.style.height = `${length * 2}px`;
-    span.dataset.t = Date.now();
-    span.style.transitionDuration = Ripple.duration;
+    // span.dataset.t = Date.now();
+    // span.style.animationDuration = `${Ripple.duration}ms`;
+    spanBg.className = 'tc-ripple-span_bg';
+    spanBg.style.backgroundColor = Ripple.color;
 
     wraper.appendChild(span);
+    span.appendChild(spanBg);
     Ripple.quantity += 1;
   },
 
   leave() {
     const wraper = this.querySelector('.tc-ripple-wraper');
     const span = wraper.lastElementChild;
-    const startTime = parseInt(span.dataset.t, 10);
-    const delay = Ripple.duration - ((Date.now() - startTime) / 1000);
+    // const startTime = parseInt(span.dataset.t, 10);
+    // const delay = Ripple.duration - (Date.now() - startTime);
 
+    if (!span) return;
+    span.classList.add('leave');
     setTimeout(() => {
       if (!span.parentNode) return;
 
       wraper.removeChild(span);
       Ripple.quantity -= 1;
-    }, delay > 0 ? delay : 0);
+      // 在动画结束之前删除 dom 节点
+    }, Ripple.duration - 50);
+  },
+
+  enhancedOffset(event, node) {
+    let { offsetX, offsetY } = event;
+    const { left, top, width, height } = node.getBoundingClientRect();
+    // 移动端 touch 事件
+    if (this.platform === 'mobile') {
+      offsetX = event.targetTouches[0].pageX - left;
+      offsetY = event.targetTouches[0].pageY - top;
+    }
+
+    return { offsetX, offsetY, width, height };
   },
 };
 

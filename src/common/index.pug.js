@@ -19,7 +19,7 @@
 export function humanDate(dateStr) {
   // 转化为旧日期格式: 2020/12/1 23:32:12
   // 兼容 IE、Safari
-  const date = new Date(dateStr.replace('-', '/'));
+  const date = new Date(typeof dateStr === 'string' ? dateStr.replace('-', '/') : dateStr);
   const diffTs = Date.now() - date.getTime();
 
   if (diffTs > 365 * 24 * 60 * 60 * 1000) {

@@ -36,7 +36,7 @@ block content
           displayTimes.push({ val: `earlier${year - 1}-${month}`, text: '更早' });
         each val in displayTimes
           li(class= /autumn/.test(val.val) ? 'active' : '')
-            a.tc-ripple(href= `#${val.val}`)
+            a.tc-ripple(href= `#${val.val}`, role="button")
               +icon(val.season, 20)
               | #{val.text}
     .articles
