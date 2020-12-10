@@ -5,9 +5,9 @@ let _cache;
 
 // SEO 数据
 if (IS_PROD) {
-  _cache = require('../_cache.dist.json');
+  _cache = require('../public/_cache.dist.json');
 } else {
-  _cache = require('../_cache.dev.json');
+  _cache = require('../public/_cache.dev.json');
 }
 
 // 需要打包的页面

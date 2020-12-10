@@ -201,7 +201,7 @@ export const FloatText = {
     setTimeout(() => {
       document.body.removeChild(span);
       this.map.delete(dom);
-    }, 400);
+    }, 400 + 250);
   },
 };
 

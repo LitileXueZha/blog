@@ -1,5 +1,3 @@
-import { Base64 } from 'js-base64';
-
 import './index.less';
 import { Ripple, FloatText } from '../common';
 
@@ -37,14 +35,14 @@ window.addEventListener('load', () => {
         // 绑定keyup事件，转码
         if (pattern === 'text') {
           dom.addEventListener('keyup', debounce(() => {
-            $transformed.value = Base64.encode(dom.value);
+            $transformed.value = window.btoa(dom.value);
           }));
         } else if (pattern === 'b64') {
           dom.addEventListener('keyup', debounce(() => {
             let str = '';
 
             try {
-              str = Base64.decode(dom.value);
+              str = window.atob(dom.value);
             } catch (e) {
               str = '';
             }
@@ -90,6 +88,7 @@ window.addEventListener('load', () => {
      */
     function handleFile(file) {
       if (!file) return;
+      // eslint-disable-next-line no-else-return
       else if (!/\.(ico)|(jpg)|(jpeg)|(gif)|(png)$/i.test(file.name)) {
         // 不是常见图片格式，不转
         $file.value = '';

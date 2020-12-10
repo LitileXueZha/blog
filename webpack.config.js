@@ -46,10 +46,10 @@ module.exports = [merge(config, {
     // 复制静态页面和 favicon
     new CopyWebpackPlugin([
       {
-        from: './favicon.ico',
+        from: './public/favicon.ico',
         to: path.join(PATH_DIST, '[name].[ext]'),
       }, {
-        from: './robots.txt',
+        from: './public/robots.txt',
         to: path.join(PATH_DIST, '[name].[ext]'),
       }, {
         from: './pages.static/*.html',

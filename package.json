@@ -5,6 +5,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.config.dev.js --hot",
     "build": "cross-env NODE_ENV=production webpack -p --progress",
+    "seo": "node public/seo.js",
     "static": "webpack --config pages.static/webpack.config.js --progress",
     "static:dev": "webpack-dev-server --config pages.static/webpack.config.dev.js --hot --color",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,11 +26,9 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "highlight.js": "^10.4.0",
-    "js-base64": "^2.6.4",
-    "marked": "^0.7.0",
+    "marked": "^1.2.5",
     "query-string": "^6.13.1",
     "regenerator-runtime": "^0.13.7",
-    "request": "^2.88.2",
     "whatwg-fetch": "^3.4.1"
   },
   "devDependencies": {
