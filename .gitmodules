@@ -1,0 +1,8 @@
+[submodule "my"]
+	path = dist/v1.0
+	url = https://github.com/LitileXueZha/my.git
+	branch = master
+[submodule "blog-doc"]
+	path = dist/docs
+	url = https://github.com/LitileXueZha/blog-doc.git
+	branch = master
