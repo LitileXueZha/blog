@@ -35,6 +35,8 @@ block content
           i.tc-divider
           a#fullscreen(href="javascript:;", role="button") 全屏阅读
         .body
+        button#exit-fullscreen(title="退出全屏")
+          +icon('close', 14)
       //- 骨架屏：目录
       .skeleton-catalog
         .title
@@ -51,10 +53,10 @@ block content
           +icon('heart', 20)
         button.tc-ripple(title="踩一下")
           +icon('foot', 20)
-      p.previous 上一篇：
-        a(href="#") 钢铁是怎样炼成的
       p.next 下一篇：
         a(href="#") 打酱油
+      p.previous 上一篇：
+        a(href="#") 钢铁是怎样炼成的
       .comments
         form#form-comment
           textarea.input-comment(name="content", cols="30", rows="10", maxlength=200, placeholder="说说你的看法~")

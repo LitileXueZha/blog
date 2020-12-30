@@ -41,6 +41,28 @@ html {
   }
 }
 
+.markdowned #exit-fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: none;
+  padding-top: 4px;
+  width: 48px;
+  height: 28px;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    background: @dangerousColor;
+    .icon { fill: #fff }
+  }
+
+  .icon { fill: @textColor}
+}
+
 .markdowned > .title,
 .catalog .catalog-title {
   padding-bottom: @mainSpace;

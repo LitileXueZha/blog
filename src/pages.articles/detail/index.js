@@ -50,6 +50,7 @@ window.addEventListener('load', async () => {
   }
 
   renderArticle(data);
+  renderChapters(data.siblings);
 
   // 初始化
   Ripple.init();
@@ -70,6 +71,9 @@ window.addEventListener('load', async () => {
   });
   document.querySelector('#fullscreen').addEventListener('click', () => {
     fullscreen($mdContainer);
+  });
+  document.querySelector('#exit-fullscreen').addEventListener('click', () => {
+    fullscreen(null, true);
   });
 
   initLoadComment(id);
@@ -222,7 +226,25 @@ function initLoadComment(id) {
   }
 }
 
-function fullscreen(dom) {
+/**
+ * 全屏
+ * @param {Element} dom 元素
+ * @param {boolean} exited 是否退出全屏
+ */
+function fullscreen(dom, exited) {
+  if (exited) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+    return;
+  }
+
   if (dom.requestFullscreen) {
     dom.requestFullscreen();
   } else if (dom.webkitRequestFullscreen) {
@@ -231,5 +253,26 @@ function fullscreen(dom) {
     dom.mozRequestFullScreen();
   } else if (dom.msRequestFullscreen) {
     dom.msRequestFullscreen();
+  }
+}
+
+/** 渲染上下两篇文章 */
+function renderChapters(articles = []) {
+  const [previous, next] = articles;
+  const $prev = document.querySelector('.container-more .previous > a');
+  const $next = document.querySelector('.container-more .next > a');
+  const $none = document.createTextNode('~');
+
+  render($prev, previous);
+  render($next, next);
+
+  function render($dom, data) {
+    if (data) {
+      $dom.href = `/articles/${data.id}`;
+      $dom.textContent = data.title;
+      return;
+    }
+
+    $dom.parentNode.replaceChild($none, $dom);
   }
 }

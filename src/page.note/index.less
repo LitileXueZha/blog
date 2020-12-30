@@ -40,7 +40,7 @@
 
   & > .cover {
     margin-left: @mainSpace * 4;
-    width: 70px;
+    width: 70/0.618px;
     height: 70px;
     border-radius: 2px;
     object-fit: cover;
@@ -48,9 +48,10 @@
 }
 
 #more {
-  position: absolute;
-  left: (@mainWidth - 2px) / 2 - 44px;
-  bottom: -17px;
+  // position: absolute;
+  // left: (@mainWidth - 2px) / 2 - 44px;
+  // bottom: -17px;
+  margin-left: -16px;
   color: @mainColor;
   background: #fff;
 }
