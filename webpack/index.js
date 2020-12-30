@@ -15,4 +15,9 @@ module.exports = {
   },
   module: { rules: loaders },
   plugins,
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, '../src'),
+    },
+  },
 };

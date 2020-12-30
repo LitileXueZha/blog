@@ -22,23 +22,25 @@ const pages = [
   'articles/index', // 文章列表页
   'articles/detail', // 文章详情页
 ];
-const entry = { common: './src/common/index.js' };
+const entry = { main: './src/index.js' };
 const plugins = [];
 
 for (let i = 0; i < pages.length; i++) {
   const page = pages[i];
   // 是否为二级页面
   const hasChild = page.indexOf('/') > 0;
+  // 删除末尾 /index 免重
+  const pageResolved = `page${hasChild ? 's' : ''}.${page}`.replace(/\/index$/, '');
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
-    template: `./src/page${hasChild ? 's' : ''}.${page}/index.pug`,
+    template: `./src/${pageResolved}/index.pug`,
     templateParameters: { pathname: page, _cache },
     // NOTE: 必须要手动加上 vendor
-    chunks: ['common', `vendors~${page}`, page],
+    chunks: ['main', `vendors~${page}`, page],
     minify: { removeComments: false },
   });
 
-  entry[page] = `./src/page${hasChild ? 's' : ''}.${page}/index.js`;
+  entry[page] = `./src/${pageResolved}/index.js`;
   plugins.push(plugin);
 }
 

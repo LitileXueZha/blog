@@ -1,7 +1,7 @@
 import { encode, decode } from 'js-base64';
 
 import './index.less';
-import { Ripple, FloatText } from '../common';
+import { Ripple, FloatText } from 'src/index.js';
 
 const { debounce } = window.TC;
 

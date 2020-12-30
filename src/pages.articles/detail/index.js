@@ -7,7 +7,7 @@ import {
   Ripple,
   fetch,
   humanDate,
-} from '../../common';
+} from 'src/index.js';
 import initHighlightJS from './md.highlight';
 import { initMermaid, initMathJax } from './md.addons';
 import marked from './md.marked';

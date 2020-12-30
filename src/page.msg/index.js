@@ -1,5 +1,5 @@
 import './index.less';
-import { Ripple, fetch, randomColor, humanDate } from '../common';
+import { Ripple, fetch, randomColor, humanDate } from 'src/index.js';
 
 window.addEventListener('load', async () => {
   Ripple.init();

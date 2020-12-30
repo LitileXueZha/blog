@@ -1,7 +1,7 @@
 import QueryString from 'query-string';
 
 import './index.less';
-import { fetch } from '../common';
+import { fetch } from 'src/index.js';
 
 window.addEventListener('load', () => {
   const $suggest = document.querySelector('.suggest');

@@ -42,7 +42,7 @@ module.exports = [merge(config, {
       chunkFilename: 'css/[name].[contenthash].css',
     }),
     // 把公共样式直接内联进了 html 中
-    new InlineHtmlWebpackPlugin([/common.*\.css/]),
+    new InlineHtmlWebpackPlugin([/main.*\.css/]),
     // 复制静态页面和 favicon
     new CopyWebpackPlugin([
       {
@@ -70,7 +70,7 @@ module.exports = [merge(config, {
       new OptimizeCssPlugin({}),
     ],
     // 整合 runtime 到公共模块，可以不用单独打个 runtime.js 增加请求
-    runtimeChunk: { name: 'common' },
+    runtimeChunk: { name: 'main' },
     splitChunks: {
       cacheGroups: {
         vendors: {
@@ -83,8 +83,8 @@ module.exports = [merge(config, {
           enforce: true,
           reuseExistingChunk: true,
         },
-        common: {
-          name: 'common',
+        main: {
+          name: 'main',
           chunks: 'initial',
           minChunks: 2,
         },

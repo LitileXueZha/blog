@@ -1,5 +1,5 @@
 import './index.less';
-import { Ripple, fetch, humanDate } from '../../common';
+import { Ripple, fetch, humanDate } from 'src/index.js';
 
 const SIZE = 10;
 /** 全局查询文章条件 */

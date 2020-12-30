@@ -1,6 +1,6 @@
 import './index.less';
 
-import { Ripple, fetch, humanDate } from '../common';
+import { Ripple, fetch, humanDate } from 'src/index.js';
 import { resolveTags } from './index.pug.js';
 
 window.addEventListener('load', async () => {
