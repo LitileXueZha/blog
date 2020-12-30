@@ -22,7 +22,7 @@ module.exports = [merge(config, {
   mode: 'production',
   output: {
     // conenthash 可在英文最新版看到，移除了 manifest.json
-    filename: 'js/[name]-[contenthash].js',
+    filename: 'js/[name].[contenthash].js',
     hashDigestLength: 8,
   },
   stats: {
@@ -38,8 +38,8 @@ module.exports = [merge(config, {
     // 文档：https://webpack.js.org/guides/caching/
     new HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name]-[contenthash].css',
-      chunkFilename: 'css/[name]-[contenthash].css',
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[name].[contenthash].css',
     }),
     // 把公共样式直接内联进了 html 中
     new InlineHtmlWebpackPlugin([/common.*\.css/]),

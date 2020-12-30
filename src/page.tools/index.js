@@ -1,3 +1,5 @@
+import { encode, decode } from 'js-base64';
+
 import './index.less';
 import { Ripple, FloatText } from '../common';
 
@@ -35,14 +37,14 @@ window.addEventListener('load', () => {
         // 绑定keyup事件，转码
         if (pattern === 'text') {
           dom.addEventListener('keyup', debounce(() => {
-            $transformed.value = window.btoa(dom.value);
+            $transformed.value = encode(dom.value);
           }));
         } else if (pattern === 'b64') {
           dom.addEventListener('keyup', debounce(() => {
             let str = '';
 
             try {
-              str = window.atob(dom.value);
+              str = decode(dom.value);
             } catch (e) {
               str = '';
             }

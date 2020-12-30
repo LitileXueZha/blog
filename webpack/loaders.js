@@ -9,6 +9,8 @@ const MODULE_NEED_BABEL = [
   'split-on-first',
   // highlight.js 升级后，发布的包文件面向 es6，不支持 IE11
   'highlight.js',
+  // js-base64 v3 开始使用 es6 语法
+  'js-base64',
 ];
 // 生产环境下编译
 // 注意不同系统上的路径分隔符
@@ -21,7 +23,7 @@ module.exports = [
     test: /\.pug$/,
     use: 'pug-loader',
   }, {
-    test: /\.js$/,
+    test: /\.m?js$/, // 有的库 es6 module 文件后缀名为 .mjs，醉了
     // exclude: /node_modules/,
     exclude: EXCLUDE_BABEL,
     use: {
