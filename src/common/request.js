@@ -32,7 +32,6 @@ function Request(url, opts = {}) {
   this.handler = responseHandler;
 
   this.token = localStorage.getItem(TOKEN_NAME);
-  this.fetch = window.fetch && window.fetch.bind(window);
 
   this.url = API + url;
   // 合并默认配置
@@ -61,23 +60,12 @@ function Request(url, opts = {}) {
   }
 }
 
-/** 简易 `window.fetch` 兼容 */
-Request.prototype.fetchPolyfill = async function fetchPolyfill() {
-  if (!this.fetch) {
-    const res = await import(/* webpackChunkName: "whatwg-fetch" */ 'whatwg-fetch');
-
-    window.fetch = res.fetch;
-    this.fetch = window.fetch;
-  }
-};
-
 /** 请求 */
 Request.prototype.fetchStart = async function fetchStart() {
-  await this.fetchPolyfill();
   await this.auth();
 
   /** `fetch` 返回对象 */
-  this.response = await this.fetch(this.url, this.opts);
+  this.response = await window.fetch(this.url, this.opts);
   /** 请求成功数据 */
   this.result = await this.handler(this.response);
 
@@ -91,7 +79,7 @@ Request.prototype.auth = async function auth(refresh = false) {
     return;
   }
 
-  const res = await this.fetch(`${API}/oauth`, {
+  const res = await window.fetch(`${API}/oauth`, {
     headers: {
       Authorization: this.token,
     },
