@@ -23,3 +23,4 @@ export { default as Ripple } from './Ripple.js';
 export { default as Affix } from './Affix.js';
 export { default as Scrollspy } from './Scrollspy.js';
 export { default as FloatText } from './FloatText.js';
+export { default as PaginationBase } from './PaginationBase.js';

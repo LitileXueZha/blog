@@ -14,10 +14,10 @@ main.container {
     min-height: 370px;
     border-left: 1px solid @borderColor;
 
-    li {
+    .list-item {
       padding: @mainSpace * 2 0;
     }
-    li:first-of-type {
+    .list-item:first-of-type {
       padding-top: 0;
     }
   }
@@ -26,7 +26,7 @@ main.container {
 .time-quantum {
   height: 100%;
 
-  li > a {
+  .season > .season-item {
     display: block;
     line-height: 40px;
     color: @textColor;
@@ -36,10 +36,14 @@ main.container {
       background: rgba(0,0,0,0.08);
     }
   }
-  li.active {
+  .season.active {
     position: relative;
-    font-weight: bold;
-    color: #000;
+    // font-weight: bold;
+
+    &, & > .season-item {
+      color: #000;
+      transition: .3s;
+    }
 
     &::after {
       content: ' ';
@@ -58,7 +62,7 @@ main.container {
     }
   }
   .icon {
-    margin: 0 10px;
+    margin: -4px 10px 0 10px;
     vertical-align: middle;
 
     .color {
@@ -72,4 +76,66 @@ main.container {
   left: -16px;
   margin-top: @mainSpace * 2 - 8px;
   color: @mainColor;
+
+  & + .no-more {
+    display: none;
+    margin-top: @mainSpace * 2;
+    color: #ccc;
+  }
+  &.tc-hidden + .no-more {
+    display: inline-block;
+  }
+}
+
+.articles {
+  &.loading {
+    .skeleton {
+      display: block;
+    }
+    .list-article,
+    #more {
+      display: none;
+    }
+  }
+}
+
+// 骨架屏
+.articles .skeleton {
+  display: none;
+
+  .skeleton-article {
+    padding: @mainSpace * 2 0;
+
+    &:first-of-type { padding-top: 0; }
+
+    .title {
+      margin-bottom: 8px;
+      height: 28px;
+      width: @mostUseLength;
+      background-color: @skeletonColor;
+    }
+    .description {
+      line-height: 0;
+
+      & span {
+        display: inline-block;
+        margin-right: 4px;
+        height: 12px;
+        width: 48px;
+        background-color: @skeletonColor;
+      }
+    }
+    .p {
+      margin-top: 4px;
+      height: 18px;
+      background-color: @skeletonColor;
+    }
+  }
+
+  .skeleton-btn {
+    margin-top: @mainSpace * 2;
+    width: 56px;
+    height: 20px;
+    background-color: @skeletonColor;
+  }
 }

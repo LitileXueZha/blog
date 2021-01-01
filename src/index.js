@@ -5,6 +5,7 @@ export * from './plugins/index.js';
 export * from './common/index.pug.js';
 export * from './common/constants.js';
 export { default as fetch } from './common/request.js';
+export { default as Events, EventsUnit } from './common/Events.js';
 
 // 通用库的封装
 window.TC = {

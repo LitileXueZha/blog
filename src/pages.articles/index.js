@@ -34,8 +34,8 @@ async function initTags() {
   const frags = items.map((tag) => {
     return `
       <li class="filter-item tag">
-        <input id="${tag.id}" type="radio" name="tag" value="${tag.id}" />
-        <label class="item" for="${tag.id}">${tag.name}</label>
+        <input id="_${tag.id}" type="radio" name="tag" value="${tag.id}" />
+        <label class="item" for="_${tag.id}">${tag.name}</label>
       </li>
     `;
   });
@@ -69,7 +69,7 @@ async function initTags() {
       method: 'HEAD',
       params: { id: tagId },
     });
-    document.querySelector(`input#${tagId}`).checked = true;
+    document.querySelector(`input#_${tagId}`).checked = true;
     // 设置查询条件
     query.tag = tagId;
   }
