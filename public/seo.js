@@ -6,7 +6,7 @@ const https = require('https');
 
 const API = {
     // 机器人 robot 令牌
-    token: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.MTU3ODI4MDk1NDpyb2JvdA==.enCpi8Loy+gA/hobLeWp56UfO7aQS/otOXvBm4wRbs0=',
+    token: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.MTU3ODI4MDk1NDpyb2JvdA==.zzs8nnFLyNb9ft6U2q8N3F13c/v+LzaZkpLtPH/BBaw=',
     prefix: 'https://api.ningtaostudy.cn/v1',
     getToken() {
         return this.token;
@@ -20,7 +20,7 @@ const _cache = {
     try {
         const ts = Date.now();
         // 设置 token
-        API.token= await get('/oauth');
+        API.token = await get('/oauth');
     
         // 设置首页数据
         _cache['index'] = await get('/seo/index');
@@ -68,6 +68,7 @@ function get(url) {
                 Authorization: API.getToken(),
                 'User-Agent': 'Robot by seo.js',
             },
+            rejectUnauthorized: false,
         }, (res) => {
             if (res.statusCode !== 200) {
                 reject(new Error('请求失败。状态码为 '+ res.statusCode));
