@@ -134,7 +134,9 @@ async function getArticles(isLoadMore = false) {
           <a class="tc-font-title" href="/articles/${item.id}">${item.title}</a>
         </h2>
         <div class="description">
-          <time title="发布时间">${humanDate(item.create_at)}</time><i class="tc-divider"></i><span title="标签">${item.tag_name}</span><i class="tc-divider"></i><span title="点击量">000</span>
+          <time title="发布时间" datetime="${item.create_at}">${humanDate(item.publish_at)}</time>`
+          + '<i class="tc-divider"></i>'
+          + `<span title="标签">${item.tag_name}</span><i class="tc-divider"></i><span title="点击量">000</span>
         </div>
         <p>${item.summary || '暂无简介~'}</p>
       </section>

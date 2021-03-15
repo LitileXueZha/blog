@@ -96,7 +96,9 @@ async function fetchArticles(params) {
         <a class="tc-font-title" href="/articles/${article.id}">${article.title}</a>
       </h3>
       <div class="description">
-        <time title="发布时间">${humanDate(article.create_at)}</time><i class="tc-divider"></i><span title="分类标签">${article.tag_name}</span>
+        <time title="发布时间" datetime="${article.create_at}">${humanDate(article.publish_at)}</time>`
+        + '<i class="tc-divider"></i>'
+        + `<span title="分类标签">${article.tag_name}</span>
       </div>
       <p>${article.summary}</p>
     `;

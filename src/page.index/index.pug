@@ -6,16 +6,12 @@ block content
     .content
       .to-noobs
         span.title.tc-font-title 有些话想说
-        p
-          | 1. 千万别当程序员。
-          br
-          | 2. 干了就要变成加班的代名词，一天十二小时。
-          br
-          | 3. 如果加班多的话，工资得多要，才对得起身体啊！
-          br
-          | 4. 工资少，还老委屈了，二话不说走人先。
-          br
-          | 5. 回家卖烧饼月入一两万了解一下······
+        ol.sentences
+          li 千万别当程序员。
+          li 干了就要变成加班的代名词，一天十二小时。
+          li 如果加班多的话，工资得多要，才对得起身体啊！
+          li 工资少，还老委屈了，二话不说走人先。
+          li 回家卖烧饼月入一两万了解一下······
       section.articles
         ul.list.skeleton
           //- 骨架屏
@@ -34,9 +30,9 @@ block content
               h3.title
                 a.tc-font-title(href= `/articles/${article.id}`)= article.title
               .description
-                label(title="发布时间")= humanDate(article.create_at)
+                time(title="发布时间", datetime= article.create_at)= humanDate(article.publish_at)
                 i.tc-divider
-                label(title="分类标签")= article.tag_name
+                span(title="分类标签")= article.tag_name
               p= article.summary
         .actions
           button#more.tc-button.tc-ripple 加载更多

@@ -9,7 +9,7 @@ module.exports = {
   devServer: {
     stats: 'minimal',
     port: 8001,
-    // contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'dist'),
     disableHostCheck: true,
     hot: true,
     compress: true,

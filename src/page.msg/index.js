@@ -104,7 +104,7 @@ function createMsgListItem(msg) {
     <div class="msg-content">
       <h3 class="tc-font-title">
         ${escapeHtml(msg.name)}
-        <time class="msg-time">${humanDate(msg.create_at)}</time>
+        <time class="msg-time" datetime="${msg.create_at}">${humanDate(msg.create_at)}</time>
       </h3>
       <p class="msg-summary">${escapeHtml(msg.content)}</p>
     </div>

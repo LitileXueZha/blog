@@ -94,6 +94,7 @@ function renderArticle(data) {
     content,
     tag_name: tagName,
     create_at: createAt,
+    publish_at: publishAt,
     bg,
   } = data;
 
@@ -109,7 +110,9 @@ function renderArticle(data) {
   document.title = `${title}_滔's 博客`;
   $mdTitle.innerText = title;
   // 设置时间与标签
-  $createAt.innerText = humanDate(createAt);
+  $createAt.innerText = humanDate(publishAt);
+  // SEO：设置 datetime 属性
+  $createAt.setAttribute('datetime', createAt);
   $tag.innerText = tagName;
 
   // 生成 markdown html
@@ -167,7 +170,7 @@ function initFormComment(articleId) {
 
     $comment.className = 'comment';
     $comment.innerHTML = `
-      <time class="comment-at">刚刚</time>
+      <time class="comment-at" datetime="${new Date()}">刚刚</time>
       <p class="comment-content">${window.TC.escapeHtml(res.content)}</p>
     `;
 
@@ -193,7 +196,7 @@ function renderComments(data, isLoadMore = false) {
   const $commnetList = document.querySelector('.list-comment');
   const comments = data.map(item => `
     <li class="comment">
-      <time class="comment-at">${humanDate(item.create_at)}</time>
+      <time class="comment-at" datetime="${item.create_at}">${humanDate(item.create_at)}</time>
       <p class="comment-content">${window.TC.escapeHtml(item.content)}</p>
     </li>
   `);
