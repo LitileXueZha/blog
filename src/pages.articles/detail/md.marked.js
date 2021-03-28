@@ -26,7 +26,7 @@ renderer.codespan = (code) => {
   return renderer.defaultCodespan(code);
 };
 
-// 3. 生成目录
+// 3. 生成目录，且文章内所有标题都降低一级
 const catalogs = ['<ol class="nav tc-scrollspy">'];
 let headingCount = 0;
 let second = false;
@@ -75,6 +75,16 @@ renderer.link = (...args) => {
   const linkSeo = linkHtml.replace(regLink, '$1" rel="nofollow noopener noreferrer">');
 
   return linkSeo;
+};
+
+// 5. 任务列表添加样式类名
+renderer.defaultListitem = renderer.listitem;
+renderer.listitem = (text, task) => {
+  if (task) {
+    return `<li class="task-list-item">${text}</li>\n`;
+  }
+
+  return `<li>${text}</li>\n`;
 };
 
 // 设置
