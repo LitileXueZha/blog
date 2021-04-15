@@ -1,4 +1,4 @@
-extends ../layout.pug
+extends src/layout.pug
 
 block title
   title 留言板_滔's 博客
@@ -14,7 +14,7 @@ block content
         button.tc-button.btn-reset(type="reset") 清空
     ul.list-msg
       li#my-msg.msg
-        img.msg-cover(src= require('../assets/photo.jpg'), alt="头像", width=50 height=50)
+        img.msg-cover(src= require('src/assets/photo.jpg'), alt="头像", width=50 height=50)
         .msg-content
           h3.tc-font-title 微风轻拂晨曦之纱
             time.msg-time 刚刚

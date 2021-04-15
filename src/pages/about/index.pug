@@ -1,4 +1,4 @@
-extends ../layout.pug
+extends src/layout.pug
 
 block title
   title 关于滔's 博客
@@ -40,4 +40,4 @@ block content
       p 男，90后江西吉安人。从事IT行业，前端开发工程师。性格开朗乐观、很怀旧，有的时候能说一大堆子的话，有的时候一声不吭。
         | 平时除了敲代码外，也会看看视频、打打游戏，当然需要运动起来，嗯，这个在计划之中
       a#showPhoto(role="button") 查看照片
-      img.hidden.photo(src, data-src= require('../assets/photo.jpg'), alt="头像", width=270, height=270)
+      img.hidden.photo(src, data-src= require('src/assets/photo.jpg'), alt="头像", width=270, height=270)

@@ -27,10 +27,8 @@ const plugins = [];
 
 for (let i = 0; i < pages.length; i++) {
   const page = pages[i];
-  // 是否为二级页面
-  const hasChild = page.indexOf('/') > 0;
   // 删除末尾 /index 免重
-  const pageResolved = `page${hasChild ? 's' : ''}.${page}`.replace(/\/index$/, '');
+  const pageResolved = `pages/${page.replace(/\/index$/, '')}`;
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
     template: `./src/${pageResolved}/index.pug`,

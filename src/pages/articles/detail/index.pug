@@ -1,5 +1,5 @@
-extends ../../layout.pug
-include ../../components/icon_svg.pug
+extends src/layout.pug
+include src/components/icon_svg.pug
 
 block title
   title 文章详情_滔's 博客
@@ -45,7 +45,7 @@ block content
       //- ====================================
       .tc-affix(data-top=10)
         aside.catalog
-          //- img.cover(src= require("../../assets/life.jpg"), alt="封面", height=200)
+          //- img.cover(src= require("../src/assets/life.jpg"), alt="封面", height=200)
           .content 无目录
     .container-more
       .actions
