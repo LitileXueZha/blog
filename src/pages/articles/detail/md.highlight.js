@@ -24,6 +24,7 @@ import sql from 'highlight.js/lib/languages/sql';
 import json from 'highlight.js/lib/languages/json';
 import diff from 'highlight.js/lib/languages/diff';
 import shell from 'highlight.js/lib/languages/shell';
+import yaml from 'highlight.js/lib/languages/yaml';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);
@@ -38,5 +39,6 @@ hljs.registerLanguage('sql', sql);
 hljs.registerLanguage('json', json);
 hljs.registerLanguage('diff', diff);
 hljs.registerLanguage('shell', shell);
+hljs.registerLanguage('yaml', yaml);
 
-export default () => hljs.initHighlighting();
+export default () => hljs.highlightAll();

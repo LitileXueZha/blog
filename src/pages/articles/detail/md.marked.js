@@ -51,7 +51,7 @@ renderer.heading = (text, level, ...args) => {
     headingCount += 100;
     second = false;
     catalogs.push(`${first ? '' : ext}<li>${$anchor}`);
-  } else if (level === 2) {
+  } else if (level === 2 && headingCount > 0) {
     // 处理二级目录
     headingCount += 1;
 
