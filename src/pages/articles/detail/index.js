@@ -120,7 +120,7 @@ function renderArticle(data) {
 
   $mdBody.innerHTML = mdHtml || '<p>无内容</p>';
   // 有目录时渲染
-  $catalog.innerHTML = catalog ? `<h2 class="catalog-title">目录</h2>${catalog}` : '无目录';
+  $catalog.innerHTML = `<h2 class="catalog-title">目录</h2>${catalog || '<span class="none">无</span>'}`;
   // 有封面时插入图片到目录
   if (bg) {
     const $cover = document.createElement('img');
