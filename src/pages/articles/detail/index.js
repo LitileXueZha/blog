@@ -11,7 +11,7 @@ import {
 import initHighlightJS from './md.highlight';
 import { initMermaid, initMathJax } from './md.addons';
 import marked from './md.marked';
-window.marked=marked;
+
 /** 在页面上展示错误提示 */
 function renderErrorContent() {
   const $container = document.querySelector('main.tc-container');
@@ -40,9 +40,9 @@ window.addEventListener('load', async () => {
    * 数据读取注入的 `__SSR_DATA__`
    */
 
-  const data = await fetch(`/articles/${id}`).catch(renderErrorContent);
+  // const data = await fetch(`/articles/${id}`).catch(renderErrorContent);
   // eslint-disable-next-line
-  // const data = window.__SSR_DATA__;
+  const data = window.__SSR_DATA__;
 
   if (!data) {
     renderErrorContent();
