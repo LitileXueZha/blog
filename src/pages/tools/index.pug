@@ -11,21 +11,29 @@ block content
         a(href="#base64", role="button") Base64转码
       li.character
         a(href="#character", role="button") 字符
+      li.sourcemap
+        a(href="#sourcemap", role="button") SourceMap解析
       //- li
       //-   a(href="#") 待做
     .container-tool
       .base64.active
-        p Base64是常见的编码方式，好处良多。这里提供文字、图片的互相转换
+        p.intro
+          strong Base64
+          | &nbsp;是常见的编码方式，基于 64 个可打印字符来表示二进制数据，这里提供文字、图片的互相转换。
         .text-to-b64
           textarea.input(data-pattern="text" placeholder="输入文字..." autocomplete="off" spellcheck="false")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          +icon('copy')
+          .copy(title="点击复制")
+            +icon('copy')
+            span.icon-success ✓
         .b64-to-text
           textarea.input(data-pattern="b64" placeholder="输入Base64..." autocomplete="off" spellcheck="false")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          +icon('copy')
+          .copy(title="点击复制")
+            +icon('copy')
+            span.icon-success ✓
         .img-to-text
           .upload
             .info
@@ -36,7 +44,9 @@ block content
             input#img(type="file" accept="image/*")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          +icon('copy')
+          .copy(title="点击复制")
+            +icon('copy')
+            span.icon-success ✓
         .text-to-img
           textarea.input(placeholder="输入Base64，转为图片" autocomplete="off" spellcheck="false")
           +icon('arrow-right')
@@ -51,3 +61,51 @@ block content
           each val in str
             span.character-str= val
           span.character-str(title="华为手机一般只显示 1 条杠，这个字符能够正常显示成 2 条") ¥
+      
+      //- source map 解析
+      .sourcemap
+        p.intro
+          strong Source Map&nbsp;
+          | 是一种用于映射 JavaScript 压缩混淆后代码与源代码位置之间的技术，基于线上报错日志快速定位源码。
+          a(
+            href="https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit"
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+          ) 文档
+        .form
+          .upload-jsmap
+            +icon('plus', 20, '#d2d2d2')
+            input#jsmap(type="file", accept=".js.map")
+            p
+              | 选择&nbsp;
+              code .js.map
+              | &nbsp;文件上传
+          .form-inputs
+            .form-item
+              label.form-label(for="name") 文件名
+              input#name.form-input(type="text", placeholder="未选择", disabled)
+            .form-item
+              label.form-label(for="line") 行号
+              input#line.form-input(type="number", value="1", placeholder="压缩文件第几行")
+            .form-item
+              label.form-label(for="column") 列号
+              input#column.form-input(type="number", placeholder="压缩文件第几列")
+            .form-item
+              label.form-label(for="size") 内容大小
+              select#size.form-select(name="size")
+                option(value="5") 5行
+                option(value="25") 25行
+                option(value="-1") 全部
+          .divider
+          aside.result-src
+            pre.result-format
+              .
+                {
+                  source: '源文件地址', <span style="color: #ccc">// 示例解析结果</span>
+                  line: 2283,
+                  column: 19,
+                }
+            .hint
+              p 文件内容
+              +icon('arrow-right', 16)
+        .source-content
