@@ -26,9 +26,6 @@ window.addEventListener('load', () => {
 
   initBase64();
 
-    }
-    );
-
   // 根据 location.hash 控制 tab 选项卡的显示
   function renderTab() {
     let { hash } = window.location;
