@@ -11,4 +11,5 @@ import 'core-js/es/string/starts-with';
 import 'core-js/es/string/ends-with';
 import 'core-js/es/array/find-index';
 import 'core-js/es/number/is-nan';
+import 'core-js/features/dom-collections/for-each';
 import 'whatwg-fetch';
