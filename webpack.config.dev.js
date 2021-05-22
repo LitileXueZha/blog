@@ -12,7 +12,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     disableHostCheck: true,
     hot: true,
-    compress: true,
+    // compress: true,
     historyApiFallback: {
       rewrites: [{
         from: /^\/articles\/\w+/,

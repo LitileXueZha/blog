@@ -7,7 +7,7 @@ export function initMermaid() {
 
   const $script = document.createElement('script');
 
-  $script.src = 'https://unpkg.com/mermaid@8.3.1/dist/mermaid.min.js';
+  $script.src = __CDN_LINK_MERMAID__;
   // eslint-disable-next-line
   $script.addEventListener('load', () => mermaid.init(undefined, $mermaids));
   document.body.appendChild($script);
@@ -27,7 +27,7 @@ export function initMathJax() {
 
   const $script = document.createElement('script');
 
-  $script.src = 'https://unpkg.com/mathjax@3.0.0/es5/tex-chtml.js';
+  $script.src = __CDN_LINK_MATHJAX__;
   $script.async = true;
   // mathjax v3 的配置
   window.MathJax = {

@@ -6,6 +6,7 @@
     },
     "rules": {
         "no-use-before-define": ["error", { "functions": false }],
+        "prefer-destructuring": ["error", { "AssignmentExpression": false }],
         "import/extensions": ["error", "ignorePackages"],
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
     },
