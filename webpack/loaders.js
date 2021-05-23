@@ -38,17 +38,24 @@ module.exports = [
       },
     },
   }, {
-    test: /\.(le|c)ss$/,
+    test: /\.css$/,
+    use: [
+      IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+      'css-loader',
+    ],
+  }, {
+    test: /\.less$/,
     use: [
       IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
       {
         loader: 'css-loader',
-        options: { importLoaders: 1 },
+        options: { importLoaders: 2 },
       }, {
         loader: 'postcss-loader',
         options: {
-          ident: 'postcss',
-          plugins: [autoprefixer],
+          postcssOptions: {
+            plugins: [autoprefixer],
+          },
         },
       },
       'less-loader',

@@ -191,7 +191,7 @@ main.container {
       width: 90px;
     }
     &:nth-of-type(3) {
-      width: @mostUseLength - 90px - 4px * 2 - @width;
+      width: (@mostUseLength - @width) - 90px - 4px * 2;
     }
     &:nth-last-of-type(2) {
       width: @width * 2;
