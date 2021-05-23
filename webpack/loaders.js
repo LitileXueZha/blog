@@ -57,8 +57,13 @@ module.exports = [
             plugins: [autoprefixer],
           },
         },
+      }, {
+        loader: 'less-loader',
+        options: {
+          // Less v4 数学运算需要加括号，修改为旧版
+          lessOptions: { math: 'always' },
+        },
       },
-      'less-loader',
     ],
   }, {
     test: /\.(png|jpg|gif)$/,
