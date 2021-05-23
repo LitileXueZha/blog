@@ -30,6 +30,8 @@
     "marked": "^1.2.5",
     "query-string": "^6.13.1",
     "regenerator-runtime": "^0.13.7",
+    "source-map": "^0.7.3",
+    "traceback.js": "^0.3.0",
     "whatwg-fetch": "^3.4.1"
   },
   "devDependencies": {

@@ -213,10 +213,26 @@ body {
     
     input {
       position: absolute;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
       opacity: 0;
       cursor: pointer;
+    }
+
+    .upload-filename {
+      display: none;
+      color: @textColor;
+    }
+    &.uploaded {
+      .upload-filename {
+        display: block;
+      }
+      .icon-plus,
+      .upload-hint {
+        display: none;
+      }
     }
   }
 
@@ -245,6 +261,7 @@ body {
       width: 200px;
       padding: 0 4px;
       line-height: inherit;
+      height: 26px;
       border: 1px solid @borderColor;
       border-radius: 2px;
 
@@ -257,6 +274,8 @@ body {
     .form-select {
       width: 200px * @goldRatio;
       height: 26px;
+      border-radius: 2px;
+      border-color: @borderColor;
     }
   }
 
@@ -264,6 +283,7 @@ body {
   .result-src {
     margin-left: @mainSpace * 6;
     flex: 1;
+    overflow: hidden;
 
     .result-format {
       overflow: auto;
@@ -272,8 +292,8 @@ body {
   }
 
   .hint {
-    position: relative;
-    top: @mainSpace * 4;
+    margin-top: @mainSpace;
+    padding-left: 246px + 270px + @mainSpace * 10;
     color: @placeholderColor;
     font-size: 12px;
     text-align: center;
@@ -287,7 +307,6 @@ body {
   }
 
   .source-content {
-    margin-top: @mainSpace * 4;
     min-height: 50px;
     box-shadow: 1px 2px 20px rgba(0, 0, 0, 10%);
   }

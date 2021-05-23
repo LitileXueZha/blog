@@ -30,5 +30,11 @@ module.exports = merge(pages, {
     alias: {
       src: path.resolve(__dirname, '../src'),
     },
+    // 本地 npm link 的包查找依赖时，提高当前项目的优先级
+    // modules: [path.resolve(__dirname, '../node_modules'), 'node_modules'],
+  },
+  externals: {
+    fs: '__FIX_SOURCE_MAP_NODE_PROBLEM__',
+    path: '__FIX_SOURCE_MAP_NODE_PROBLEM__',
   },
 });

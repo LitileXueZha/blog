@@ -74,38 +74,37 @@ block content
           ) 文档
         .form
           .upload-jsmap
-            +icon('plus', 20, '#d2d2d2')
             input#jsmap(type="file", accept=".js.map")
-            p
+            +icon('plus', 20, '#d2d2d2')
+            p.upload-hint
               | 选择&nbsp;
               code .js.map
               | &nbsp;文件上传
+            p.upload-filename 未选择
           .form-inputs
             .form-item
-              label.form-label(for="name") 文件名
-              input#name.form-input(type="text", placeholder="未选择", disabled)
-            .form-item
               label.form-label(for="line") 行号
-              input#line.form-input(type="number", value="1", placeholder="压缩文件第几行")
+              input#line.form-input(type="text", value="1", placeholder="压缩文件第几行")
             .form-item
               label.form-label(for="column") 列号
-              input#column.form-input(type="number", placeholder="压缩文件第几列")
+              input#column.form-input(type="text", placeholder="压缩文件第几列")
             .form-item
-              label.form-label(for="size") 内容大小
+              label.form-label(for="size") 显示源码
               select#size.form-select(name="size")
-                option(value="5") 5行
-                option(value="25") 25行
+                option(value="-5+5") 5行
+                option(value="-25+25") 25行
                 option(value="-1") 全部
           .divider
           aside.result-src
             pre.result-format
               .
                 {
-                  source: '源文件地址', <span style="color: #ccc">// 示例解析结果</span>
-                  line: 2283,
-                  column: 19,
+                    source: '源文件地址', <span style="color: #ccc">// 示例解析结果</span>
+                    line: 2283,
+                    column: 19,
                 }
-            .hint
-              p 文件内容
-              +icon('arrow-right', 16)
+        .hint
+          p 文件内容
+          +icon('arrow-right', 16)
         .source-content
+          span

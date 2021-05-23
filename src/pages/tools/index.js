@@ -3,6 +3,7 @@ import { encode, decode } from 'js-base64';
 import './index.less';
 import { Ripple, FloatText } from 'src/index.js';
 import initBase64 from './Base64.js';
+import initSourceMap from './SourceMap.js';
 
 const { debounce } = window.TC;
 
@@ -25,6 +26,7 @@ window.addEventListener('load', () => {
   window.addEventListener('hashchange', renderTab);
 
   initBase64();
+  initSourceMap();
 
   // 根据 location.hash 控制 tab 选项卡的显示
   function renderTab() {
