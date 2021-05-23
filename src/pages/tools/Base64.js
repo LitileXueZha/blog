@@ -32,11 +32,9 @@ export default function initBase64() {
 
       // 绑定keyup事件，转码
       if (pattern === 'text') {
-        $dom.addEventListener('keyup', evEncode);
-        $dom.addEventListener('mouseup', evEncode);
+        $dom.addEventListener('input', evEncode);
       } else if (pattern === 'b64') {
-        $dom.addEventListener('keyup', evDecode);
-        $dom.addEventListener('mouseup', evDecode);
+        $dom.addEventListener('input', evDecode);
       }
 
       cp($transformed);
@@ -67,8 +65,7 @@ export default function initBase64() {
     $img.src = $textarea.value;
   };
 
-  $textarea.addEventListener('keyup', evImgsrc);
-  $textarea.addEventListener('mouseup', evImgsrc);
+  $textarea.addEventListener('input', evImgsrc);
   $textarea.nextElementSibling.nextElementSibling.appendChild($img);
 
   /**
@@ -106,14 +103,18 @@ function cp($transformed) {
   let timer = null;
 
   $cpDom.addEventListener('click', () => {
-    $transformed.select();
     clearTimeout(timer);
-    if (document.execCommand('copy')) {
+
+    if ('clipboard' in navigator) {
+      navigator.clipboard.writeText($transformed.value);
+    } else {
+      $transformed.select();
+      document.execCommand('copy');
       $transformed.blur();
-      $cpDom.classList.add('copied');
-      timer = setTimeout(() => {
-        $cpDom.classList.remove('copied');
-      }, 1500);
     }
+    $cpDom.classList.add('copied');
+    timer = setTimeout(() => {
+      $cpDom.classList.remove('copied');
+    }, 1500);
   });
 }
