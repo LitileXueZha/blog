@@ -24,14 +24,14 @@ block content
           textarea.input(data-pattern="text" placeholder="输入文字..." autocomplete="off" spellcheck="false")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          .copy(title="点击复制")
+          .copy(title="点击复制", role="button")
             +icon('copy')
             span.icon-success ✓
         .b64-to-text
           textarea.input(data-pattern="b64" placeholder="输入Base64..." autocomplete="off" spellcheck="false")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          .copy(title="点击复制")
+          .copy(title="点击复制", role="button")
             +icon('copy')
             span.icon-success ✓
         .img-to-text
@@ -44,7 +44,7 @@ block content
             input#img(type="file" accept="image/*")
           +icon('arrow-right')
           textarea.transformed(spellcheck="false")
-          .copy(title="点击复制")
+          .copy(title="点击复制", role="button")
             +icon('copy')
             span.icon-success ✓
         .text-to-img

@@ -38,6 +38,10 @@ textarea {
 		color: #ccc;
 	}
 }
+// :target 对应到 url 中带元素 id 时激活，参考 github issue-comments
+::selection {
+	background: rgba(@mainColor, .25);
+}
 
 // 相关文本属性
 abbr { text-decoration: none; }
@@ -301,9 +305,11 @@ header {
 		&::placeholder {
 			color: @activeColor;
 		}
-		&::-moz-placeholder,
-		&:-ms-input-placeholder {
+		&::-moz-placeholder {
 			color: @activeColor;
+		}
+		&:-ms-input-placeholder {
+			color: @activeColor !important;
 		}
 	}
 }
