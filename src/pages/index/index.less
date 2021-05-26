@@ -1,4 +1,5 @@
 @import '../../common/variables.less';
+@import 'src/styles/typography.less';
 
 @navWidth: 270px;
 
@@ -21,27 +22,27 @@ main.container {
   position: relative;
   display: block;
   margin-bottom: @mainSpace * 2;
-  height: @textHeight + @mainSpace;
-  padding-bottom: @mainSpace;
+  padding-bottom: @mainSpace / 2;
   border-bottom: 1px solid @borderColor;
 }
 .to-noobs .title { margin-right: @mainSpace * -4; }
-// .to-noobs p { line-height: @textHeight; }
 .to-noobs .sentences {
-  margin-left: 1em;
-  list-style: decimal;
+  // padding-left: @font-size + 2px;
+  li { margin-bottom: 0; }
 }
 
 .tag-cloud > .tags {
   margin-top: -5px;
+  font-size: @font-size-small;
   
   & > .tag {
     display: inline-block;
     margin: 5px @mainSpace 0 0;
+    line-height: @font-size + 4px;
 
-    &.xl { font-size: 20px }
-    &.l { font-size: 18px }
-    &.m { font-size: 16px }
+    &.xl { font-size: @font-size + 4px; }
+    &.l { font-size: @font-size + 2px; }
+    &.m { font-size: @font-size; }
   }
 }
 
@@ -50,33 +51,34 @@ main.container {
   
   & > figcaption {
     margin-bottom: @mainSpace * 2;
-    padding: @mainSpace 0;
+    padding-bottom: @mainSpace / 2;
     border-bottom: 1px solid @borderColor;
   }
 
   & .list {
     position: relative;
     left: -3px;
+    padding-left: 0;
   }
 
   & .list-item {
+    @size: 20px;
     display: flex;
     align-items: center;
-    line-height: @textHeight;
-
-    &:not(:last-of-type) { margin-bottom: @mainSpace; }
-
+    margin-bottom: 8px;
+    height: @size;
+    line-height: @size;
+    
     & > .list-style {
       display: inline-block;
       margin-right: 5px;
-      width: 20px;
+      width: @size;
       text-align: center;
       user-select: none;
     }
 
     & > a {
       flex: 1;
-      height: @textHeight;
       overflow: hidden;
       text-overflow: ellipsis;
       word-break: break-all;
@@ -92,6 +94,11 @@ main.container {
   padding: 40px 40px (40px + @textHeight) 0;
   // box-shadow: 0 2px 8px rgba(0,0,0,.09);
 
+  .list {
+    padding-left: 0;
+    list-style-type: none;
+  }
+
   .list-item {
     padding: 30px 0;
     border-bottom: 1px dotted @borderColor;
@@ -106,16 +113,15 @@ main.container {
     // position: absolute;
     // left: 0;
     // bottom: 40px;
-    margin-top: @mainSpace;
-    width: 100%;
-    height: @textHeight;
-    // padding-right: 40px;
-    line-height: @textHeight;
+    margin-top: -0.25rem;
+    height: 20px;
+    font-size: @font-size-small;
 
     & > #more {
       position: relative;
-      left: -16px;
+      left: -1rem;
       color: @mainColor;
+      font-size: @font-size-small;
     }
   }
 }
@@ -194,7 +200,7 @@ main.container {
       width: (@mostUseLength - @width) - 90px - 4px * 2;
     }
     &:nth-last-of-type(2) {
-      width: @width * 2;
+      width: @width * 1.75;
     }
   }
 }

@@ -1,0 +1,173 @@
+/**
+ * 全站排版样式集合
+ *
+ * 整体架构设计指南 Bootstrap: https://getbootstrap.com/docs/5.0/content/reboot
+ *
+ * 具体样式参考: Github、MDN、Microsoft 文档、Google 文档
+ * + MDN: https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard
+ * + Microsoft: https://docs.microsoft.com/zh-cn/windows/terminal/
+ * + Google: https://developer.android.com/guide/components/activities/intro-activities
+ *
+ *
+ *********** 仅包括：大小、间距 ***********
+ *
+ * 尽量基于 rem 设计。
+ */
+
+@import '../common/variables.less';
+
+@font-size: 16px;
+@font-size-small: .875rem; // 描述性的文字
+@font-size-tip: 12px; // 小提示
+@font-size-code: .875em;
+@icon-size: 20px;
+
+@fontHeight: 22px;
+@font-height: 22 / 16;
+
+@font-family:
+    // Windows
+    'Segoe UI',
+    // 跨平台。系统默认
+    system-ui, 
+    // 苹果系列
+    -apple-system, BlinkMacSystemFont,
+    // 安卓
+    'Roboto',
+    // Linux
+    'Noto Sans', 'Liberation Sans',
+    // 兜底方案
+    Helvetica, Arial, sans-serif,
+    // Emoji 表情
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+@font-family-code:
+    SFMono-Regular,
+    Consolas,
+    Monaco,
+    'Liberation Mono', // Linux
+    Menlo,
+    Courier,
+    monospace;
+
+// 统一的左间距
+@space-left: @font-size * 1.5;
+
+.mixinTypeset(@level: 0) {
+h6 { font-size: 1rem; }
+h5 { font-size: 1.25rem; }
+h4 { font-size: 1.5rem; }
+h3 { font-size: 1.75rem; }
+h2 { font-size: 2rem; }
+h1 { font-size: 2.5rem; }
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+    color: @typColorTitle;
+    font-weight: 500;
+}
+
+p { margin: 1em 0; }
+
+small {
+    font-size: smaller;
+}
+strong, b {
+    font-weight: bold;
+}
+em, i {
+    font-style: italic;
+}
+mark {
+    background: @typColorMarkBg;
+}
+abbr, a {
+    text-decoration: none;
+}
+a {
+    color: @linkColor;
+    &:not([role="button"]):hover {
+        text-decoration: underline;
+        color: @activeColor;
+    }
+}
+kbd {
+    padding: 4px 6px;
+    color: #fff;
+    font-size: @font-size-code;
+    font-family: @font-family-code;
+    background-color: @textColor;
+    border-radius: @radius * 2;
+    vertical-align: text-top;
+}
+sub {
+    vertical-align: sub;
+    font-size: smaller;
+}
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
+code {
+    padding: .2em .4em;
+    font-size: @font-size-code;
+    font-family: @font-family-code;
+    background: @codeBgColor;
+    border-radius: @radius;
+    vertical-align: text-bottom;
+
+    pre & {
+        display: block;
+        padding: @space-left * @goldRatio @space-left;
+        border-radius: @radius * 2;
+        overflow-x: auto;
+    }
+}
+
+blockquote {
+    padding: 0 @space-left - 4px;
+    color: @textColorSecondary;
+    border-left: 4px solid @quoteBorderColor;
+}
+
+ol, ul {
+    margin-bottom: 1rem;
+    padding-left: @space-left;
+
+    & ol, & ul {
+        margin-bottom: 0;
+    }
+
+    li {
+        margin-bottom: .25em;
+    }
+}
+ul {
+    list-style-type: circle;
+    & ul {
+        list-style-type: disc;
+    }
+}
+ol {
+    list-style-type: decimal;
+    & ol {
+        list-style-type: lower-roman;
+    }
+}
+input, textarea, button {
+    font: inherit;
+}
+}
+
+// 一些通用 mixins 格式化
+.clearListStyle() {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+.overTextElipis() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

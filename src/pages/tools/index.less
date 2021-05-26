@@ -1,7 +1,8 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 body {
-  background: #f5f5f5;
+  background: @bgColor;
   
   main {
     margin-top: @mainSpace * 2 !important;
@@ -11,13 +12,14 @@ body {
 }
 
 .list-tool {
+  .clearListStyle;
   border-bottom: 1px solid @borderColor;
 
   & > li {
     display: inline-block;
     margin-right: @mainSpace;
+    margin-bottom: 0;
     height: 48px;
-    line-height: @textHeight;
 
     &.active {
       border-bottom: 2px solid @mainColor;
@@ -31,7 +33,7 @@ body {
 
     & > a {
       display: block;
-      padding: 14px 24px;
+      padding: 12px 24px;
       color: @textColor;
     }
     & > a:hover {
@@ -41,7 +43,11 @@ body {
 }
 
 .container-tool {
-  padding: 24px;
+  padding: 24px * @goldRatio 24px;
+
+  .intro {
+    margin-top: 0;
+  }
 
   .base64,
   .character,
@@ -67,12 +73,11 @@ body {
   .upload,
   .transformed {
     flex: 1;
-    height: @textHeight * 6 + 16px;
+    height: 120px;
     padding: 8px 12px;
     border: 1px solid @borderColor;
-    border-radius: 3px;
-    font-family: @textFont;
-    line-height: @textHeight;
+    border-radius: @radius;
+    font-size: @font-size-small;
     word-break: break-all;
   }
 
@@ -104,7 +109,7 @@ body {
     border-radius: 2px;
     text-align: center;
     line-height: 28px;
-    background: #f5f5f5;
+    background: @bgColor;
     box-shadow: @shadowBtn;
     cursor: pointer;
 
@@ -147,7 +152,10 @@ body {
 
     .icon-plus { width: 100% }
     .icon-plus .color { fill: @borderColor }
-    p { color: @borderColor }
+    p {
+      margin: 0;
+      color: @tipColor;
+    }
   }
 
   .preview {
@@ -208,6 +216,7 @@ body {
     width: @w;
     height: @h;
     color: @borderColor;
+    font-size: @font-size-small;
     border: 1px solid @borderColor;
     border-radius: 4px;
     
@@ -221,6 +230,7 @@ body {
       cursor: pointer;
     }
 
+    .upload-hint { margin: 0; }
     .upload-filename {
       display: none;
       color: @textColor;
@@ -249,7 +259,7 @@ body {
     .form-label {
       margin-right: @mainSpace;
       display: inline-block;
-      width: 60px;
+      width: 68px;
       color: @textColorSecondary;
       text-align: right;
 
@@ -262,6 +272,7 @@ body {
       padding: 0 4px;
       line-height: inherit;
       height: 26px;
+      font-size: @font-size-small;
       border: 1px solid @borderColor;
       border-radius: 2px;
 
@@ -294,8 +305,8 @@ body {
   .hint {
     margin-top: @mainSpace;
     padding-left: 246px + 270px + @mainSpace * 10;
-    color: @placeholderColor;
-    font-size: 12px;
+    color: @tipColor;
+    font-size: @font-size-tip;
     text-align: center;
 
     .icon-arrow-right {

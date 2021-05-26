@@ -47,40 +47,6 @@
   overflow: hidden;
   min-height: 300px;
 
-  h1, h2, h3, h4, h5, h6 {
-    margin: 32px 0;
-    font-weight: 500;
-    color: #000;
-  }
-  h1 {
-    font-size: 30px;
-    line-height: 30px;
-  }
-  h2 {
-    font-size: 24px;
-    line-height: 24px;
-  }
-  h3 {
-    font-size: 20px;
-  }
-  h4 {
-    font-size: 18px;
-  }
-  h5 {
-    font-size: 16px;
-  }
-  h6 {
-    font-size: 14px;
-  }
-  ol, ul {
-    padding-left: 1.5em;
-    list-style: circle;
-  }
-  ol { list-style: decimal }
-  ol ol { list-style: lower-roman }
-  ul + ul, ul + ol, ol + ol, ol + ul {
-    margin-top: 16px;
-  }
   .task-list-item {
     list-style-type: none;
 
@@ -90,43 +56,15 @@
     }
   }
 
-  p, pre, img, table {
-    margin: @textSize 0;
+  pre, img, table {
+    margin: 1em 0;
   }
-
-  code {
-    padding: 0 4px;
+  p > img {
+    margin: 0;
   }
+  // 参考 typography.less
   pre > code {
-    display: block;
-    padding: 16px;
-    border-radius: 3px;
-    overflow-x: auto;
-  }
-
-  em {
-    font-style: italic;
-  }
-  b, strong {
-    font-weight: bold;
-  }
-
-  blockquote {
-    padding: 0 1em;
-    color: @textColorSecondary;
-    border-left: 0.25em solid #dfe2e5;
-  }
-
-  sub {
-    vertical-align: sub;
-    font-size: smaller;
-  }
-  sup {
-    vertical-align: super;
-    font-size: smaller;
-  }
-  small {
-    font-size: smaller;
+    padding: @space-left * @goldRatio @space-left;
   }
 
   img {

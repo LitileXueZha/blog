@@ -54,7 +54,7 @@ block content
       
       //- 一些字符，或许能当图标使用
       .character
-        p.character-desc 下面是收集的一些有趣的字符，或许能当图标用。
+        p.intro.character-desc 下面是收集的一些有趣的字符，或许能当图标用。
           strong 但要注意兼容性！
         div.fixed-border
           - const str = ['✓', '✗']
@@ -96,13 +96,14 @@ block content
                 option(value="-1") 全部
           .divider
           aside.result-src
-            pre.result-format
-              .
-                {
-                    source: '源文件地址', <span style="color: #ccc">// 示例解析结果</span>
-                    line: 2283,
-                    column: 19,
-                }
+            pre
+              code.result-format
+                .
+                  {
+                      source: '源文件地址', <span style="color: #ccc">// 示例解析结果</span>
+                      line: 2283,
+                      column: 19,
+                  }
         .hint
           p 文件内容
           +icon('arrow-right', 16)

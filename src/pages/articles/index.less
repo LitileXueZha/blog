@@ -1,4 +1,5 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 main {
   padding-top: @mainSpace * 2;
@@ -8,25 +9,29 @@ main {
 .filter-type,
 .filter-tag {
   margin-bottom: @mainSpace;
-  margin-left: -@mainSpace;
+  // margin-left: -@mainSpace;
 
   & .list {
     display: inline-block;
+    .clearListStyle;
   }
 }
 
 .filter-item {
   display: inline-block;
   margin-left: @mainSpace;
+  margin-bottom: 0;
 
   &.title {
-    color: #999;
+    color: @textColorSecondary;
+    font-size: @font-size-small;
+    margin: 0;
 
     .icon {
       position: relative;
       top: 2px;
     }
-    .color { fill: #999 }
+    .color { fill: @textColorSecondary }
   }
 
   input { display: none; }
@@ -53,6 +58,7 @@ main {
 .results {
   margin-top: @mainSpace * 4;
 
+  .list { .clearListStyle; }
   .list-item {
     display: flex;
     align-items: center;
@@ -61,8 +67,8 @@ main {
     .content { flex: 1 }
     .cover {
       margin-left: @mainSpace * 4;
-      width: 70/0.618px;
-      height: 70px;
+      width: 98px / @goldRatio;
+      height: 98px;
       border-radius: 2px;
       object-fit: cover;  
     }
@@ -70,9 +76,10 @@ main {
 }
 
 .results > .info {
-  margin-bottom: @mainSpace * 2;
-  padding-bottom: 4px;
+  margin: 0 0 @mainSpace * 2 0;
+  padding-bottom: @mainSpace / 2;
   border-bottom: 1px solid @borderColor;
+  font-size: @font-size-small;
 
   & > a {
     margin-right: @mainSpace;
@@ -89,6 +96,11 @@ main {
 }
 
 #more {
-  margin: 12px 0 0 -16px;
+  margin: @mainSpace 0 0 -1rem;
   color: @mainColor;
+  font-size: @font-size-small;
+}
+.no-more {
+  color: @tipColor;
+  font-size: @font-size-small;
 }

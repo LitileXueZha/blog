@@ -1,0 +1,173 @@
+// 全局前缀样式
+//
+// 包括插件需要的样式
+
+@import '../common/variables.less';
+@import './typography.less';
+
+// shorthand - 简写
+// ============================================================================
+// 居中
+.tc-text-center { text-align: center }
+// 隐藏
+.tc-hidden { display: none; }
+
+
+// 通用
+// ============================================================================
+// 字体-标头
+.tc-font-title {
+	color: @typColorTitle !important;
+	font-size: @font-size + 2px;
+	font-weight: 500;
+}
+// 导航栏下的介绍文本
+.tc-intro {
+	display: block;
+	margin: @mainSpace * 2 0;
+	padding-bottom: @mainSpace / 2;
+	border-bottom: 1px solid @borderColor;
+}
+// 列表项文章样式
+.tc-list-item-article {
+	& > .title {
+		margin: 0 0 10px 0;
+        font-size: @font-size + 2px;
+
+		& > a { .tc-font-title }
+	}
+
+	& > .description {
+		color: @tipColor;
+		line-height: 20px;
+		font-size: @font-size-tip;
+	}
+	
+	& > p {
+        margin: 0;
+		max-height: @fontHeight * 3;
+		line-height: @fontHeight;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+// 主容器
+.tc-container {
+	margin: 0 auto;
+	width: @mainWidth;
+}
+
+// 分割线，用于间隔链接
+.tc-divider {
+	display: inline-block;
+	position: relative;
+	top: -1px;
+	margin: 0 10px;
+	width: 1px;
+	height: 12px;
+	border-radius: 1px;
+	background: @borderColor;
+	vertical-align: middle;
+}
+
+// 错误提示
+.tc-error {
+	padding: @mainSpace 0;
+	color: @dangerousColor;
+	background-color: @bgColor;
+}
+
+// 按钮样式统一
+.tc-button {
+	padding: .5rem 1rem;
+	border: none;
+	border-radius: @radius * 2;
+	font-size: @font-size;
+	line-height: @font-height;
+	color: @textColor;
+	background: transparent;
+	outline: none;
+	cursor: pointer;
+	transition: .3s;
+
+	&:hover,
+	&:focus { background: rgba(@mainColor, .1) !important; }
+}
+
+// 水波纹相关，还需要在js里启动
+@keyframes ripple {
+	from {
+		transform: scale(0);
+		opacity: 0.1;
+	}
+	to {
+		transform: scale(1);
+		opacity: 0.4;
+	}
+}
+@keyframes ripple-leave {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+.tc-ripple {
+	position: relative;
+	-webkit-tap-highlight-color: transparent;
+	
+	& > .tc-ripple-wraper {
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		border-radius: inherit;
+		overflow: hidden;
+		transition: .3s;
+		cursor: inherit;
+
+		& > .tc-ripple-span {
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			opacity: 0.4;
+			transform-origin: center;
+			animation: ripple .55s cubic-bezier(0.4, 0, 0.2, 1);
+			pointer-events: none;
+			overflow: hidden;
+		}
+		.tc-ripple-span_bg {
+			display: block;
+			height: 100%;
+		}
+		.tc-ripple-span.leave .tc-ripple-span_bg {
+			animation: ripple-leave .55s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+	}
+}
+
+// 浮动文本
+@keyframes floatText {
+	from {}
+	to {
+		opacity: 0.7;
+		transform: translate(-50%, -200%) scale(1);
+	}
+}
+.tc-float-text.span {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	line-height: @textHeight;
+	color: @textColor;
+	opacity: 0;
+	transform: translate(-50%, -50%) scale(0);
+	transform-origin: center;
+
+	&.floating {
+		animation: floatText .4s forwards;
+	}
+}
+

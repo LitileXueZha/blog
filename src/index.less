@@ -1,25 +1,24 @@
-@import './common/reset.css';
 @import './common/variables.less';
+@import './styles/reset.css';
+@import './styles/typography.less';
+@import './styles/layout.less';
+@import './styles/TaoCommon.less';
 
+.mixinTypeset();
 
-// 布局规范
-* { box-sizing: border-box; }
-// html {
-// 	// 点击 a 链接及返回时平滑滚动
-// 	scroll-behavior: smooth;
-// 	// 字体渲染优化
-// 	-webkit-font-smoothing: antialiased;
-// }
-body {
-	min-width: @mainWidth + 40px;
-	font-size: @textSize;
+html {
+	// // 点击 a 链接及返回时平滑滚动
+	// scroll-behavior: smooth;
+	// 字体渲染优化
+	-webkit-font-smoothing: antialiased;
+}
+body, html {
+	min-width: @mainWidth + @mainSpace * 4;
 	color: @textColor;
-	font-family: @textFont;
-	line-height: @textHeight;
+	font: 400 @font-size @font-family;
+	line-height: @font-height;
 	// background-color: #f5f5f5;
 }
-// HACK: IE11里main需要定义为块级元素
-main { display: block; }
 // Sarafi上输入框样式修复
 input[type=search] {
 	-webkit-appearance: textfield;
@@ -28,14 +27,14 @@ input[type=search] {
 input,
 textarea {
 	&:-ms-input-placeholder {
-		color: #ccc !important;
+		color: @placeholderColor !important;
 	}
 	&::-webkit-input-placeholder,
 	&::placeholder {
-		color: #ccc;
+		color: @placeholderColor;
 	}
 	&::-moz-placeholder {
-		color: #ccc;
+		color: @placeholderColor;
 	}
 }
 // :target 对应到 url 中带元素 id 时激活，参考 github issue-comments
@@ -43,195 +42,10 @@ textarea {
 	background: rgba(@mainColor, .25);
 }
 
-// 相关文本属性
-abbr { text-decoration: none; }
-a {
-	color: @linkColor;
-	text-decoration: none;
-	// outline: none;
-	
-	&:not([role="button"]):hover {
-		text-decoration: underline;
-		color: @activeColor;
-	}
-}
-code, pre {
-	font-family: Consolas, Monaco, Liberation Mono, Menlo;
-	background: #f5f5f5;
-}
-strong {
-	font-weight: 500;
-}
-kbd {
-	padding: 0 4px;
-	color: #fff;
-	background-color: @textColor;
-	border-radius: 4px;
-}
 
 // 一些hack手段，清除多余的样式
 // input::-ms-clear { display: none }
 
-// 居中
-.tc-text-center { text-align: center }
-// 隐藏
-.tc-hidden { display: none; }
-
-// 字体-标头
-.tc-font-title {
-	color: #000;
-	font-size: 17px;
-	font-weight: 500;
-	line-height: @textHeight;
-}
-// 导航栏下的介绍文本
-.tc-intro {
-	display: block;
-	margin: @mainSpace * 2 0;
-	height: 30px;
-	padding-bottom: @mainSpace;
-	border-bottom: 1px solid @borderColor;
-}
-// 列表项文章样式
-.tc-list-item-article {
-	& > h3.title {
-		margin-bottom: 10px;
-
-		& > a { .tc-font-title }
-	}
-
-	& > .description {
-		color: #ccc;
-		line-height: @textHeight;
-		font-size: 12px;
-	}
-	
-	& > p {
-		max-height: @textHeight * 3;
-		line-height: @textHeight;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-}
-
-// 主容器
-.tc-container {
-	margin: 0 auto;
-	width: @mainWidth;
-}
-
-// 分割线，用于间隔链接
-.tc-divider {
-	display: inline-block;
-	position: relative;
-	top: -1px;
-	margin: 0 10px;
-	width: 1px;
-	height: 12px;
-	border-radius: 1px;
-	background: @borderColor;
-	vertical-align: middle;
-}
-
-// 错误提示
-.tc-error {
-	padding: @mainSpace 0;
-	color: @dangerousColor;
-	background-color: #f5f5f5;
-}
-
-// 水波纹相关，还需要在js里启动
-@keyframes ripple {
-	from {
-		transform: scale(0);
-		opacity: 0.1;
-	}
-	to {
-		transform: scale(1);
-		opacity: 0.4;
-	}
-}
-@keyframes ripple-leave {
-	from {
-		opacity: 1;
-	}
-	to {
-		opacity: 0;
-	}
-}
-.tc-ripple {
-	position: relative;
-	-webkit-tap-highlight-color: transparent;
-	
-	& > .tc-ripple-wraper {
-		display: block;
-		position: absolute;
-		left: 0;
-		top: 0;
-		border-radius: inherit;
-		overflow: hidden;
-		transition: .3s;
-		cursor: inherit;
-
-		& > .tc-ripple-span {
-			display: block;
-			position: absolute;
-			border-radius: 50%;
-			opacity: 0.4;
-			transform-origin: center;
-			animation: ripple .55s cubic-bezier(0.4, 0, 0.2, 1);
-			pointer-events: none;
-			overflow: hidden;
-		}
-		.tc-ripple-span_bg {
-			display: block;
-			height: 100%;
-		}
-		.tc-ripple-span.leave .tc-ripple-span_bg {
-			animation: ripple-leave .55s cubic-bezier(0.4, 0, 0.2, 1);
-		}
-	}
-}
-
-// 按钮样式统一
-.tc-button {
-	padding: 8px 16px;
-	border: none;
-	border-radius: 3px;
-	font-size: @textSize;
-	line-height: @textHeight;
-	color: @textColor;
-	background: transparent;
-	outline: none;
-	cursor: pointer;
-	transition: .3s;
-
-	&:hover,
-	&:focus { background: rgba(@mainColor, .1) !important; }
-}
-
-// 浮动文本
-@keyframes floatText {
-	from {}
-	to {
-		opacity: 0.7;
-		transform: translate(-50%, -200%) scale(1);
-	}
-}
-.tc-float-text.span {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	line-height: @textHeight;
-	color: @textColor;
-	opacity: 0;
-	transform: translate(-50%, -50%) scale(0);
-	transform-origin: center;
-
-	&.floating {
-		animation: floatText .4s forwards;
-	}
-}
 
 // @media screen and (max-width: 1200px) and (min-width: 992px) {
 // 	.container {
@@ -250,120 +64,3 @@ kbd {
 // }
 
 
-// 头部样式
-header {
-	width: 100%;
-	height: 56px;
-	background-color: @mainColor;
-
-	& > .nav-header {
-		display: flex;
-		position: relative;
-		padding: 8px 0;
-
-		& > .msg {
-			position: absolute;
-			right: 0;
-		}
-	}
-}
-.nav-header > #search {
-	position: relative;
-	margin-right: 40px;
-
-	& > .icon {
-		position: absolute;
-		top: @mainSpace;
-		left: @mainSpace;
-		padding: 0;
-		border: none;
-		background: transparent;
-		// outline: none;
-		cursor: pointer;
-
-		.color { fill: @activeColor !important }
-	}
-
-	& > input {
-		width: 270px;
-		height: 40px;
-		padding: 0 14px 0 40px;
-		border: 1px solid @activeColor;
-		border-radius: 2px;
-		color: #fff;
-		background: transparent;
-		outline: none;
-		
-		&:focus {
-			background: @activeColor;
-			transition: .3s;
-
-			& + .icon .color { fill: #fff !important }
-		}
-
-		&::-webkit-input-placeholder,
-		&::placeholder {
-			color: @activeColor;
-		}
-		&::-moz-placeholder {
-			color: @activeColor;
-		}
-		&:-ms-input-placeholder {
-			color: @activeColor !important;
-		}
-	}
-}
-.nav-header > ul {
-	& > li {
-		display: inline-block;
-		height: 40px;
-		margin-left: 20px;
-		line-height: 43px;
-	}
-	& a {
-		display: block;
-		padding: 0 @mainSpace;
-		color: rgba(255,255,255,0.5);
-		text-decoration: none;
-		transition: .3s;
-
-		&.active {
-			color: #fff;
-			transform: scale(1.2);
-		}
-
-		&:hover { color: #fff }
-	}
-}
-
-.nav-header > .msg {
-	.color {
-		fill: rgba(255,255,255,0.5);
-		transition: .3s;
-	}
-	&:hover .color { fill: #fff }
-	&.active .color { fill: #fff }
-}
-
-// 脚部样式
-footer {
-	display: flex;
-	justify-content: space-between;
-	margin-top: (@mainSpace * 6) !important;
-	padding: (@mainSpace * 2) 0;
-	border-top: 1px solid @borderColor;
-	font-size: 12px;
-	line-height: 14px;
-
-	.copyright {
-		text-align: center;
-
-		.record {
-			display: block;
-			color: @textColor;
-			text-decoration: none !important;
-		}
-	}
-
-	& > .links a:not(:last-of-type) { margin-right: @mainSpace * 1.2 }
-}

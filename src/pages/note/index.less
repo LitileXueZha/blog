@@ -1,4 +1,5 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 .intro {
   margin-bottom: @mainSpace * 4;
@@ -20,9 +21,12 @@
     margin-bottom: @mainSpace * 2;
     padding-bottom: 4px;
     border-bottom: 1px dotted @borderColor;
+    font-size: @font-size-small;
   }
 
   & > .list {
+    padding-left: 0;
+    list-style-type: none;
 
     & > .list-item {
       padding: @mainSpace * 2 0;
@@ -40,8 +44,8 @@
 
   & > .cover {
     margin-left: @mainSpace * 4;
-    width: 70/0.618px;
-    height: 70px;
+    width: 98px / @goldRatio;
+    height: 98px;
     border-radius: 2px;
     object-fit: cover;
   }
@@ -51,7 +55,8 @@
   // position: absolute;
   // left: (@mainWidth - 2px) / 2 - 44px;
   // bottom: -17px;
-  margin-left: -16px;
+  margin-left: -1rem;
   color: @mainColor;
+  font-size: @font-size-small;
   background: #fff;
 }

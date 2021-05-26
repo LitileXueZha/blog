@@ -1,4 +1,5 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 main.container {
   display: flex;
@@ -6,6 +7,7 @@ main.container {
 
   .time-quantum {
     width: @mostUseLength - 1px;
+    .clearListStyle;
   }
 
   .articles {
@@ -13,6 +15,10 @@ main.container {
     padding-left: 70px;
     min-height: 370px;
     border-left: 1px solid @borderColor;
+
+    .list-article {
+      .clearListStyle;
+    }
 
     .list-item {
       padding: @mainSpace * 2 0;
@@ -38,10 +44,10 @@ main.container {
   }
   .season.active {
     position: relative;
-    // font-weight: bold;
+    font-weight: 500;
 
     &, & > .season-item {
-      color: #000;
+      color: @typColorTitle;
       transition: .3s;
     }
 
@@ -58,7 +64,7 @@ main.container {
     }
 
     .color {
-      fill: #000;
+      fill: @typColorTitle;
     }
   }
   .icon {
@@ -73,14 +79,16 @@ main.container {
 
 #more {
   position: relative;
-  left: -16px;
+  left: -1rem;
   margin-top: @mainSpace * 2 - 8px;
   color: @mainColor;
+  font-size: @font-size-small;
 
   & + .no-more {
     display: none;
-    margin-top: @mainSpace * 2;
-    color: #ccc;
+    // margin-top: @mainSpace * 2;
+    color: @tipColor;
+    font-size: @font-size-small;
   }
   &.tc-hidden + .no-more {
     display: inline-block;

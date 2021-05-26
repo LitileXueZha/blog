@@ -1,4 +1,5 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 main {
   padding-top: 20px;
@@ -15,7 +16,6 @@ main {
     width: 100%;
     padding: 0;
     border: none;
-    line-height: @textHeight;
     outline: none;
   }
 
@@ -35,9 +35,8 @@ main {
   }
   
   & > textarea {
-    margin-top: 10px;
-    font-family: @textFont;
-    color: @textColor;
+    margin-top: @mainSpace;
+    font-size: @font-size-small;
     resize: none;
     overflow-y: hidden;
   }
@@ -46,16 +45,19 @@ main {
     display: flex;
     justify-content: space-between;
     margin-bottom: -8px;
-
-    & .btn-submit {
-      position: relative;
-      left: -16px;
-      color: @mainColor;
-    }
-
+    
+    & .btn-submit,
     & .btn-reset {
       position: relative;
-      right: -16px;
+      color: @mainColor;
+      font-size: @font-size-small;
+    }
+
+    & .btn-submit {
+      left: -1rem;
+    }
+    & .btn-reset {
+      right: -1rem;
       color: @dangerousColor;
     }
     & .btn-reset:hover,
@@ -72,37 +74,42 @@ main {
 
   & .msg {
     display: flex;
-    padding: @mainSpace * 2 0;
+    padding: 1rem 0;
 
     & .msg-cover {
+      @size: 56px;
       position: relative;
       top: -2px;
       margin-right: @mainSpace * 2;
-      width: 50px;
-      height: 50px;
-      border-radius: 3px;
+      width: @size;
+      height: @size;
+      border-radius: @radius * 2;
       font-size: 25px;
-      font-family: 幼圆;
+      font-family: '幼圆';
       text-align: center;
       text-transform: uppercase;
-      line-height: 50px;
-      background: #f5f5f5;
+      line-height: @size;
+      background: @bgColor;
     }
 
     .msg-time {
       float: right;
       font-size: 12px;
       font-weight: normal;
-      color: #ccc;
+      color: @tipColor;
     }
 
     .msg-content { flex: 1 }
-    .msg-summary { margin-top: @mainSpace }
+    .msg-content > .tc-font-title { margin-top: 0 }
+    .msg-summary {
+      margin-bottom: 0;
+      margin-top: -@mainSpace;
+    }
 
     // 最后一条加载更多按钮
     &.empty {
       padding: 0 0 0 50px + @mainSpace * 2;
-      color: #ccc;
+      color: @tipColor;
     }
   }
 }

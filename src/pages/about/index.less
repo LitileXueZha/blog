@@ -8,18 +8,21 @@ main {
     flex: 1;
     margin-right: @mainSpace * 10;
   }
+  .blog, .blogger {
+    margin-top: -2.25rem;
+  }
 
   .blogger {
     width: @mostUseLength;
 
     #showPhoto {
       display: block;
-      margin-top: @textSize * 1.5;
+      margin-top: @mainSpace * 1.5;
       cursor: pointer;
     }
   
     .photo {
-      margin-top: @textSize * 1.5;
+      margin-top: @mainSpace * 1.5;
       width: @mostUseLength;
       height: @mostUseLength;
       object-fit: cover;
@@ -28,13 +31,4 @@ main {
 
     .hidden { display: none !important }
   }
-}
-
-.experience,
-.more {
-  margin-top: @mainSpace * 3;
-}
-.blog p,
-.blogger p {
-  margin-top: @textSize * 1.5;
 }

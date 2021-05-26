@@ -1,9 +1,11 @@
 @import '../../common/variables.less';
+@import '../../styles/typography.less';
 
 .suggest {
-  background: #f5f5f5;
+  background: @bgColor;
   height: 0;
   padding: 0;
+  font-size: @font-size-small;
   overflow: hidden;
   visibility: hidden;
   transition: .3s;
@@ -16,7 +18,7 @@
 
   #close {
     float: right;
-    margin-top: -10px;
+    margin-top: -15px;
     height: 40px;
     padding: 15px;
     border: none;
@@ -95,25 +97,32 @@ main {
   &.hidden { display: none }
 
   & > .num {
-    color: #999;
+    color: @textColorSecondary;
     font-size: 12px;
   }
 }
 
+.result > .list { .clearListStyle; }
 .result > .list .result-item {
-  margin-top: 30px;
+  margin-top: @mainSpace * 2;
 
+  .result-title {
+    margin: 0;
+
+    & > a { color: @typColorTitle; }
+  }
   .result-content {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin-top: 0;
   }
 }
 
 // 颜色标注搜索字段
 .result mark {
-  background: rgba(#ffbf00, .4);
+  background: @typColorMarkBg;
 }
 
 .result > .list .content {

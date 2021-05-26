@@ -42,6 +42,15 @@ for (let i = 0; i < pages.length; i++) {
   plugins.push(plugin);
 }
 
+if (!IS_PROD) {
+  // 排版页
+  plugins.push(new HtmlWebpackPlugin({
+    filename: 'typography.html',
+    template: './public/typography.html',
+    chunks: ['main'],
+  }));
+}
+
 module.exports = {
   entry,
   plugins,
