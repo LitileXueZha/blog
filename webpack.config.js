@@ -5,6 +5,7 @@ const { HashedModuleIdsPlugin } = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const { merge } = require('webpack-merge');
 
@@ -63,7 +64,14 @@ module.exports = [merge(config, {
     //   openAnalyzer: false,
     //   logLevel: 'error',
     // }),
+    // Gzip 压缩设置
+    // 需对应 nginx.conf 里的配置一同设置
+    new CompressionPlugin({
+      test: /\.(html|js|css|jpg|jpeg)$/,
+      threshold: 1024,
+    }),
   ],
+  devtool: 'source-map',
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({}),
