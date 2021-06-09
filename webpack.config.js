@@ -25,6 +25,9 @@ module.exports = [merge(config, {
     // conenthash 可在英文最新版看到，移除了 manifest.json
     filename: 'js/[name].[contenthash].js',
     hashDigestLength: 8,
+    // BUG: 貌似只能应用于 .js，其它类型的文件比如 .css 无效
+    // devtoolModuleFilenameTemplate: 'webpack://[namespace]/[resource-path]?[loaders]',
+    devtoolModuleFilenameTemplate: 'litilexuezha://[namespace]/[resource-path]?[loaders]',
   },
   stats: {
     children: false,
@@ -67,7 +70,7 @@ module.exports = [merge(config, {
     // Gzip 压缩设置
     // 需对应 nginx.conf 里的配置一同设置
     new CompressionPlugin({
-      test: /\.(html|js|css|jpg|jpeg)$/,
+      test: /\.(html|js|css|jpg|jpeg|ico)$/,
       threshold: 1024,
     }),
   ],
@@ -75,7 +78,13 @@ module.exports = [merge(config, {
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({}),
-      new OptimizeCssPlugin({}),
+      new OptimizeCssPlugin({
+        cssProcessorOptions: {
+          map: {
+            annotation: (file) => `/${file}.map`,
+          },
+        },
+      }),
     ],
     // 整合 runtime 到公共模块，可以不用单独打个 runtime.js 增加请求
     runtimeChunk: { name: 'main' },
