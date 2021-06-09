@@ -1,0 +1,106 @@
+include src/components/icon_svg.pug
+
+doctype html
+html(lang="zh")
+  head
+    meta(http-equiv="Content-Type", content="text/html;charset=utf-8")
+    meta(name="viewport", content="width=device-width,initial-scale=1,viewport-fit=cover")
+    meta(name="X-UA-Compatible", content="IE=edge,chrome=1")
+    meta(name="keywords", content="博客,个人博客,滔,诸葛林,前端,技术")
+    meta(name="description", content="滔's 博客，前端开发工程师的学习笔记。每天的技术分享与生活笔记，谨以此来纪念即将逝去的青春。")
+    title 图标_滔's 博客
+    link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+    style.
+      .container {
+        margin: 0 auto;
+        width: 800px;
+        line-height: 0;
+      }
+      .block {
+        display: inline-block;
+        margin: 20px 2px 0 0;
+        background-color: rgba(255 255 0 / 35%);
+      }
+      .desc {
+        margin: 0;
+        line-height: 1.5;
+        font-size: 13px;
+        text-align: center;
+        background-color: #fff;
+      }
+      code {
+        font-size: smaller;
+        font-family: consolas;
+      }
+    script.
+      window.addEventListener('load', () => {
+        const $icons = document.querySelectorAll('.block');
+        const N = 8;
+        
+
+        $icons.forEach(($icon, index) => {
+          if (index < N) {
+            const { left } = $icon.getBoundingClientRect();
+            const $div = document.createElement('div');
+
+            $div.style.position = 'fixed';
+            $div.style.top = '0';
+            $div.style.bottom = '0';
+            $div.style.left = `${parseInt(left, 10)+96/2}px`;
+            $div.style.borderLeft = '1px dotted rgba(0 0 0 / 35%)';
+            $div.style.zIndex = '99';
+            $icon.appendChild($div);
+          }
+          if (index % N === 0) {
+            const { top } = $icon.getBoundingClientRect();
+            console.log(top)
+            const $div = document.createElement('div');
+
+            $div.style.position = 'fixed';
+            $div.style.left = '0';
+            $div.style.right = '0';
+            $div.style.top = `${top+96/2}px`;
+            $div.style.borderTop = '1px dotted rgba(0 0 0 / 35%)';
+            $div.style.zIndex = '99';
+            $icon.appendChild($div);
+          }
+        });
+      });
+  body
+    -
+      const size = 96;
+      const icons = [
+        { name: 'msg', label: '留言板' },
+        { name: 'search', label: '搜索' },
+        { name: 'fire', label: '火焰' },
+        { name: 'spring', label: '春天' },
+        { name: 'summer', label: '夏天' },
+        { name: 'autumn', label: '秋天' },
+        { name: 'winter', label: '冬天' },
+        { name: 'arrow-right', label: '右箭头' },
+        { name: 'copy', label: '复制' },
+        { name: 'plus', label: '加号' },
+        { name: 'download', label: '下载' },
+        { name: 'no-result', label: '无结果' },
+        { name: 'close', label: '关闭' },
+        { name: 'filter', label: '筛选' },
+        { name: 'time', label: '时间' },
+        { name: 'tag', label: '标签' },
+        { name: 'foot', label: '脚印、踩' },
+        { name: 'heart', label: '心形、喜欢' },
+        { name: 'back', label: '返回' },
+        { name: 'home', label: '首页' },
+        { name: 'home-f', label: '首页（填充型）' },
+      ];
+    .container
+      each icon in icons
+        .block
+          +icon(icon.name, size, '#000')
+          p.desc
+            code= icon.name
+          p.desc= icon.label
+      .block
+        +iconRSS(size)
+        p.desc
+          code +iconRSS()
+        p.desc RSS源

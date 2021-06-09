@@ -46,8 +46,14 @@ if (!IS_PROD) {
   // 排版页
   plugins.push(new HtmlWebpackPlugin({
     filename: 'typography.html',
-    template: './public/typography.html',
+    template: './src/pages/_demos_dev_/typography.html',
     chunks: ['main'],
+  }));
+  // 图标页
+  plugins.push(new HtmlWebpackPlugin({
+    filename: 'icon.html',
+    template: './src/pages/_demos_dev_/icon.pug',
+    chunks: [],
   }));
 }
 
