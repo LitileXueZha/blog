@@ -1,10 +1,9 @@
 import QueryString from 'query-string';
 
 import './index.less';
-import { fetch } from 'src/index.js';
+import { fetch, Alert } from 'src/index.js';
 
 window.addEventListener('load', () => {
-  const $suggest = document.querySelector('.suggest');
   const $info = document.querySelector('.info');
   const $result = document.querySelector('.result');
   const $resultNum = document.querySelector('.num');
@@ -64,8 +63,6 @@ window.addEventListener('load', () => {
     search(searchText);
     // 重置搜索次数
     setSearchTimes(true);
-    // 隐藏建议按钮
-    $suggest.querySelector('#close').addEventListener('click', () => setSearchTimes(true));
   }());
 
   /**
@@ -129,7 +126,7 @@ window.addEventListener('load', () => {
    */
   function setSearchTimes(shouldReset = false) {
     if (shouldReset) {
-      $suggest.classList.remove('active');
+      Alert.close();
       window.sessionStorage.setItem('search_times', '0');
       return;
     }
@@ -137,7 +134,7 @@ window.addEventListener('load', () => {
     const times = parseInt(window.sessionStorage.getItem('search_times') || 0, 10);
 
     if (times >= 3) {
-      $suggest.classList.add('active');
+      Alert.info('搜了这么多次都没有，试试去筛选 <a href="/articles">所有文章</a>', { closed: true });
       window.sessionStorage.setItem('search_times', 0);
       return;
     }
@@ -194,12 +191,12 @@ function renderSearchResults(data, query) {
     const $li = document.createElement('li');
 
     $li.className = 'result-item';
-    $li.innerHTML = `
+    $li.innerHTML = window.TC.minifyHtmlTags(`
       <h2 class="result-title">
         <a class="tc-font-title" href="${item.url}">${item.title}</a>
       </h2>
       <p class="result-content">${highlightHelper(item.summary || '-', query)}</p>
-    `;
+    `);
     $frag.appendChild($li);
   });
 

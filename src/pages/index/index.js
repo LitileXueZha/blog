@@ -1,6 +1,11 @@
 import './index.less';
 
-import { Ripple, fetch, humanDate } from 'src/index.js';
+import {
+  Ripple,
+  fetch,
+  humanDate,
+  Alert,
+} from 'src/index.js';
 import { resolveTags } from './index.pug.js';
 
 window.addEventListener('load', async () => {
@@ -15,8 +20,8 @@ window.addEventListener('load', async () => {
     renderTagCloud(tags);
     renderTopicList(data.topics);
   } catch (e) {
-    // TODO: 错误提示
     removeSkeletons();
+    Alert.error('服务器出了点小问题。。。');
   }
 
   // 添加加载更多文章事件
@@ -40,6 +45,7 @@ window.addEventListener('load', async () => {
     });
 
     renderAricleList(items, true);
+    Alert.close();
 
     if (total <= page * size) {
       // 已加载完成全部数据
@@ -84,17 +90,17 @@ function renderAricleList(articles, isLoadMore) {
     const $li = document.createElement('li');
 
     $li.className = 'list-item tc-list-item-article';
-    $li.innerHTML = `
+    $li.innerHTML = window.TC.minifyHtmlTags(`
       <h3 class="title">
         <a class="tc-font-title" href="/articles/${article.id}">${article.title}</a>
       </h3>
       <div class="description">
-        <time title="发布时间" datetime="${article.create_at}">${humanDate(article.publish_at)}</time>`
-        + '<i class="tc-divider"></i>'
-        + `<span title="分类标签">${article.tag_name}</span>
+        <time title="发布时间" datetime="${article.create_at}">${humanDate(article.publish_at)}</time>
+        <i class="tc-divider"></i>
+        <span title="分类标签">${article.tag_name}</span>
       </div>
       <p>${article.summary}</p>
-    `;
+    `);
     $frag.appendChild($li);
   });
 
@@ -130,12 +136,12 @@ function renderTopicList(topics) {
       listStyle = `<span class="list-style">${index + 1}</span>`;
     }
 
-    return `
+    return window.TC.minifyHtmlTags(`
       <li class="list-item">
         ${listStyle}
         <a href="/articles/${topic.id}">${topic.title}</a>
       </li>
-    `;
+    `);
   });
 
   $topics.innerHTML = fragments.join('');

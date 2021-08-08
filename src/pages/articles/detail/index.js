@@ -7,6 +7,7 @@ import {
   Ripple,
   fetch,
   humanDate,
+  Alert,
 } from 'src/index.js';
 import initHighlightJS from './md.highlight';
 import { initMermaid, initMathJax } from './md.addons';
@@ -14,12 +15,7 @@ import marked from './md.marked';
 
 /** 在页面上展示错误提示 */
 function renderErrorContent() {
-  const $container = document.querySelector('main.tc-container');
-  const $error = document.createElement('div');
-
-  $error.className = 'tc-error';
-  $error.innerHTML = '<p class="tc-container">文章不存在或已下线</p>';
-  $container.parentNode.insertBefore($error, $container);
+  Alert.error('文章不存在或已下线');
 }
 
 window.addEventListener('load', async () => {

@@ -21,7 +21,6 @@ window.TC = {
 
     return () => {
       clearTimeout(timer);
-
       timer = setTimeout(fn, duration);
     };
   },
@@ -30,19 +29,17 @@ window.TC = {
    * 节流
    * 
    * @param {function} fn 执行函数
-   * @param {number} minUnit 默认间隔为 `10`
+   * @param {number} threshold 默认间隔为 `10`
    * @return {function} 参数为节流单位。可以是像素、时间等
    */
-  throttle(fn, minUnit = 10) {
+  throttle(fn, threshold = 10) {
     let lastUnit = 0;
 
     return (unit) => {
-      if (Math.abs(lastUnit - unit) < minUnit) {
-        return;
+      if (Math.abs(lastUnit - unit) >= threshold) {
+        lastUnit = unit;
+        fn();
       }
-
-      lastUnit = unit;
-      fn();
     };
   },
 
@@ -84,6 +81,18 @@ window.TC = {
     }
 
     return arrEscape.join('');
+  },
+
+  /**
+   * 删除 html 片段首尾以及标签间的空白字符
+   * 
+   * @param {string} html
+   * @returns {string}
+   */
+  minifyHtmlTags(html) {
+    // 可能会造成标签内的 `>  <` 意外压缩
+    // 主要还是用在 template literal 中
+    return html.replace(/>\s*</gm, '><').trim();
   },
 };
 

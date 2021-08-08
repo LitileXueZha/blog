@@ -171,3 +171,47 @@
 	}
 }
 
+// Alert - 提示栏
+
+@alert-bg-info: #f5f5f5; // @bgColor
+@alert-bg-error: #f5f5f5; // @bgColor
+@alert-color-info: #214a3b; // @textColor
+@alert-color-error: #f44336; // @dangerousColor
+.tc-alert {
+	background-color: @bgColor;
+	overflow: hidden;
+
+	@size: 40px;
+	&-body {
+		display: flex;
+		height: 0;
+		transition-duration: .3s;
+	}
+	&.active &-body {
+		height: @size;
+	}
+
+	&-content {
+		flex: 1;
+		margin: 0 @mainSpace 0 0;
+		padding: @mainSpace 0;
+		font-size: @font-size-small;
+		transition-duration: inherit;
+	}
+
+	&-close {
+		width: @size;
+		height: @size;
+		border: none;
+		background-color: transparent;
+		visibility: hidden;
+		cursor: pointer;
+
+		.icon-close { color: @textColor }
+	}
+	&.closed &-close { visibility: visible; }
+
+	// 错误提示栏
+	&.error { background-color: @alert-bg-error; }
+	&.error &-content { color: @alert-color-error; }
+}
