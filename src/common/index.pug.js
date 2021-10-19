@@ -19,7 +19,7 @@
 export function humanDate(dateStr) {
   // 转化为旧日期格式: 2020/12/1 23:32:12
   // 兼容 IE、Safari
-  const date = new Date(typeof dateStr === 'string' ? dateStr.replace('-', '/') : dateStr);
+  const date = new Date(typeof dateStr === 'string' ? dateStr.replace(/-/g, '/') : dateStr);
   const diffTs = Date.now() - date.getTime();
 
   if (diffTs > 365 * 24 * 60 * 60 * 1000) {
@@ -50,9 +50,11 @@ export function humanDate(dateStr) {
  * @return {string} 随机色值，例如 `#ff6977`
  */
 export function randomColor() {
-  const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
-  const max = 7; // colors.length - 1
-  const index = Math.round(Math.random() * max);
+  const colors = [
+    '#ff6977', '#00bbaa', '#008b8b', '#009688',
+    '#128378', '#4b4b4b', '#007066', '#008080',
+  ];
+  const index = Math.round(Math.random() * (colors.length - 1));
 
   return colors[index];
 }

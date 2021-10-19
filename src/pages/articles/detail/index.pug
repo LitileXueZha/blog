@@ -2,7 +2,11 @@ extends src/layout.pug
 include src/components/icon_svg.pug
 
 block title
-  title 文章详情_滔's 博客
+  title %ssr_title%_滔's 博客
+block head_keywords
+  meta(name="keywords", content="%ssr_keywords%博客,个人博客,滔,诸葛林,前端,技术")
+block head_description
+  meta(name="description", content="%ssr_description%")
 
 block content
   main.tc-container
