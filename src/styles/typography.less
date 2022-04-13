@@ -51,7 +51,7 @@
     monospace;
 
 // 统一的左间距
-@space-left: @font-size * 1.5;
+@space-left: @font-size / @goldRatio;
 
 .mixinTypeset(@level: 0) {
 h6 { font-size: 1rem; }
@@ -114,21 +114,23 @@ code {
     font-size: @font-size-code;
     font-family: @font-family-code;
     background: @codeBgColor;
-    border-radius: @radius;
+    border-radius: @radius * 2;
     vertical-align: text-bottom;
 
     pre & {
         display: block;
-        padding: @space-left * @goldRatio @space-left;
-        border-radius: @radius * 2;
+        border-radius: 0;
         overflow-x: auto;
     }
 }
 
 blockquote {
+    margin: 1em 0;
     padding: 0 @space-left - 4px;
     color: @textColorSecondary;
-    border-left: 4px solid @quoteBorderColor;
+    background-color: lighten(@mainColor, 67.5%);
+    border-left: 4px solid @mainColor;
+    overflow: hidden;
 }
 
 ol, ul {
@@ -141,6 +143,8 @@ ol, ul {
 
     li {
         margin-bottom: .25em;
+
+        &::marker { color: @textColorSecondary; }
     }
 }
 ul {

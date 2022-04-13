@@ -70,7 +70,7 @@ html {
 }
 
 .markdowned > .info {
-  color: @tipColor;
+  color: @textColorSecondary;
   font-size: @font-size-tip;
   line-height: 14px;
 
@@ -138,25 +138,24 @@ html {
   & > li > a {
     color: inherit;
     font-weight: inherit;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .overTextElipis();
   }
 
-  & > li:hover {
-    color: @activeColor;
-  }
+  & > li {
+    color: @textColorSecondary;
 
-  & > li.active {
-    color: @mainColor;
-    font-weight: 600;
+    &:hover { color: @activeColor; }
+    &.active > a {
+      color: @typColorTitle;
+      background-color: lighten(@mainColor, 67.5%);
+    }
   }
 }
 
 // 二级目录
 .catalog ul.nav {
   display: none;
-  margin-bottom: @mainSpace;
+  margin: 4px 0 @mainSpace 0;
   padding-left: 0;
   list-style-type: none;
 
@@ -180,11 +179,8 @@ html {
   & > li > a {
     display: block;
     font-size: @font-size * @font-size-small - 2;
-    font-weight: normal;
     color: @textColor;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    .overTextElipis;
 
     &:hover { color: @activeColor }
   }

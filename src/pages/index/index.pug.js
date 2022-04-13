@@ -1,7 +1,7 @@
 export const pathname = 'index';
 
-// 取色地址：http://encycolorpedia.cn/009688
-const colors = ['#ff6977', '#00bbaa', '#008b8b', '#009688', '#128378', '#4b4b4b', '#007066', '#008080'];
+// 取色地址：https://primer.style/primitives/colors
+const colors = ['#24292f', '#0969da', '#1a7f37', '#9a6700', '#bc4c00', '#cf222e', '#8250df', '#C4432B'];
 
 /**
  * 格式化标签

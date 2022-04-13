@@ -49,17 +49,10 @@ module.exports = [merge(config, {
     new InlineHtmlWebpackPlugin([/main.*\.css/]),
     // 复制静态页面和 favicon
     new CopyWebpackPlugin([
-      {
-        from: './public/favicon.ico',
-        to: path.join(PATH_DIST, '[name].[ext]'),
-      }, {
-        from: './public/robots.txt',
-        to: path.join(PATH_DIST, '[name].[ext]'),
-      }, {
-        from: './pages.static/*.html',
-        to: path.join(PATH_DIST, '[name].html'),
-      },
-    ]),
+      './public/favicon.ico',
+      './public/robots.txt',
+      './pages.static/*.html',
+    ].map((from) => ({ from, to: path.join(PATH_DIST, '[name].[ext]') }))),
     // 打包分析，文件：zzz-analyzer.html
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static',

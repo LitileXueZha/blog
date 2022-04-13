@@ -9,8 +9,8 @@ import { API, FETCH_DEFAULT_OPTS, TOKEN_NAME } from './constants';
  * @param {Object} opts 同原生 `fetch` 配置对象
  */
 export default async function request(url, opts = {}) {
-  const RequestInstance = new Request(url, opts);
-  const result = await RequestInstance.fetchStart();
+  const reqInstance = new Request(url, opts);
+  const result = await reqInstance.fetchStart();
 
   if (result) {
     return result.data;
@@ -60,12 +60,30 @@ function Request(url, opts = {}) {
   }
 }
 
+/**
+ * 支持 Fetch API 超时
+ * 
+ * @param {RequestInfo} input
+ * @param {RequestInit} [init]
+ */
+Request.prototype._fetch = async function _fetch(input, init) {
+  const { timeout } = this.opts;
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), timeout * 1000);
+  const response = await window.fetch(input, {
+    ...init,
+    signal: ac.signal,
+  });
+  clearTimeout(timer);
+  return response;
+};
+
 /** 请求 */
 Request.prototype.fetchStart = async function fetchStart() {
   await this.auth();
 
   /** `fetch` 返回对象 */
-  this.response = await window.fetch(this.url, this.opts);
+  this.response = await this._fetch(this.url, this.opts);
   /** 请求成功数据 */
   this.result = await this.handler(this.response);
 
@@ -79,7 +97,7 @@ Request.prototype.auth = async function auth(refresh = false) {
     return;
   }
 
-  const res = await window.fetch(`${API}/oauth`, {
+  const res = await this._fetch(`${API}/oauth`, {
     headers: {
       Authorization: this.token,
     },
@@ -105,7 +123,7 @@ Request.prototype.auth = async function auth(refresh = false) {
  * 可以直接用 `this` 访问请求实例，
  * 请求成功时必须返回全部数据
  * 
- * @param {Promise} fetchResponse `fetch` 返回对象
+ * @param {Response} fetchResponse `fetch` 返回对象
  * @return {object} 请求成功返回数据
  */
 async function responseHandler(fetchResponse) {
