@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const autoprefixer = require('autoprefixer')({ browsers: ['last 15 versions'] });
+const autoprefixer = require('autoprefixer');
 
-const IS_PROD = process.env.NODE_ENV === 'production';
+const PRODUCTION = process.env.NODE_ENV === 'production';
 // 需要被 babel 编译的包。这些包只有 es6+ 的代码，而 loader 里又忽略了
 const MODULE_NEED_BABEL = [
   'query-string',
@@ -14,7 +14,7 @@ const MODULE_NEED_BABEL = [
 ];
 // 生产环境下编译
 // 注意不同系统上的路径分隔符
-const EXCLUDE_BABEL = IS_PROD
+const EXCLUDE_BABEL = PRODUCTION
   ? new RegExp(`node_modules[\\\\/](?!(${MODULE_NEED_BABEL.join('|')}))`)
   : /node_modules/;
 
@@ -40,13 +40,14 @@ module.exports = [
   }, {
     test: /\.css$/,
     use: [
-      IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+      PRODUCTION ? MiniCssExtractPlugin.loader : 'style-loader',
       'css-loader',
     ],
   }, {
     test: /\.less$/,
+    exclude: /node_modules/,
     use: [
-      IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+      PRODUCTION ? MiniCssExtractPlugin.loader : 'style-loader',
       {
         loader: 'css-loader',
         options: { importLoaders: 2 },
@@ -54,7 +55,9 @@ module.exports = [
         loader: 'postcss-loader',
         options: {
           postcssOptions: {
-            plugins: [autoprefixer],
+            plugins: [
+              [autoprefixer()],
+            ],
           },
         },
       }, {
@@ -67,13 +70,9 @@ module.exports = [
     ],
   }, {
     test: /\.(png|jpg|gif)$/,
-    use: {
-      loader: 'file-loader',
-      options: {
-        outputPath: 'images/',
-        publicPath: '/images/',
-        name: '[name].[ext]',
-      },
+    type: 'asset/resource',
+    generator: {
+      filename: 'images/[name].[ext]',
     },
   },
 ];

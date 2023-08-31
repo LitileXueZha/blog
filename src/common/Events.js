@@ -19,9 +19,8 @@ const DEFAULT_MAX_LISTENERS = 10;
  * @link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
  */
 export default function Events() {
-  this._listeners = new Map();
-  this._once_ = new WeakMap();
-  this._maxListeners = DEFAULT_MAX_LISTENERS;
+  this._listeners = Object.create(null);
+  this.maxListeners = DEFAULT_MAX_LISTENERS;
 }
 
 /**
@@ -32,21 +31,16 @@ export default function Events() {
 Events.prototype.dispatch = function dispatch(e, data) {
   const ev = e instanceof EventsUnit ? e : new EventsUnit(e, data);
   const { type, detail } = ev;
-  const evSet = this._get(type, false);
+  const evSet = this._listeners[type];
 
   if (!evSet) {
+    if (__DEV__) {
+      console.warn('触发了未监听的事件', type);
+    }
     return;
   }
 
-  evSet.forEach((listener) => {
-    listener(detail);
-
-    // 一次性事件清理
-    if (this._once_.has(listener)) {
-      evSet.delete(listener);
-      this._once_.delete(listener);
-    }
-  });
+  evSet.forEach((listener) => listener(detail));
 };
 
 /**
@@ -55,13 +49,18 @@ Events.prototype.dispatch = function dispatch(e, data) {
  * @param {function} listener 监听器
  */
 Events.prototype.add = function add(type, listener) {
-  const evSet = this._get(type);
+  let evSet = this._listeners[type];
+  if (!evSet) {
+    evSet = [];
+    this._listeners[type] = evSet;
+  }
 
   // 达到最大数量
-  if (evSet.size >= this._maxListeners) {
+  if (evSet.length >= this.maxListeners) {
     return;
   }
-  evSet.add(listener);
+  listener._evtIndex = evSet.length;
+  evSet.push(listener);
 };
 
 /**
@@ -70,13 +69,13 @@ Events.prototype.add = function add(type, listener) {
  * @param {function} listener 监听器
  */
 Events.prototype.remove = function remove(type, listener) {
-  const evSet = this._get(type, false);
+  const evSet = this._listeners[type];
 
-  if (!evSet) {
+  if (!evSet || !listener._evtIndex) {
     return;
   }
 
-  evSet.delete(listener);
+  evSet.splice(listener._evtIndex, 1);
 };
 
 /**
@@ -85,26 +84,16 @@ Events.prototype.remove = function remove(type, listener) {
  * @param {function} listener 监听器
  */
 Events.prototype.once = function once(type, listener) {
-  this.add(type, listener);
-  this._once_.set(listener, type);
+  const autoRemove = (...args) => {
+    listener.apply(null, args);
+    this.remove(type, autoRemove);
+  };
+  this.add(type, autoRemove);
 };
 
-/**
- * @param {string} type 事件类型
- * @return {Set}
- */
-Events.prototype._get = function _get(type, createIfEpmty = true) {
-  let evSet = this._listeners.get(type);
-
-  if (!evSet && createIfEpmty) {
-    evSet = new Set();
-    this._listeners.set(type, evSet);
-  }
-
-  return evSet;
-};
-
-
+Events.prototype.emit = Events.prototype.dispatch;
+Events.prototype.on = Events.prototype.add;
+Events.prototype.off = Events.prototype.remove;
 // W3C 标准事件名
 Events.prototype.dispatchEvent = Events.prototype.dispatch;
 Events.prototype.addEventListener = Events.prototype.add;

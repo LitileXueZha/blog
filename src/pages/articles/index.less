@@ -1,63 +1,70 @@
 @import '../../common/variables.less';
 @import '../../styles/typography.less';
 
-main {
-  padding-top: @mainSpace * 2;
+.container {
+  display: flex;
+  margin-top: @mainSpace * 4 !important;
   min-height: 400px;
+
+  .filters {
+    width: @mostUseLength;
+  }
+  .body {
+    flex: 1;
+    width: 0;
+    margin-left: 66px;
+  }
 }
 
 .filter-type,
 .filter-tag {
   margin-bottom: @mainSpace;
-  // margin-left: -@mainSpace;
+  padding: 8px;
+  border: 1px solid @borderColor;
+  border-radius: @radius;
+  font-size: @font-size-small;
+  box-shadow: 0 3px 6px rgba(140,149,159,0.15);
+
+  & > .title {
+    padding: 0 4px;
+    margin-top: 0;
+    color: @textColorSecondary;
+
+    .color { fill: currentColor }
+  }
 
   & .list {
-    display: inline-block;
     .clearListStyle;
+  }
+
+  input {
+    position: relative;
+    top: 1px;
+    margin: 4px 4px 0 4px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .item {
+    margin-right: @mainSpace;
   }
 }
 
 .filter-item {
-  display: inline-block;
-  margin-left: @mainSpace;
-  margin-bottom: 0;
-
-  &.title {
-    color: @textColorSecondary;
-    font-size: @font-size-small;
-    margin: 0;
-
-    .icon {
-      position: relative;
-      top: 2px;
-    }
-    .color { fill: @textColorSecondary }
-  }
-
-  input { display: none; }
+  margin-bottom: 4px;
 
   .item {
-    border-radius: 3px;
     transition: .3s;
     cursor: pointer;
-
-    &:hover { color: @activeColor }
-
-    .color { fill: @textColor }
   }
   // 选中状态
-  input:checked + .item {
-    padding: 4px 10px;
-    color: #fff;
-    background: @mainColor;
-
-    .color { fill: #fff }
+  // input:checked + .item,
+  .item:hover {
+    color: @activeColor;
   }
 }
 
 .results {
-  margin-top: @mainSpace * 4;
-
   .list { .clearListStyle; }
   .list-item {
     display: flex;
@@ -66,17 +73,17 @@ main {
 
     .content { flex: 1 }
     .cover {
-      margin-left: @mainSpace * 4;
+      margin-left: @mainSpace;
       width: 98px / @goldRatio;
       height: 98px;
-      border-radius: 2px;
+      border-radius: @radius;
       object-fit: cover;  
     }
   }
 }
 
 .results > .info {
-  margin: 0 0 @mainSpace * 2 0;
+  margin: 0 0 @mainSpace 0;
   padding-bottom: @mainSpace / 2;
   border-bottom: 1px solid @borderColor;
   font-size: @font-size-small;
@@ -92,6 +99,11 @@ main {
 
   .total {
     float: right;
+    margin-top: -3px;
+    padding: 3px 8px;
+    border-radius: 100px;
+    background: @badge;
+    font-weight: 500;
   }
 }
 
@@ -100,7 +112,11 @@ main {
   color: @mainColor;
   font-size: @font-size-small;
 }
+#more.tc-hidden + .no-more {
+  visibility: visible;
+}
 .no-more {
+  visibility: hidden;
   color: @tipColor;
   font-size: @font-size-small;
 }

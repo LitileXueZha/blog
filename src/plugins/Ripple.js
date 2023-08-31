@@ -10,7 +10,11 @@ const Ripple = {
   max: 4,
   platform: 'pc',
 
-  init({ color, duration } = {}) {
+  async init({ color, duration } = {}) {
+    if (__DEV__) {
+      // 等待开发环境下 style-loader 注入 css
+      await new Promise((done) => setTimeout(done, 300));
+    }
     // 自定义水波纹颜色与扩散时间
     if (color) this.color = color;
     if (duration) this.duration = duration;
@@ -19,7 +23,7 @@ const Ripple = {
     if (/mobile/i.test(navigator.userAgent)) this.platform = 'mobile';
 
     Array.prototype.slice
-      .call(document.querySelectorAll('.tc-ripple'))
+      .call(document.getElementsByClassName('tc-ripple'))
       .forEach(val => this.add(val));
   },
 

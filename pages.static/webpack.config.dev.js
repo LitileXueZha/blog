@@ -11,7 +11,9 @@ module.exports = {
   plugins,
   devtool: 'eval-source-map',
   devServer: {
-    stats: 'minimal',
+    devMiddleware: {
+      stats: 'minimal',
+    },
     port: 8002,
     host: '0.0.0.0',
     hot: true,

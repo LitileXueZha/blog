@@ -6,6 +6,10 @@
 
 .mixinTypeset();
 
+:root {color-scheme: normal;}
+@media (prefers-color-scheme: dark) {
+	:root {color-scheme: dark;}
+}
 html {
 	// // 点击 a 链接及返回时平滑滚动
 	// scroll-behavior: smooth;
@@ -15,6 +19,7 @@ html {
 body, html {
 	min-width: @mainWidth + @mainSpace * 4;
 	color: @textColor;
+	background-color: @bg;
 	font: 400 @font-size @font-family;
 	line-height: @font-height;
 	// background-color: #f5f5f5;
@@ -41,6 +46,9 @@ textarea {
 ::selection {
 	background: #0969da;
 	color: #fff;
+}
+:focus-visible {
+	outline: #218bff solid 1px;
 }
 
 

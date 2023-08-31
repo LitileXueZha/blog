@@ -7,8 +7,8 @@ const rules = require('./loaders');
 const pages = require('./pages');
 // CDN 库链接
 const MERMAID = 'https://unpkg.com/mermaid@8.3.1/dist/mermaid.min.js';
-const MATHJAX = 'https://unpkg.com/mathjax@3.0.0/es5/tex-chtml.js';
-const SOURCEMAP_MAPPINGS = 'https://unpkg.com/source-map@0.7.3/lib/mappings.wasm';
+const MATHJAX = 'https://unpkg.com/mathjax@3.2.2/es5/tex-chtml.js';
+const SOURCEMAP_MAPPINGS = 'https://unpkg.com/source-map@0.7.4/lib/mappings.wasm';
 
 // 导出的配置
 module.exports = merge(pages, {
@@ -24,6 +24,7 @@ module.exports = merge(pages, {
       __CDN_LINK_MERMAID__: JSON.stringify(MERMAID),
       __CDN_LINK_MATHJAX__: JSON.stringify(MATHJAX),
       __CDN_LINK_SOURCEMAP_MAPPINGS__: JSON.stringify(SOURCEMAP_MAPPINGS),
+      __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
     }),
   ],
   resolve: {

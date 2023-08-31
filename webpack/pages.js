@@ -1,10 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const IS_PROD = process.env.NODE_ENV === 'production';
+const PRODUCTION = process.env.NODE_ENV === 'production';
 let _cache;
 
 // SEO 数据
-if (IS_PROD) {
+if (PRODUCTION) {
   _cache = require('../public/_cache.dist.json');
 } else {
   _cache = require('../public/_cache.dev.json');
@@ -19,30 +19,30 @@ const pages = [
   'tools', // 工具
   'msg', // 留言板
   'search', // 搜索页
-  'articles/index', // 文章列表页
+  'articles', // 文章列表页
   'articles/detail', // 文章详情页
 ];
-const entry = { main: './src/index.js' };
+const entry = {main: './src/index.js'};
 const plugins = [];
 
 for (let i = 0; i < pages.length; i++) {
   const page = pages[i];
-  // 删除末尾 /index 免重
-  const pageResolved = `pages/${page.replace(/\/index$/, '')}`;
+  const filePath = page === 'index' ? '' : `/${page}`;
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
-    template: `./src/${pageResolved}/index.pug`,
+    template: `./src/pages${filePath}/index.pug`,
     templateParameters: { pathname: page, _cache },
     // NOTE: 必须要手动加上 vendor
-    chunks: ['main', `vendors~${page}`, page],
-    minify: { removeComments: false },
+    chunks: ['common', `vendors~${page}`, page],
+    minify: { removeComments: false, collapseWhitespace: true },
+    inject: 'body',
   });
 
-  entry[page] = `./src/${pageResolved}/index.js`;
+  entry[page] = `./src/pages${filePath}/index.js`;
   plugins.push(plugin);
 }
 
-if (!IS_PROD) {
+if (!PRODUCTION) {
   // 排版页
   plugins.push(new HtmlWebpackPlugin({
     filename: 'typography.html',

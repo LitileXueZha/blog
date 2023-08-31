@@ -1,4 +1,4 @@
-const autoprefixer = require('autoprefixer')({ browsers: ['last 15 versions'] });
+const autoprefixer = require('autoprefixer');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -48,8 +48,11 @@ const loaders = firstCssLoader => [
       {
         loader: 'postcss-loader',
         options: {
-          ident: 'postcss',
-          plugins: [autoprefixer],
+          postcssOptions: {
+            plugins: [
+              [autoprefixer()],
+            ],
+          },
         },
       },
       'less-loader',

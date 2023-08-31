@@ -11,7 +11,7 @@ export const FETCH_DEFAULT_OPTS = {
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30,
+  timeout: 10,
 };
 
 /** 项目 `token` 名称 */

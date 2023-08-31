@@ -31,12 +31,12 @@ block content
                 a.tc-font-title(href= `/articles/${article.id}`)= article.title
               .description
                 time(title="发布时间", datetime= article.create_at)= humanDate(article.publish_at)
-                i.tc-divider
+                //- i.tc-divider
                 span(title="分类标签")= article.tag_name
               p= article.summary
         .actions
           button#more.tc-button.tc-ripple 加载更多
-          a(href="/articles") 查看所有
+          a(href="/articles") 全部文章
 
     aside.info-nav
       .tag-cloud

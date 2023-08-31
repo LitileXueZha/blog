@@ -48,6 +48,7 @@
     'Liberation Mono', // Linux
     Menlo,
     Courier,
+    'Microsoft YaHei', // Windows 上等宽字体默认的“宋体”斜着看起来太难受了
     monospace;
 
 // 统一的左间距
@@ -98,7 +99,7 @@ kbd {
     font-size: @font-size-code;
     font-family: @font-family-code;
     background-color: @textColor;
-    border-radius: @radius * 2;
+    border-radius: @radius;
     vertical-align: text-top;
 }
 sub {
@@ -114,7 +115,7 @@ code {
     font-size: @font-size-code;
     font-family: @font-family-code;
     background: @codeBgColor;
-    border-radius: @radius * 2;
+    border-radius: @radius;
     vertical-align: text-bottom;
 
     pre & {

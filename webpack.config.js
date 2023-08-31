@@ -1,7 +1,7 @@
 const path = require('path');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
-const { HashedModuleIdsPlugin } = require('webpack');
+const CssMinizerPlugin = require('css-minimizer-webpack-plugin');
+const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -14,7 +14,8 @@ const InlineHtmlWebpackPlugin = require('./webpack/InlineHtmlWebpackPlugin.js');
 const polyfill = require('./webpack/polyfill');
 
 // 路径常量
-const PATH_DIST = path.join(__dirname, 'dist');
+const DIST = path.join(__dirname, 'dist');
+const REG_MODULES = /[\\/]node_modules[\\/]/;
 
 /**
  * 生产环境增加了 polyfill 打包任务
@@ -27,7 +28,6 @@ module.exports = [merge(config, {
     hashDigestLength: 8,
     // BUG: 貌似只能应用于 .js，其它类型的文件比如 .css 无效
     // devtoolModuleFilenameTemplate: 'webpack://[namespace]/[resource-path]?[loaders]',
-    devtoolModuleFilenameTemplate: 'litilexuezha://[namespace]/[resource-path]?[loaders]',
   },
   stats: {
     children: false,
@@ -40,19 +40,22 @@ module.exports = [merge(config, {
   plugins: [
     // 修复 vendor、runtime 打包后 contenthash 变化。
     // 文档：https://webpack.js.org/guides/caching/
-    new HashedModuleIdsPlugin(),
+    // new webpack.ids.HashedModuleIdsPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[name].[contenthash].css',
     }),
     // 把公共样式直接内联进了 html 中
-    new InlineHtmlWebpackPlugin([/main.*\.css/]),
+    new InlineHtmlWebpackPlugin([/common.*\.css/]),
     // 复制静态页面和 favicon
-    new CopyWebpackPlugin([
-      './public/favicon.ico',
-      './public/robots.txt',
-      './pages.static/*.html',
-    ].map((from) => ({ from, to: path.join(PATH_DIST, '[name].[ext]') }))),
+    new CopyWebpackPlugin({
+      patterns: [
+        './public/favicon.ico',
+        './public/robots.txt',
+        './pages.static/*.html',
+      ].map((from) => ({ from, to: path.join(DIST, '[name].[ext]') })),
+      noErrorOnMissing: true,
+    }),
     // 打包分析，文件：zzz-analyzer.html
     // new BundleAnalyzerPlugin({
     //   analyzerMode: 'static',
@@ -66,36 +69,43 @@ module.exports = [merge(config, {
       test: /\.(html|js|css|jpg|jpeg|ico)$/,
       threshold: 1024,
     }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map',
+      publicPath: '/',
+      moduleFilenameTemplate: 'litilexuezha://[namespace]/[resource-path]?[loaders]',
+    }),
   ],
   devtool: 'source-map',
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({}),
-      new OptimizeCssPlugin({
-        cssProcessorOptions: {
-          map: {
-            annotation: (file) => `/${file}.map`,
-          },
-        },
-      }),
+      new CssMinizerPlugin(),
     ],
     // 整合 runtime 到公共模块，可以不用单独打个 runtime.js 增加请求
-    runtimeChunk: { name: 'main' },
+    runtimeChunk: {name: 'common'},
+    moduleIds: 'deterministic',
     splitChunks: {
       cacheGroups: {
         vendors: {
-          chunks: 'all',
+          chunks: 'initial',
+          name(module, chunks, cacheGroupKey) {
+            const allChunksNames = chunks.map((item) => item.name).join('~');
+            if (allChunksNames === 'main') {
+              return 'common';
+            }
+            return `${cacheGroupKey}~${allChunksNames}`;
+          },
           // 只提 js 模块到 vendor，样式可以打包到一起
           test(module) {
-            return module.type === 'javascript/auto' && /[\\/]node_modules[\\/]/.test(module.resource);
+            return module.type.startsWith('javascript') && REG_MODULES.test(module.resource);
           },
           priority: -10,
-          enforce: true,
           reuseExistingChunk: true,
         },
-        main: {
-          name: 'main',
+        common: {
+          name: 'common',
           chunks: 'initial',
+          enforce: true,
           minChunks: 2,
         },
       },

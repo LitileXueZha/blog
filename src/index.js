@@ -19,9 +19,9 @@ window.TC = {
   debounce(fn, duration = 400) {
     let timer = null;
 
-    return () => {
+    return (...args) => {
       clearTimeout(timer);
-      timer = setTimeout(fn, duration);
+      timer = setTimeout(() => fn.apply(null, args), duration);
     };
   },
 

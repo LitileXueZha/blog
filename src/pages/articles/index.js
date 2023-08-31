@@ -11,8 +11,7 @@ const query = {
 window.addEventListener('load', async () => {
   Ripple.init();
 
-  await initTags();
-  await getArticles();
+  await Promise.all([initTags(), getArticles()]);
 
   let loading = false;
   const $btnMore = document.getElementById('more');
@@ -32,18 +31,18 @@ async function initTags() {
   const $list = document.querySelector('.filter-tag .list');
   const { items } = await fetch('/tags');
   const frags = items.map((tag) => {
-    return `
+    return window.TC.minifyHtmlTags(`
       <li class="filter-item tag">
-        <input id="_${tag.id}" type="radio" name="tag" value="${tag.id}" />
+        <input id="_${tag.id}" type="checkbox" name="tag" value="${tag.id}" />
         <label class="item" for="_${tag.id}">${tag.name}</label>
       </li>
-    `;
+    `);
   });
 
   $list.innerHTML = frags.join('');
 
   // 只有在标签列表渲染完后才能绑
-  addFilterListener((values) => {
+  addFilterListener(window.TC.debounce((values) => {
     Object.keys(values).forEach((key) => {
       if (values[key] && values[key] !== 'all') {
         query[key] = values[key];
@@ -58,7 +57,7 @@ async function initTags() {
     query.size = SIZE;
 
     getArticles();
-  });
+  }));
 
   // 标签点击量统计
   const { hash } = window.location;
@@ -69,7 +68,7 @@ async function initTags() {
       method: 'HEAD',
       params: { id: tagId },
     });
-    document.querySelector(`input#_${tagId}`).checked = true;
+    document.getElementById(`_${tagId}`).checked = true;
     // 设置查询条件
     query.tag = tagId;
   }
@@ -91,10 +90,16 @@ function addFilterListener(listener) {
 
       switch (type) {
         case 'radio':
+          if (name === 'tag') {
+            // 清空标签复选框
+            params.tag?.forEach((id) => {
+              document.getElementById(`_${id}`).checked = false;
+            });
+          }
           params[name] = value;
           break;
         case 'checkbox': {
-          if (!params[name]) params[name] = [];
+          if (!params[name] || params[name] === 'all') params[name] = [];
 
           const { checked } = e.target;
           const param = params[name];
@@ -104,6 +109,9 @@ function addFilterListener(listener) {
             param.push(value);
           } else if (!checked && index > -1) {
             param.splice(index, 1);
+          }
+          if (name === 'tag') {
+            document.getElementById('all1').checked = false;
           }
           break;
         }
@@ -128,20 +136,20 @@ async function getArticles(isLoadMore = false) {
     const $li = document.createElement('li');
 
     $li.className = 'list-item';
-    $li.innerHTML = `
+    $li.innerHTML = window.TC.minifyHtmlTags(`
       <section class="content tc-list-item-article">
         <h2 class="title">
           <a class="tc-font-title" href="/articles/${item.id}">${item.title}</a>
         </h2>
         <div class="description">
-          <time title="发布时间" datetime="${item.create_at}">${humanDate(item.publish_at)}</time>`
-          + '<i class="tc-divider"></i>'
-          + `<span title="标签">${item.tag_name}</span><i class="tc-divider"></i><span title="点击量">000</span>
+          <time title="发布时间" datetime="${item.create_at}">${humanDate(item.publish_at)}</time>
+          <span title="标签">${item.tag_name}</span>
+          <span title="点击量">000</span>
         </div>
         <p>${item.summary || '暂无简介~'}</p>
       </section>
       ${item.bg ? `<img src="${item.bg}" class="cover" alt="封面" width="40" height="40" />` : ''}
-    `;
+    `);
     $frag.appendChild($li);
   });
 
@@ -154,13 +162,11 @@ async function getArticles(isLoadMore = false) {
     $list.parentNode.replaceChild($newList, $list);
   }
 
-  $total.textContent = `共${data.total}篇`;
+  $total.textContent = `共 ${data.total} 篇`;
 
   if (data.total <= query.page * query.size) {
     document.getElementById('more').classList.add('tc-hidden');
-    document.querySelector('.no-more').classList.remove('tc-hidden');
   } else {
     document.getElementById('more').classList.remove('tc-hidden');
-    document.querySelector('.no-more').classList.add('tc-hidden');
   }
 }

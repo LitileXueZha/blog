@@ -2,14 +2,14 @@ extends src/layout.pug
 include src/components/icon_svg.pug
 
 block title
-  title 所有文章_滔's 博客
+  title 全部文章_滔's 博客
 
 block content
-  main.tc-container
-    .filter-type
-      h3.filter-item.title 分类
-        +icon('arrow-right', 14)
-      ul.list
+  main.tc-container.container
+    form.filters
+      fieldset.filter-type
+        h4.title 分类
+          +icon('arrow-right', 14)
         -
           const types = [
             { label: '全部', value: 'all' },
@@ -17,41 +17,42 @@ block content
             { label: '生活', value: 'life' },
           ];
         each item in types
-          li.filter-item.type
+          div.filter-item
             input(id= item.value, type="radio", name="category", value= item.value, checked= item.value === 'all')
             label.item(for= item.value)= item.label
-    .filter-tag
-      h3.filter-item.title 标签
-        +icon('arrow-right', 14)
-      .filter-item.tag
-        input#all1(type="radio", name="tag", value="all", checked)
-        label.item(for="all1") 全部
-      ul.list
-        //- -
-        //-   const tags = [
-        //-     { label: 'JavaScript', value: 'js' },
-        //-     { label: 'Css', value: 'css' },
-        //-   ];
-        //- each item in tags
-        //-   li.filter-item.tag
-        //-     input(id= item.value, type="radio", name="tag", value= item.value)
-        //-     label.item(for= item.value)= item.label
-    .results
-      p.info
-        a.active(href="#") 最新
-        a(href="#hot") 最多点击
-        span.total 共-篇
-      ul.list
-        //- each val, index in new Array(5)
-        //-   li.tc-list-item-article
-        //-     h2.title
-        //-       a.tc-font-title(href="/articles/detail?id=" +index) 多拉风老大
-        //-     .description
-        //-       time(title="发布时间") 刚刚
-        //-       i.tc-divider
-        //-       span(title="标签") Css
-        //-       i.tc-divider
-        //-       span(title="点击量") 100
-        //-     p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis atque perferendis impedit blanditiis maxime totam eum, corporis, molestias deserunt nemo rerum quia fugiat debitis, iure dicta excepturi temporibus exercitationem voluptate!
-    button#more.tc-button.tc-ripple 加载更多
-    span.no-more.tc-hidden 暂无更多~
+      .filter-tag
+        h4.title 标签
+          +icon('arrow-right', 14)
+        .filter-item.tag
+          input#all1(type="radio", name="tag", value="all", checked)
+          label.item(for="all1") 全部
+        ul.list
+          //- -
+          //-   const tags = [
+          //-     { label: 'JavaScript', value: 'js' },
+          //-     { label: 'Css', value: 'css' },
+          //-   ];
+          //- each item in tags
+          //-   li.filter-item.tag
+          //-     input(id= item.value, type="radio", name="tag", value= item.value)
+          //-     label.item(for= item.value)= item.label
+    .body
+      .results
+        p.info
+          a.active(href="#") 最新
+          a(href="#hot") 最多点击
+          span.total 共-篇
+        ul.list
+          //- each val, index in new Array(5)
+          //-   li.tc-list-item-article
+          //-     h2.title
+          //-       a.tc-font-title(href="/articles/detail?id=" +index) 多拉风老大
+          //-     .description
+          //-       time(title="发布时间") 刚刚
+          //-       i.tc-divider
+          //-       span(title="标签") Css
+          //-       i.tc-divider
+          //-       span(title="点击量") 100
+          //-     p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis atque perferendis impedit blanditiis maxime totam eum, corporis, molestias deserunt nemo rerum quia fugiat debitis, iure dicta excepturi temporibus exercitationem voluptate!
+      button#more.tc-button.tc-ripple 加载更多
+      span.no-more 暂无更多~

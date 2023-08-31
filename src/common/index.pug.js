@@ -11,7 +11,7 @@
  * + 时，例如：`2小时`
  * + 天，例如：`3天`
  * + 月，例如：`4个月`
- * + 日期，例如：`2019.12.31`
+ * + 日期，例如：`2019/12/31`
  * 
  * @param {String} dateStr 日期字符串
  * @returns {String} 可读性字符串
@@ -27,7 +27,7 @@ export function humanDate(dateStr) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    return `${year}.${month < 10 ? '0' : ''}${month}.${day < 10 ? '0' : ''}${day}`;
+    return `${year}/${month < 10 ? '0' : ''}${month}/${day < 10 ? '0' : ''}${day}`;
   }
   if (diffTs > 30 * 24 * 60 * 60 * 1000) {
     return `${Math.floor(diffTs / (30 * 24 * 60 * 60 * 1000))}个月`;

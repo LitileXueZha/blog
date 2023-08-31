@@ -58,10 +58,8 @@ html {
 
   &:hover {
     background: @dangerousColor;
-    .icon { fill: #fff }
+    color: #fff;
   }
-
-  .icon { fill: @textColor}
 }
 
 .markdowned > .title,
@@ -318,6 +316,7 @@ html {
     margin-top: 4px;
     height: 18px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 }
 
@@ -327,6 +326,7 @@ html {
     height: 50px;
     margin-bottom: 24px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 
   .info-label {
@@ -334,6 +334,7 @@ html {
     width: 40px;
     height: 12px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 
   .summary {
@@ -349,6 +350,7 @@ html {
     height: 32px;
     margin-top: 32px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 }
 
@@ -358,6 +360,7 @@ html {
     height: 40px;
     margin-bottom: 24px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 }
 
@@ -366,6 +369,7 @@ html {
     width: 40px;
     height: 12px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 
   .comment-content {
@@ -373,6 +377,16 @@ html {
       margin-top: 4px;
       height: 18px;
       background-color: @skeletonColor;
+      border-radius: @radius;
     }  
   }
+}
+
+.seo-content {
+  position: absolute;
+  width: 770px;
+  height: 475px;
+  visibility: hidden;
+  white-space: pre;
+  overflow: scroll;
 }

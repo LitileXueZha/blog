@@ -1,5 +1,5 @@
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -25,12 +25,12 @@ module.exports = {
     new InlineHtmlWebpackPlugin(false, { all: true, cleanup: true }),
     // FIXME: copy-webpack-plugin 无法复制构建时生成的文件
     // TODO: 换个插件。比如 https://github.com/gregnb/filemanager-webpack-plugin
-    new CopyWebpackPlugin([
+    new CopyWebpackPlugin({patterns: [
       {
         from: './*.html',
         to: path.join(PATH_DIST, '[name].html'),
       },
-    ]),
+    ], noErrorOnMissing: true}),
   ],
   stats: {
     children: false,
@@ -43,7 +43,7 @@ module.exports = {
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({}),
-      new OptimizeCssPlugin({}),
+      new CssMinimizerPlugin({}),
     ],
   },
 };

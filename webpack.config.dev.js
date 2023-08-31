@@ -1,19 +1,23 @@
 const path = require('path');
+const {merge} = require('webpack-merge');
 
 const config = require('./webpack');
 
-module.exports = {
-  ...config,
+module.exports = merge(config, {
   mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
-    stats: 'minimal',
     port: 8001,
-    contentBase: path.join(__dirname, 'dist'),
-    disableHostCheck: true,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    devMiddleware: {
+      stats: 'minimal',
+    },
+    allowedHosts: 'all',
     hot: true,
     host: '0.0.0.0',
-    // compress: true,
+    compress: false,
     historyApiFallback: {
       rewrites: [{
         from: /^\/articles\/\w+/,
@@ -30,4 +34,4 @@ module.exports = {
       '/Markdown': 'http://localhost',
     },
   },
-};
+});

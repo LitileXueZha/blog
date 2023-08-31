@@ -31,20 +31,26 @@
 // 列表项文章样式
 .tc-list-item-article {
 	& > .title {
-		margin: 0 0 10px 0;
-        font-size: @font-size + 2px;
+		margin: 0 0 4px 0;
+        font-size: 1.125em;
 
 		& > a { .tc-font-title }
 	}
 
 	& > .description {
-		color: @textColorSecondary;
-		line-height: 20px;
-		font-size: @font-size-tip;
+		time, span {
+			margin-right: 6px;
+			padding: 2px 6px;
+			color: @textColorSecondary;
+			line-height: 1;
+			font-size: @font-size-tip;
+			background: @badge;
+			border-radius: 30px;
+		}
 	}
 	
 	& > p {
-        margin: 0;
+        margin: 4px 0 0 0;
 		max-height: @fontHeight * 3;
 		line-height: @fontHeight;
 		overflow: hidden;
@@ -82,7 +88,7 @@
 .tc-button {
 	padding: .5rem 1rem;
 	border: none;
-	border-radius: @radius * 2;
+	border-radius: @radius;
 	font-size: @font-size;
 	line-height: @font-height;
 	color: @textColor;
@@ -214,4 +220,22 @@
 	// 错误提示栏
 	&.error { background-color: @alert-bg-error; }
 	&.error &-content { color: @alert-color-error; }
+}
+
+.hide {
+	visibility: hidden;
+}
+.s-mod {
+	position: relative;
+	top: -2px;
+	display: inline-block;
+	margin: 0 4px;
+	padding: 2px 6px;
+	font-size: 12px;
+	background: @mainColor;
+	color: #fff;
+	border-radius: @radius;
+	&::after {
+		content: '博主';
+	}
 }

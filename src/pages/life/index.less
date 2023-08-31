@@ -12,7 +12,7 @@ main.container {
 
   .articles {
     flex: 1;
-    padding-left: 70px;
+    padding-left: 66px;
     min-height: 370px;
     border-left: 1px solid @borderColor;
 
@@ -37,6 +37,8 @@ main.container {
     line-height: 40px;
     color: @textColor;
     transition: .3s;
+    border-top-left-radius: @radius;
+    border-bottom-left-radius: @radius;
 
     &:hover {
       background: rgba(0,0,0,0.08);
@@ -121,6 +123,7 @@ main.container {
       height: 28px;
       width: @mostUseLength;
       background-color: @skeletonColor;
+      border-radius: @radius;
     }
     .description {
       line-height: 0;
@@ -131,12 +134,14 @@ main.container {
         height: 12px;
         width: 48px;
         background-color: @skeletonColor;
+        border-radius: @radius;
       }
     }
     .p {
       margin-top: 4px;
       height: 18px;
       background-color: @skeletonColor;
+      border-radius: @radius;
     }
   }
 

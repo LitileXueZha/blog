@@ -8,9 +8,7 @@ import {
 } from 'src/index.js';
 import { resolveTags } from './index.pug.js';
 
-window.addEventListener('load', async () => {
-  Ripple.init({ color: 'rgba(0,150,136,0.8)' });
-
+document.addEventListener('DOMContentLoaded', async () => {
   try {
     const data = await fetch('/seo/index');
     const tags = resolveTags(data.tags);
@@ -23,6 +21,9 @@ window.addEventListener('load', async () => {
     removeSkeletons();
     Alert.error('服务器出了点小问题。。。');
   }
+
+  // 修复未渲染完成前的错误计算
+  Ripple.init({ color: 'rgba(0,150,136,0.8)' });
 
   // 添加加载更多文章事件
   let page = 1;
@@ -96,7 +97,6 @@ function renderAricleList(articles, isLoadMore) {
       </h3>
       <div class="description">
         <time title="发布时间" datetime="${article.create_at}">${humanDate(article.publish_at)}</time>
-        <i class="tc-divider"></i>
         <span title="分类标签">${article.tag_name}</span>
       </div>
       <p>${article.summary}</p>

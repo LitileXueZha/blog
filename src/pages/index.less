@@ -1,4 +1,4 @@
-@import '../../common/variables.less';
+@import '../common/variables.less';
 @import 'src/styles/typography.less';
 
 @navWidth: 270px;
@@ -140,6 +140,7 @@ main.container {
       height: 28px;
       width: @mostUseLength;
       background-color: @skeletonColor;
+      border-radius: @radius;
     }
     .description {
       line-height: 0;
@@ -150,12 +151,14 @@ main.container {
         height: 12px;
         width: 48px;
         background-color: @skeletonColor;
+        border-radius: @radius;
       }
     }
     .p {
       margin-top: 4px;
       height: 18px;
       background-color: @skeletonColor;
+      border-radius: @radius;
     }
   }
 }
@@ -172,6 +175,7 @@ main.container {
   .skeleton-topic {
     height: 20px;
     background-color: @skeletonColor;
+    border-radius: @radius;
   }
 }
 
@@ -192,6 +196,7 @@ main.container {
     width: @width;
     height: 20px;
     background-color: @skeletonColor;
+    border-radius: @radius;
 
     &:nth-of-type(1) {
       width: 90px;

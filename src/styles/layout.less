@@ -1,21 +1,19 @@
 @import '../common/variables.less';
 @import './typography.less';
 
+@height: 56px;
+@hBase: 40px;
+
 // 头部样式
 .header {
 	width: 100%;
-	height: 56px;
+	height: @height;
 	background-color: @mainColor;
 
 	& > .nav-header {
 		display: flex;
-		position: relative;
-		padding: 8px 0;
-
-		& > .msg {
-			position: absolute;
-			right: 0;
-		}
+		align-items: center;
+		padding: (@height - @hBase)/2 0;
 	}
 }
 .nav-header > #search {
@@ -25,7 +23,7 @@
 	& > .icon {
 		position: absolute;
 		top: @mainSpace;
-		left: @mainSpace;
+		left: 12px;
 		padding: 0;
 		border: none;
 		background: transparent;
@@ -35,10 +33,10 @@
 		.color { fill: @activeColor !important }
 	}
 
-	& > input {
+	& > .input {
 		width: 270px;
-		height: 40px;
-		padding: 0 14px 0 40px;
+		height: @hBase;
+		padding: 0 14px 0 42px;
 		border: 1px solid @activeColor;
 		border-radius: @radius;
 		color: #fff;
@@ -48,7 +46,7 @@
 		
 		&:focus {
 			background: @activeColor;
-			transition: .3s;
+			transition: .25s;
 
 			& + .icon .color { fill: #fff !important }
 		}
@@ -65,31 +63,40 @@
 		}
 	}
 }
-.nav-header > ul {
+.nav-header > .links {
 	.clearListStyle;
-	& > li {
+	& > .item {
 		display: inline-block;
-		height: 40px;
-		margin-left: 20px;
-		line-height: 43px;
+		margin: 0 0 0 16px;
 	}
-	& a {
-		display: block;
+	& .link {
+		display: inline-block;
 		padding: 0 @mainSpace;
 		color: rgba(255,255,255,0.5);
 		text-decoration: none;
-		transition: .3s;
+		line-height: 32px;
+		border-radius: @radius;
+		transition: .25s;
 
-		&.active {
+		&.active, &:hover {
 			color: #fff;
-			transform: scale(1.2);
+			background-color: @activeColor;
 		}
-
-		&:hover { color: #fff }
 	}
 }
+.nav-header > .rss {
+	position: relative;
+	top: 2px;
+	margin-left: 16px;
+	transition: .25s linear;
 
+	&:hover {
+		transform: rotate3d(0,0,1,-12deg);
+	}
+}
 .nav-header > .msg {
+	margin-left: auto;
+	line-height: 0;
 	.color {
 		fill: rgba(255,255,255,0.5);
 		transition: .3s;
