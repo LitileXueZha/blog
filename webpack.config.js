@@ -53,8 +53,11 @@ module.exports = [merge(config, {
         './public/favicon.ico',
         './public/robots.txt',
         './pages.static/*.html',
-      ].map((from) => ({ from, to: path.join(DIST, '[name].[ext]') })),
-      noErrorOnMissing: true,
+      ].map((from) => ({
+        from,
+        to: path.join(DIST, '[name].[ext]'),
+        noErrorOnMissing: true,
+      })),
     }),
     // 打包分析，文件：zzz-analyzer.html
     // new BundleAnalyzerPlugin({

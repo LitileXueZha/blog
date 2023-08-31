@@ -29,8 +29,9 @@ module.exports = {
       {
         from: './*.html',
         to: path.join(PATH_DIST, '[name].html'),
+        noErrorOnMissing: true,
       },
-    ], noErrorOnMissing: true}),
+    ]}),
   ],
   stats: {
     children: false,
