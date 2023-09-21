@@ -18,7 +18,7 @@ function renderErrorContent() {
   Alert.error('文章不存在或已下线');
 }
 
-window.addEventListener('load', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // const params = QueryString.parse(window.location.search);
   // const { id } = params;
   // 匹配 `/articles/xxx`

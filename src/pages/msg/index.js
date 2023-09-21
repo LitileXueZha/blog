@@ -1,7 +1,7 @@
 import './index.less';
 import { Ripple, fetch, randomColor, humanDate } from 'src/index.js';
 
-window.addEventListener('load', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   Ripple.init();
 
   const $loadMore = document.getElementById('load-more');

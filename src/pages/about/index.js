@@ -1,6 +1,6 @@
 import './index.less';
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   // 查看与显示照片
   const $showBtn = document.querySelector('#showPhoto');
   const $photo = document.querySelector('#showPhoto + img');

@@ -7,7 +7,7 @@ import initSourceMap from './SourceMap.js';
 
 const { debounce } = window.TC;
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   Ripple.init();
 
   // 几个 tab DOM 和容器 DOM

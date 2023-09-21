@@ -8,7 +8,7 @@ const query = {
   size: SIZE,
 };
 
-window.addEventListener('load', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   Ripple.init();
 
   await Promise.all([initTags(), getArticles()]);

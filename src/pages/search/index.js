@@ -3,7 +3,7 @@ import QueryString from 'query-string';
 import './index.less';
 import { fetch, Alert } from 'src/index.js';
 
-window.addEventListener('load', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const $info = document.querySelector('.info');
   const $result = document.querySelector('.result');
   const $resultNum = document.querySelector('.num');

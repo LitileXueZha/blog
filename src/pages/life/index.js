@@ -13,7 +13,7 @@ const pager = new PaginationBase({
   onChange: fetchArticles,
 });
 
-window.addEventListener('load', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const $btnMore = document.querySelector('#more');
   const $container = document.querySelector('.articles');
 
