@@ -1,5 +1,5 @@
 import './index.less';
-import { Ripple, fetch, humanDate } from 'src/index.js';
+import {Ripple, fetch, humanDate} from 'src/index.js';
 
 const SIZE = 10;
 /** 全局查询文章条件 */
@@ -29,15 +29,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 /** 加载标签列表，绑定筛选 */
 async function initTags() {
   const $list = document.querySelector('.filter-tag .list');
-  const { items } = await fetch('/tags');
-  const frags = items.map((tag) => {
-    return window.TC.minifyHtmlTags(`
+  const {items} = await fetch('/tags');
+  const frags = items.map((tag) => window.TC.minifyHtmlTags(`
       <li class="filter-item tag">
         <input id="_${tag.id}" type="checkbox" name="tag" value="${tag.id}" />
         <label class="item" for="_${tag.id}">${tag.name}</label>
       </li>
-    `);
-  });
+    `));
 
   $list.innerHTML = frags.join('');
 
@@ -60,13 +58,13 @@ async function initTags() {
   }));
 
   // 标签点击量统计
-  const { hash } = window.location;
+  const {hash} = window.location;
   const tagId = hash.substr(1);
 
-  if (tagId && items.find(tag => tag.id === tagId)) {
+  if (tagId && items.find((tag) => tag.id === tagId)) {
     fetch('/tags/click', {
       method: 'HEAD',
-      params: { id: tagId },
+      params: {id: tagId},
     });
     document.getElementById(`_${tagId}`).checked = true;
     // 设置查询条件
@@ -76,7 +74,7 @@ async function initTags() {
 
 /**
  * 绑定筛选项监听
- * 
+ *
  * @param {function} listener 监听函数
  */
 function addFilterListener(listener) {
@@ -86,7 +84,7 @@ function addFilterListener(listener) {
   // 绑定每个 input，使用事件委托难以正确拿到 input
   Array.from($inputs).forEach(($input) => {
     $input.addEventListener('change', (e) => {
-      const { name, value, type } = e.target;
+      const {name, value, type} = e.target;
 
       switch (type) {
         case 'radio':
@@ -101,7 +99,7 @@ function addFilterListener(listener) {
         case 'checkbox': {
           if (!params[name] || params[name] === 'all') params[name] = [];
 
-          const { checked } = e.target;
+          const {checked} = e.target;
           const param = params[name];
           const index = param.indexOf(value);
 

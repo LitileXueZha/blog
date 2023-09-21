@@ -1,6 +1,8 @@
 import './index.less';
-import { Affix, Ripple, PaginationBase, fetch, Events } from 'src/index.js';
-import { humanDate } from 'src/common/index.pug.js';
+import {
+  Affix, Ripple, PaginationBase, fetch, Events,
+} from 'src/index.js';
+import {humanDate} from 'src/common/index.pug.js';
 
 const DEFAULT_SIZE = 5;
 const CATEGORY = 'life';
@@ -69,8 +71,8 @@ function initSeason() {
 }
 
 async function fetchArticles(params) {
-  const { page, size } = params;
-  const { items, total } = await fetch('/articles', {
+  const {page, size} = params;
+  const {items, total} = await fetch('/articles', {
     params: {
       page,
       size,

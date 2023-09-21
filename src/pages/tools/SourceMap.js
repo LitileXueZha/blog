@@ -1,10 +1,10 @@
 let SourceMapConsumer;
 let TracebackJS;
-const { debounce } = window.TC;
+const {debounce} = window.TC;
 
 /**
  * 初始化 source map 解析
- * 
+ *
  * 动态加载解析库
  */
 export default async function initSourceMap() {
@@ -76,11 +76,11 @@ export default async function initSourceMap() {
 
   /** 重新解析 */
   function resolveMap() {
-    const { line, column, consumer } = mapSource;
+    const {line, column, consumer} = mapSource;
 
     if (!(column && consumer)) return;
 
-    const result = consumer.originalPositionFor({ line, column });
+    const result = consumer.originalPositionFor({line, column});
 
     if (result.source === null) {
       $resultJson.innerHTML = '<span style="color: red">解析为 null</span>';
@@ -95,8 +95,8 @@ export default async function initSourceMap() {
   }
   /** 渲染源代码 */
   function render() {
-    const { content, highlightRow, size } = mapSource;
-    const $dom = TracebackJS.render(content, { highlightRow, displayRows: size });
+    const {content, highlightRow, size} = mapSource;
+    const $dom = TracebackJS.render(content, {highlightRow, displayRows: size});
 
     $resultSource.replaceChild($dom, $resultSource.firstElementChild);
   }

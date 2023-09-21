@@ -3,9 +3,9 @@ const DEFAULT_MAX_LISTENERS = 10;
 
 /**
  * 事件（发布/订阅机制）
- * 
+ *
  * 主要参考 w3c 规范 `EventTarget`，另外有一些 node 实现
- * 
+ *
  * @example
  * ```javascript
  * const ev = new Events();
@@ -15,7 +15,7 @@ const DEFAULT_MAX_LISTENERS = 10;
  * ev.once(); // 一次性
  * ev.remove(); // 删除
  * ```
- * 
+ *
  * @link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
  */
 export default function Events() {
@@ -30,7 +30,7 @@ export default function Events() {
  */
 Events.prototype.dispatch = function dispatch(e, data) {
   const ev = e instanceof EventsUnit ? e : new EventsUnit(e, data);
-  const { type, detail } = ev;
+  const {type, detail} = ev;
   const evSet = this._listeners[type];
 
   if (!evSet) {

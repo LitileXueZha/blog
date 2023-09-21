@@ -1,9 +1,9 @@
 /**
  * 滚动监听 Scrollspy
- * 
+ *
  * 给标签加上 `.tc-scrollspy`，[`data-dom` 写选择符，默认为 `body`，当页面有两个以上时必写]；
  * 接着在 js 中初始化 `Scrollspy.init()`，可传入选项
- * 
+ *
  * 注：`data-dom` 指向的元素应是已定位的！！！
  */
 const Scrollspy = {
@@ -75,7 +75,7 @@ const Scrollspy = {
         activeNodes: Array.prototype.slice.call(dom.querySelectorAll('.active')),
       };
 
-      const { anchors, linksRenfer } = metaObj;
+      const {anchors, linksRenfer} = metaObj;
 
       for (let i = 1; i < links.length; i += 1) {
         const href = links[i].getAttribute('href').substr(1);
@@ -104,7 +104,7 @@ const Scrollspy = {
     }
 
     // 在anchors中查找此时active的link
-    const { anchors, linksRenfer, activeNodes } = metaObj;
+    const {anchors, linksRenfer, activeNodes} = metaObj;
     let index = 0;
 
     do {
@@ -121,7 +121,7 @@ const Scrollspy = {
     // 从二级切换到一级时，activeNodes 包含了一级，这里确保能删除二级 .active
     if (activeNodes.indexOf($p) === 0) return;
     // 删除上次的active link
-    activeNodes.forEach(val => val.classList.remove('active'));
+    activeNodes.forEach((val) => val.classList.remove('active'));
     metaObj.activeNodes = [];
     // 只给li加上className
     while (level <= this.level) {

@@ -1,7 +1,7 @@
 import QueryString from 'query-string';
 
 import './index.less';
-import { fetch, Alert } from 'src/index.js';
+import {fetch, Alert} from 'src/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const $info = document.querySelector('.info');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 初始化 title 与输入框
   (function init() {
-    const { q } = QueryString.parse(window.location.search);
+    const {q} = QueryString.parse(window.location.search);
 
     // 应该是开发者修改query导致不匹配，提示之
     if (q === undefined) {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.title = `${searchText}_搜索_滔's 博客`;
-    window.history.replaceState({ q: searchText }, document.title, window.location.search);
+    window.history.replaceState({q: searchText}, document.title, window.location.search);
     $form.q.value = searchText;
     search(searchText);
     // 重置搜索次数
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchText = value;
     // Step3: 更改浏览器栏URL
     document.title = `${searchText ? `${searchText}_` : ''}搜索_滔's 博客`;
-    window.history.pushState({ q: searchText }, document.title, `?q=${searchText}`);
+    window.history.pushState({q: searchText}, document.title, `?q=${searchText}`);
 
     if (!searchText) {
       // Step4: 用户未输入字符
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const times = parseInt(window.sessionStorage.getItem('search_times') || 0, 10);
 
     if (times >= 3) {
-      Alert.info('搜了这么多次都没有，试试去筛选 <a href="/articles">所有文章</a>', { closed: true });
+      Alert.info('搜了这么多次都没有，试试去筛选 <a href="/articles">所有文章</a>', {closed: true});
       window.sessionStorage.setItem('search_times', 0);
       return;
     }
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * 搜索 & 渲染结果列表
-   * 
+   *
    * @param {String} query 要搜索的内容
    */
   async function search(query) {
@@ -156,9 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 搜索计时
     const ts = Date.now();
     const data = await fetch('/search', {
-      params: { q: query },
+      params: {q: query},
     });
-    const { total, items } = data;
+    const {total, items} = data;
 
     // TODO: 一些分析待做
     console.log(`搜索"${query}"完成，耗时${(Date.now() - ts) / 1000}ms`);
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * 渲染搜索结果
- * 
+ *
  * @param {array} data 搜索结果列表
  * @param {string} query 搜索内容
  */
@@ -208,14 +208,14 @@ function renderSearchResults(data, query) {
 
 /**
  * 高亮文本
- * 
+ *
  * 使用 `<mark>` 包裹高亮内容，空格做为分词符
- * 
+ *
  * @param {string} text 文本内容
  * @param {string} keyword 高亮内容
  */
 function highlightHelper(text, keyword) {
-  const { escapeHtml } = window.TC;
+  const {escapeHtml} = window.TC;
   const keywordStr = escapeHtml(keyword).split(' ').join('|');
   const reg = new RegExp(`(${keyword}|${keywordStr})`, 'gmi');
 

@@ -1,6 +1,6 @@
 const path = require('path');
-const { DefinePlugin } = require('webpack');
-const { merge } = require('webpack-merge');
+const {DefinePlugin} = require('webpack');
+const {merge} = require('webpack-merge');
 
 // loaders与各页面相关配置
 const rules = require('./loaders');
@@ -18,7 +18,7 @@ module.exports = merge(pages, {
     filename: 'js/[name].js',
     publicPath: '/',
   },
-  module: { rules },
+  module: {rules},
   plugins: [
     new DefinePlugin({
       __CDN_LINK_MERMAID__: JSON.stringify(MERMAID),

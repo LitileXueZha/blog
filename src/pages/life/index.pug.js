@@ -2,7 +2,7 @@ export const pathname = 'life';
 
 /**
  * 生成四季数据
- * 
+ *
  * @example
  * ```javascript
  * [
@@ -14,7 +14,7 @@ export const pathname = 'life';
  *      }
  * ]
  * ```
- * 
+ *
  * @return {array}
  */
 export function genSeasons() {

@@ -1,6 +1,6 @@
-import { encode, decode } from 'js-base64';
+import {encode, decode} from 'js-base64';
 
-const { debounce } = window.TC;
+const {debounce} = window.TC;
 
 /**
  * 初始化 base64 转码
@@ -12,7 +12,7 @@ export default function initBase64() {
   Array.prototype.slice
     .call($doms)
     .forEach(($dom) => {
-      const { pattern } = $dom.dataset;
+      const {pattern} = $dom.dataset;
       const $transformed = $dom.nextElementSibling.nextElementSibling;
       // 编码
       const evEncode = debounce(() => {
@@ -49,8 +49,8 @@ export default function initBase64() {
   $file.addEventListener('change', () => handleFile($file.files[0]));
   cp($transformed);
   // 拖拽事件
-  $file.addEventListener('dragover', e => e.preventDefault());
-  $file.addEventListener('dragenter', e => e.preventDefault());
+  $file.addEventListener('dragover', (e) => e.preventDefault());
+  $file.addEventListener('dragenter', (e) => e.preventDefault());
   $file.addEventListener('drop', (e) => {
     handleFile(e.dataTransfer.files[0]);
     e.preventDefault();

@@ -1,10 +1,10 @@
 import QueryString from 'query-string';
 
-import { API, FETCH_DEFAULT_OPTS, TOKEN_NAME } from './constants';
+import {API, FETCH_DEFAULT_OPTS, TOKEN_NAME} from './constants';
 
 /**
  * 通用请求函数封装
- * 
+ *
  * @param {string} url 接口地址
  * @param {Object} opts 同原生 `fetch` 配置对象
  */
@@ -21,13 +21,13 @@ export default async function request(url, opts = {}) {
 
 /**
  * 请求构造函数
- * 
+ *
  * @param {string} url 接口地址
  * @param {object} opts 同原生 `fetch` 配置对象
  */
 function Request(url, opts = {}) {
   /** 原请求配置 */
-  this.request = { url, opts };
+  this.request = {url, opts};
   /** 返回处理器 */
   this.handler = responseHandler;
 
@@ -62,12 +62,12 @@ function Request(url, opts = {}) {
 
 /**
  * 支持 Fetch API 超时
- * 
+ *
  * @param {RequestInfo} input
  * @param {RequestInit} [init]
  */
 Request.prototype._fetch = async function _fetch(input, init) {
-  const { timeout } = this.opts;
+  const {timeout} = this.opts;
   const ac = new AbortController();
   const timer = setTimeout(() => ac.abort(), timeout * 1000);
   const response = await window.fetch(input, {
@@ -102,7 +102,7 @@ Request.prototype.auth = async function auth(refresh = false) {
       Authorization: this.token,
     },
   });
-  const { data, code, error } = await res.json();
+  const {data, code, error} = await res.json();
 
   // 只在认证成功后，设置 token
   if (code === 1) {
@@ -119,10 +119,10 @@ Request.prototype.auth = async function auth(refresh = false) {
 
 /**
  * `response` 处理函数
- * 
+ *
  * 可以直接用 `this` 访问请求实例，
  * 请求成功时必须返回全部数据
- * 
+ *
  * @param {Response} fetchResponse `fetch` 返回对象
  * @return {object} 请求成功返回数据
  */
@@ -140,7 +140,7 @@ async function responseHandler(fetchResponse) {
     return undefined;
   }
 
-  const { code, error } = response;
+  const {code, error} = response;
 
   // token 令牌过期，认证失效
   if (code === 9001) {

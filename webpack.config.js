@@ -2,12 +2,12 @@ const path = require('path');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const CssMinizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-const { merge } = require('webpack-merge');
+const {merge} = require('webpack-merge');
 
 const config = require('./webpack');
 const InlineHtmlWebpackPlugin = require('./webpack/InlineHtmlWebpackPlugin.js');

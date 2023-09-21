@@ -1,6 +1,6 @@
 /**
  * 只在生产环境使用
- * 
+ *
  * 额外打包出来一个 `ie11-polyfill.js`，需要在 html 模版里手动添加
  */
 const path = require('path');

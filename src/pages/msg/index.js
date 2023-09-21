@@ -1,5 +1,7 @@
 import './index.less';
-import { Ripple, fetch, randomColor, humanDate } from 'src/index.js';
+import {
+  Ripple, fetch, randomColor, humanDate,
+} from 'src/index.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   Ripple.init();
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let page = 1;
   const size = 10;
   const data = await fetch('/msg', {
-    params: { page, size },
+    params: {page, size},
   });
   let loading = false;
 
@@ -22,8 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     loading = true;
     page += 1;
 
-    const { total, items } = await fetch('/msg', {
-      params: { page, size },
+    const {total, items} = await fetch('/msg', {
+      params: {page, size},
     });
 
     renderMsg(items);
@@ -58,10 +60,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     submitting = true;
     await fetch('/msg', {
       method: 'POST',
-      body: { name, content, platform: 'pc' },
+      body: {name, content, platform: 'pc'},
     });
 
-    const $li = createMsgListItem({ name, content, create_at: Date.now() });
+    const $li = createMsgListItem({name, content, create_at: Date.now()});
 
     $msgList.insertBefore($li, $myMsg.nextElementSibling);
     $form.content.value = '';
@@ -86,12 +88,12 @@ function renderMsg(data) {
 
 /**
  * 创建留言 `li` 元素
- * 
+ *
  * @param {object} msg 留言数据
  * @return {HTMLLIElement}
  */
 function createMsgListItem(msg) {
-  const { escapeHtml } = window.TC;
+  const {escapeHtml} = window.TC;
   const $li = document.createElement('li');
   // 有头像展示头像，无头像展示名称第一个字 + 随机色
   const cover = msg.avatar

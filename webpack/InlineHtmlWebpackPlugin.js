@@ -1,10 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 /**
  * 参考：https://github.com/facebook/create-react-app/blob/master/packages/react-dev-utils/InlineChunkHtmlPlugin.js
- * 
+ *
  * react-dev-utils/InlineChunkHtmlPlugin 仅仅是内联 script 代码。
  * 这里直接复制过来，可以内联 css/js。稍微美化了下代码
- * 
+ *
  * Create at: 2020-11-15.
  */
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -29,7 +29,7 @@ class InlineHtmlWebpackPlugin {
   }
 
   setInlined(publicPath, assets, tag) {
-    const { tagName, attributes } = tag;
+    const {tagName, attributes} = tag;
 
     // add inline css
     if (tagName === 'link' && attributes && attributes.rel === 'stylesheet') {
@@ -38,7 +38,7 @@ class InlineHtmlWebpackPlugin {
         : attributes.href;
       const asset = assets[name];
 
-      if (asset && (this.all || this.regexps.some(reg => name.match(reg)))) {
+      if (asset && (this.all || this.regexps.some((reg) => name.match(reg)))) {
         this._safeCleanBucket.add(name);
         return {
           tagName: 'style',
@@ -58,7 +58,7 @@ class InlineHtmlWebpackPlugin {
         : attributes.src;
       const asset = assets[name];
 
-      if (asset && (this.all || this.regexps.some(reg => name.match(reg)))) {
+      if (asset && (this.all || this.regexps.some((reg) => name.match(reg)))) {
         this._safeCleanBucket.add(name);
         return {
           tagName: 'script',
@@ -85,7 +85,7 @@ class InlineHtmlWebpackPlugin {
       // works on html-webpack-plugin@4
       // INFO: do not work on html-webpack-plugin@<4
       const hooks = htmlWebpackPlugin.getHooks(compilation);
-      const inlined = tag => this.setInlined(publicPath, compilation.assets, tag);
+      const inlined = (tag) => this.setInlined(publicPath, compilation.assets, tag);
 
       hooks.alterAssetTagGroups.tap('InlineHtmlWebpackPlugin', (assets) => {
         assets.headTags = assets.headTags.map(inlined);
@@ -96,7 +96,7 @@ class InlineHtmlWebpackPlugin {
         hooks.afterEmit.tap('InlineHtmlWebpackPlugin', () => {
           Object.keys(compilation.assets).forEach((name) => {
             if (
-              (this.all || this.regexps.some(reg => name.match(reg)))
+              (this.all || this.regexps.some((reg) => name.match(reg)))
               && this._safeCleanBucket.has(name)
             ) {
               delete compilation.assets[name];

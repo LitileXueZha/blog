@@ -4,7 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { entry, plugins, output, loaders } = require('./webpack.base.js');
+const {
+  entry, plugins, output, loaders,
+} = require('./webpack.base.js');
 const InlineHtmlWebpackPlugin = require('../webpack/InlineHtmlWebpackPlugin.js');
 
 const PATH_DIST = path.join(__dirname, '../dist');
@@ -22,16 +24,18 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '.trash/[name].css',
     }),
-    new InlineHtmlWebpackPlugin(false, { all: true, cleanup: true }),
+    new InlineHtmlWebpackPlugin(false, {all: true, cleanup: true}),
     // FIXME: copy-webpack-plugin 无法复制构建时生成的文件
     // TODO: 换个插件。比如 https://github.com/gregnb/filemanager-webpack-plugin
-    new CopyWebpackPlugin({patterns: [
-      {
-        from: './*.html',
-        to: path.join(PATH_DIST, '[name].html'),
-        noErrorOnMissing: true,
-      },
-    ]}),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './*.html',
+          to: path.join(PATH_DIST, '[name].html'),
+          noErrorOnMissing: true,
+        },
+      ],
+    }),
   ],
   stats: {
     children: false,

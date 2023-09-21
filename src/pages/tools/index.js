@@ -1,11 +1,11 @@
-import { encode, decode } from 'js-base64';
+import {encode, decode} from 'js-base64';
 
 import './index.less';
-import { Ripple, FloatText } from 'src/index.js';
+import {Ripple, FloatText} from 'src/index.js';
 import initBase64 from './Base64.js';
 import initSourceMap from './SourceMap.js';
 
-const { debounce } = window.TC;
+const {debounce} = window.TC;
 
 document.addEventListener('DOMContentLoaded', () => {
   Ripple.init();
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 根据 location.hash 控制 tab 选项卡的显示
   function renderTab() {
-    let { hash } = window.location;
+    let {hash} = window.location;
 
     hash = hash.replace('#', '');
 

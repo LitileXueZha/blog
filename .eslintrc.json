@@ -9,6 +9,7 @@
     },
     "rules": {
         "linebreak-style": "off",
+        "no-multiple-empty-lines": ["error", {"max": 2}],
         "object-curly-spacing": ["error", "never"],
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "no-use-before-define": ["error", { "functions": false }],

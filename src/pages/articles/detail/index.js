@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'src/index.js';
 import initHighlightJS from './md.highlight';
-import { initMermaid, initMathJax } from './md.addons';
+import {initMermaid, initMathJax} from './md.addons';
 import marked from './md.marked';
 
 /** 在页面上展示错误提示 */
@@ -190,7 +190,7 @@ function renderComments(data, isLoadMore = false) {
     //
   }
   const $commnetList = document.querySelector('.list-comment');
-  const comments = data.map(item => `
+  const comments = data.map((item) => `
     <li class="comment">
       <time class="comment-at" datetime="${item.create_at}">${humanDate(item.create_at)}</time>
       <p class="comment-content">${window.TC.escapeHtml(item.content)}</p>
@@ -202,7 +202,7 @@ function renderComments(data, isLoadMore = false) {
 }
 
 function initLoadComment(id) {
-  const { offsetTop } = document.querySelector('.list-comment');
+  const {offsetTop} = document.querySelector('.list-comment');
   const throttleHelper = window.TC.throttle(loadComment);
   const listener = () => throttleHelper(window.pageYOffset);
 
@@ -218,7 +218,7 @@ function initLoadComment(id) {
     window.removeEventListener('scroll', listener);
 
     const comments = await fetch('/comments', {
-      params: { parent_id: id },
+      params: {parent_id: id},
     });
 
     renderComments(comments.items);

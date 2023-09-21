@@ -1,6 +1,6 @@
 /**
  * 漂浮组件 FloatText，点击浮出一段文字
- * 
+ *
  * 给标签加上 `.tc-float-text` 和 `data-text`，js 中 `FloatText.init()`；
  * 直接调用 `action` 触发也行
  */
@@ -16,7 +16,7 @@ const FloatText = {
 
   /**
    * 触发漂浮操作
-   * 
+   *
    * @param {string} text 要漂浮的文本
    * @param {HTMLElement} dom 绑定的元素
    */

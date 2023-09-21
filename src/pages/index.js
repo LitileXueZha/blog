@@ -6,7 +6,7 @@ import {
   humanDate,
   Alert,
 } from 'src/index.js';
-import { resolveTags } from './index.pug.js';
+import {resolveTags} from './index.pug.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // 修复未渲染完成前的错误计算
-  Ripple.init({ color: 'rgba(0,150,136,0.8)' });
+  Ripple.init({color: 'rgba(0,150,136,0.8)'});
 
   // 添加加载更多文章事件
   let page = 1;
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loading = true;
     page += 1;
 
-    const { items, total } = await fetch('/articles', {
+    const {items, total} = await fetch('/articles', {
       params: {
         page,
         size,
@@ -64,12 +64,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 /**
  * 渲染标签云
- * 
+ *
  * @param {Array} tags 标签列表
  */
 function renderTagCloud(tags) {
   const $tags = document.querySelector('.tags');
-  const fragments = tags.map(tag => `
+  const fragments = tags.map((tag) => `
     <a class="tag ${tag.className}" href="/articles#${tag.id}" style="color: ${tag.color}">${tag.name}</a>
   `);
 
@@ -79,7 +79,7 @@ function renderTagCloud(tags) {
 
 /**
  * 渲染文章列表
- * 
+ *
  * @param {Array} articles 文章列表
  * @param {Boolean} isLoadMore 是否为加载更多
  */
@@ -122,7 +122,7 @@ function renderAricleList(articles, isLoadMore) {
 
 /**
  * 渲染 topics
- * 
+ *
  * @param {Array} topics 文章列表
  */
 function renderTopicList(topics) {

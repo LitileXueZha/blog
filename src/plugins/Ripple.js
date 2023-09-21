@@ -1,6 +1,6 @@
 /**
  * 水波纹插件 Ripple
- * 
+ *
  * 在需要的 html 标签上添加 `.tc-ripple`；然后 js 中调用 `Ripple.init()` 即可。
  */
 const Ripple = {
@@ -10,7 +10,7 @@ const Ripple = {
   max: 4,
   platform: 'pc',
 
-  async init({ color, duration } = {}) {
+  async init({color, duration} = {}) {
     if (__DEV__) {
       // 等待开发环境下 style-loader 注入 css
       await new Promise((done) => setTimeout(done, 300));
@@ -24,12 +24,12 @@ const Ripple = {
 
     Array.prototype.slice
       .call(document.getElementsByClassName('tc-ripple'))
-      .forEach(val => this.add(val));
+      .forEach((val) => this.add(val));
   },
 
   add(node) {
     const wraper = document.createElement('span');
-    const { width, height } = node.getBoundingClientRect();
+    const {width, height} = node.getBoundingClientRect();
     const startEventName = this.platform === 'pc' ? 'mousedown' : 'touchstart';
     const leaveEventName = this.platform === 'pc' ? 'mouseup' : 'touchend';
 
@@ -50,7 +50,9 @@ const Ripple = {
     // ripple达到数量最大时，不再添加
     if (Ripple.quantity === Ripple.max) return;
 
-    const { offsetX, offsetY, width, height } = Ripple.enhancedOffset(event, this);
+    const {
+      offsetX, offsetY, width, height,
+    } = Ripple.enhancedOffset(event, this);
     // const { width, height } = this.getBoundingClientRect();
     const px = offsetX > width / 2 ? offsetX : width - offsetX;
     const py = offsetY > height / 2 ? offsetY : height - offsetY;
@@ -92,15 +94,19 @@ const Ripple = {
   },
 
   enhancedOffset(event, node) {
-    let { offsetX, offsetY } = event;
-    const { left, top, width, height } = node.getBoundingClientRect();
+    let {offsetX, offsetY} = event;
+    const {
+      left, top, width, height,
+    } = node.getBoundingClientRect();
     // 移动端 touch 事件
     if (this.platform === 'mobile') {
       offsetX = event.targetTouches[0].pageX - left;
       offsetY = event.targetTouches[0].pageY - top;
     }
 
-    return { offsetX, offsetY, width, height };
+    return {
+      offsetX, offsetY, width, height,
+    };
   },
 };
 

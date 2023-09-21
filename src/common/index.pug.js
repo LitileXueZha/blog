@@ -1,18 +1,17 @@
-
 /**
  * 通用 .pug 函数
  */
 
 /**
  * 格式化日期
- * 
+ *
  * 分为几个级别：
  * + `刚刚`
  * + 时，例如：`2小时`
  * + 天，例如：`3天`
  * + 月，例如：`4个月`
  * + 日期，例如：`2019/12/31`
- * 
+ *
  * @param {String} dateStr 日期字符串
  * @returns {String} 可读性字符串
  */
@@ -44,9 +43,9 @@ export function humanDate(dateStr) {
 
 /**
  * 随机色
- * 
+ *
  * 取色地址：http://encycolorpedia.cn/009688
- * 
+ *
  * @return {string} 随机色值，例如 `#ff6977`
  */
 export function randomColor() {

@@ -1,8 +1,8 @@
 /**
  * 提示栏 Alert
- * 
+ *
  * 在导航栏下面的一条信息提示栏，支持 html，直接使用即可 `Alert.info()`。
- * 
+ *
  * 目前支持的类型有：
  * + `info` 正常信息
  * + `error` 错误（红色）
@@ -41,8 +41,8 @@ AlertPlugin.prototype._open = function open(opts) {
     return;
   }
 
-  const { type, html, closed } = opts;
-  const { $container, $content } = this;
+  const {type, html, closed} = opts;
+  const {$container, $content} = this;
 
   if (closed) $container.classList.add('closed');
   else $container.classList.remove('closed');
@@ -60,7 +60,7 @@ AlertPlugin.prototype._open = function open(opts) {
 
 /** 初始化（仅在调用之后） */
 AlertPlugin.prototype._init = function initialize(opts) {
-  const { type, html, closed } = opts;
+  const {type, html, closed} = opts;
   const $afterDom = document.querySelector('header');
   const alertHtml = window.TC.minifyHtmlTags(`
     <div id="${this._id}" class="tc-alert ${type} active${closed ? ' closed' : ''}">

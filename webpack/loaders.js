@@ -50,7 +50,7 @@ module.exports = [
       PRODUCTION ? MiniCssExtractPlugin.loader : 'style-loader',
       {
         loader: 'css-loader',
-        options: { importLoaders: 2 },
+        options: {importLoaders: 2},
       }, {
         loader: 'postcss-loader',
         options: {
@@ -64,7 +64,7 @@ module.exports = [
         loader: 'less-loader',
         options: {
           // Less v4 数学运算需要加括号，修改为旧版
-          lessOptions: { math: 'always' },
+          lessOptions: {math: 'always'},
         },
       },
     ],

@@ -31,10 +31,10 @@ for (let i = 0; i < pages.length; i++) {
   const plugin = new HtmlWebpackPlugin({
     filename: `${page}.html`,
     template: `./src/pages${filePath}/index.pug`,
-    templateParameters: { pathname: page, _cache },
+    templateParameters: {pathname: page, _cache},
     // NOTE: 必须要手动加上 vendor
     chunks: ['common', `vendors~${page}`, page],
-    minify: { removeComments: false, collapseWhitespace: true },
+    minify: {removeComments: false, collapseWhitespace: true},
     inject: 'body',
   });
 

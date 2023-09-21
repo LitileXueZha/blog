@@ -4,8 +4,8 @@ import './index.less';
 export * from './plugins/index.js';
 export * from './common/index.pug.js';
 export * from './common/constants.js';
-export { default as fetch } from './common/request.js';
-export { default as Events, EventsUnit } from './common/Events.js';
+export {default as fetch} from './common/request.js';
+export {default as Events, EventsUnit} from './common/Events.js';
 
 // 通用库的封装
 window.TC = {
@@ -27,7 +27,7 @@ window.TC = {
 
   /**
    * 节流
-   * 
+   *
    * @param {function} fn 执行函数
    * @param {number} threshold 默认间隔为 `10`
    * @return {function} 参数为节流单位。可以是像素、时间等
@@ -85,7 +85,7 @@ window.TC = {
 
   /**
    * 删除 html 片段首尾以及标签间的空白字符
-   * 
+   *
    * @param {string} html
    * @returns {string}
    */
