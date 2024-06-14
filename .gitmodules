@@ -6,3 +6,7 @@
 	path = dist/docs
 	url = https://github.com/LitileXueZha/blog-doc.git
 	branch = master
+[submodule "ye"]
+	path = dist/ye
+	url = https://github.com/LitileXueZha/ye.git
+	branch = master

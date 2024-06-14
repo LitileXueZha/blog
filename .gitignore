@@ -6,6 +6,8 @@ pages.static/.trash/
 pages.static/*.html
 _cache.dist.json
 
+.env*
+jsconfig.json
 package-lock.json
 
 # webpack-bundle-analyzer

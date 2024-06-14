@@ -1,0 +1,80 @@
+# https://docs.docker.com/compose/compose-file/
+# https://hub.docker.com/_/nginx
+# https://docs.docker.com/compose/compose-file/build/
+# https://docs.docker.com/reference/dockerfile/
+# https://docs.docker.com/build/building/multi-stage/
+
+
+name: blog
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    environment: &env
+      TZ: Asia/Shanghai
+      LANG: C.UTF-8
+    depends_on:
+      - php-fpm
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .\/dist:/app
+      - C:\mysoftwares\dockerdata/nginx.conf:/etc/nginx/conf.d/blog.conf:ro
+    restart: always
+    networks:
+      - net
+
+  php-fpm:
+    container_name: php
+    environment: *env
+    image: php/local
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM php:7.4-fpm
+        RUN pecl install xdebug-3.1.6 && \
+            docker-php-ext-enable xdebug
+        RUN docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd && \
+            docker-php-ext-install pdo_mysql
+        RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+
+    volumes:
+      - .\/dist:/app
+      - C:\mysoftwares\dockerdata/php.ini:/usr/local/etc/php/conf.d/blog.ini:ro
+      - C:\mysoftwares\dockerdata/php-fpm.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+    restart: always
+    expose:
+      - "9000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - net
+
+  mysql:
+    container_name: mysql
+    image: mysql:lts
+    environment:
+      <<: *env
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - data:/var/lib/mysql
+      - C:\mysoftwares\dockerdata/mysql.cnf:/etc/mysql/conf.d/blog.cnf:ro
+    ports:
+      - "127.0.0.1:3306:3306"
+    expose:
+      - "3306"
+    restart: always
+    networks:
+      - net
+
+networks:
+  net:
+    name: blog-network
+    labels:
+      - "nginx+php+fpm+mysql"
+
+volumes:
+  data:
+    name: blog-data

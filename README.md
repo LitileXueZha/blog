@@ -69,3 +69,11 @@
 ## Pug 打包问题
 
 采用 `pug-loader` 导致的引用问题：不支持 webpack alias。参考这个 [issue](https://github.com/pugjs/pug-loader/issues/96)。解决办法写在了 issue 中，修改 `node_modules/pug-loader/index.js` 源码。
+
+## Docker 环境
+
+1. 创建 dockerdata 目录以及必须的几个配置文件
+2. 复制 ssl 本地证书到 dist 目录里
+3. 创建 dist 目录软链接（windows 下 mklink；linux 是 ln）
+    - `mklink /J dist\admin ..\blog-admin\dist`
+    - `mklink /J dist\api ..\blog-api`
