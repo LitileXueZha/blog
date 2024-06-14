@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "微风轻拂晨曦之纱",
   "scripts": {
-    "start": "webpack serve --config webpack.config.dev.js --hot",
+    "start": "webpack serve --config webpack/webpack.config.dev.js --hot",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "seo": "node public/seo.js",
     "static": "webpack --config pages.static/webpack.config.js --progress",

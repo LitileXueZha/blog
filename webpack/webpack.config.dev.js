@@ -1,7 +1,7 @@
 const path = require('path');
 const {merge} = require('webpack-merge');
 
-const config = require('./webpack');
+const config = require('./index.js');
 
 module.exports = merge(config, {
   mode: 'development',

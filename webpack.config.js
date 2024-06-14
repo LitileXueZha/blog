@@ -55,7 +55,7 @@ module.exports = [merge(config, {
         './pages.static/*.html',
       ].map((from) => ({
         from,
-        to: path.join(DIST, '[name].[ext]'),
+        to: path.join(DIST, '[name][ext]'),
         noErrorOnMissing: true,
       })),
     }),
