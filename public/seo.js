@@ -7,7 +7,7 @@ const https = require('https');
 const API = {
     // 机器人 robot 令牌
     token: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.MTU3ODI4MDk1NDpyb2JvdA==.zzs8nnFLyNb9ft6U2q8N3F13c/v+LzaZkpLtPH/BBaw=',
-    prefix: 'https://api.ningtaostudy.cn/v1',
+    prefix: 'https://ningtaostudy.cn/api/v1',
     getToken() {
         return this.token;
     },
