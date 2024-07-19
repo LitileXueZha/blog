@@ -1,6 +1,6 @@
 import {marked} from 'marked';
 
-const regMermaid = /^(graph|sequenceDiagram)/;
+const regMermaid = /^(graph|sequenceDiagram|flowchart)/;
 const regMathJax = /(\$|\\\()[\s\S]+?(\$|\\\))/gm;
 const regLink = /^(<a.+?)">/;
 const defaultRender = new marked.Renderer();
