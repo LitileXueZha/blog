@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import data from './data.js';
 
 import './index.less';
@@ -10,7 +10,7 @@ function Header(props) {
   const { name, role, location } = props;
   return (
     <header className="resume-header">
-      <img src="https://tao-1252397519.cos.ap-shanghai.myqcloud.com/%E5%A4%B4%E5%83%8F2.0%E2%80%94%E2%80%94%E5%B0%8F.png" alt="头像" />
+      <img src="https://tao-1252397519.cos.ap-shanghai.myqcloud.com/tao-v2-mini.png" alt="头像" />
       <div className="resume-header-content">
         <h2 className="title">{name}</h2>
         <p className="role">{role}</p>
@@ -180,4 +180,5 @@ class ProviderComponent extends React.Component {
   }
 }
 
-ReactDOM.render(<ProviderComponent />, document.querySelector('#root'));
+createRoot(document.getElementById('root'))
+  .render(<ProviderComponent />);

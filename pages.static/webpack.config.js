@@ -30,9 +30,8 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: './*.html',
+          from: '*.html',
           to: path.join(PATH_DIST, '[name].html'),
-          noErrorOnMissing: true,
         },
       ],
     }),

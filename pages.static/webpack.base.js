@@ -4,8 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 // 定义了一些可复用的东西
-const context = path.join(__dirname, 'pages.static');
-const PATH_DIST = path.join(context, 'dist');
 const pages = [
   'resume',
   '404',
@@ -19,6 +17,7 @@ pages.forEach((val) => {
     filename: `${val}.html`,
     template: `./${val}/index.pug`,
     chunks: [val],
+    inject: 'body',
   }));
 });
 
@@ -61,8 +60,7 @@ const loaders = firstCssLoader => [
 ];
 
 module.exports = {
-  context,
-  PATH_DIST,
+  context: __dirname,
   entry,
   plugins,
   output,

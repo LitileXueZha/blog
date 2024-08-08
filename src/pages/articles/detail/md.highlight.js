@@ -25,6 +25,10 @@ import json from 'highlight.js/lib/languages/json';
 import diff from 'highlight.js/lib/languages/diff';
 import shell from 'highlight.js/lib/languages/shell';
 import yaml from 'highlight.js/lib/languages/yaml';
+import txt from 'highlight.js/lib/languages/plaintext';
+import latex from 'highlight.js/lib/languages/latex';
+import c from 'highlight.js/lib/languages/c';
+import cpp from 'highlight.js/lib/languages/cpp';
 
 // 高亮语法
 hljs.registerLanguage('html', xml);
@@ -40,5 +44,9 @@ hljs.registerLanguage('json', json);
 hljs.registerLanguage('diff', diff);
 hljs.registerLanguage('shell', shell);
 hljs.registerLanguage('yaml', yaml);
+hljs.registerLanguage('plaintext', txt);
+hljs.registerLanguage('tex', latex);
+hljs.registerLanguage('c', c);
+hljs.registerLanguage('cpp', cpp);
 
 export default () => hljs.highlightAll();

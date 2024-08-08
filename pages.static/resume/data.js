@@ -1,7 +1,7 @@
 export default {
-  details: ['1996.06', '17679069513', 'ktnigx@163.com'],
+  details: ['1996/06', '17679069513', 'ktnigx@163.com'],
   expertise: [
-    ['HTML', 85], ['CSS', 80], ['JavaScript', 90], ['PHP', 25], ['NodeJS', 45], ['Linux', 18], ['React Native', 25],
+    ['HTML&CSS', 85], ['JavaScript', 90], ['PHP', 25], ['NodeJS', 65], ['Linux', 18], ['React Native', 25],
   ],
   zh: {
     title: ['个人资料', '工作经历', '教育经历、校内实践', '详细信息', '专业技能', '爱好'],

@@ -1,6 +1,6 @@
 const {
   entry, output, loaders, plugins,
-} = require('./webpack.base');
+} = require('./webpack.base.js');
 
 module.exports = {
   context: __dirname,
