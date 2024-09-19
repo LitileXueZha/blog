@@ -32,6 +32,7 @@ module.exports = {
         {
           from: '*.html',
           to: path.join(PATH_DIST, '[name].html'),
+          noErrorOnMissing: true,
         },
       ],
     }),
